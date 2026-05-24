@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import "@/lib/i18n";
 
 function NotFoundComponent() {
   return (
@@ -72,19 +73,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Klara — Prepare for the Pflegegrad assessment" },
+      {
+        name: "description",
+        content:
+          "Klara helps caregivers in Germany prepare for the MDK Pflegegrad assessment with plain-language guidance, a care diary, and an AI report.",
+      },
+      { property: "og:title", content: "Klara — Clarity for German long-term care" },
+      {
+        property: "og:description",
+        content:
+          "Plain-language MDK preparation for families caring for elderly relatives or people with autism.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
       },
     ],
   }),
@@ -110,7 +118,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
