@@ -14,16 +14,347 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      assessment_responses: {
+        Row: {
+          criterion_code: string
+          id: string
+          module: number
+          notes: string | null
+          recipient_id: string
+          updated_at: string
+          value: Json | null
+        }
+        Insert: {
+          criterion_code: string
+          id?: string
+          module: number
+          notes?: string | null
+          recipient_id: string
+          updated_at?: string
+          value?: Json | null
+        }
+        Update: {
+          criterion_code?: string
+          id?: string
+          module?: number
+          notes?: string | null
+          recipient_id?: string
+          updated_at?: string
+          value?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_responses_recipient_id_fkey"
+            columns: ["recipient_id"]
+            isOneToOne: false
+            referencedRelation: "care_recipients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      care_recipients: {
+        Row: {
+          created_at: string
+          dob: string | null
+          id: string
+          name: string
+          owner_id: string
+          profile_type: Database["public"]["Enums"]["recipient_profile"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          dob?: string | null
+          id?: string
+          name: string
+          owner_id: string
+          profile_type: Database["public"]["Enums"]["recipient_profile"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          dob?: string | null
+          id?: string
+          name?: string
+          owner_id?: string
+          profile_type?: Database["public"]["Enums"]["recipient_profile"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      diary_entries: {
+        Row: {
+          created_at: string
+          created_by: string
+          entry_date: string
+          id: string
+          payload: Json
+          recipient_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          entry_date: string
+          id?: string
+          payload?: Json
+          recipient_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          entry_date?: string
+          id?: string
+          payload?: Json
+          recipient_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "diary_entries_recipient_id_fkey"
+            columns: ["recipient_id"]
+            isOneToOne: false
+            referencedRelation: "care_recipients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      forum_posts: {
+        Row: {
+          author_id: string
+          body: string
+          category: string | null
+          created_at: string
+          id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          body: string
+          category?: string | null
+          created_at?: string
+          id?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          category?: string | null
+          created_at?: string
+          id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      forum_replies: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          id: string
+          post_id: string
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          body: string
+          created_at?: string
+          id?: string
+          post_id: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+          post_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "forum_replies_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string | null
+          id: string
+          language: Database["public"]["Enums"]["app_language"]
+          plan: Database["public"]["Enums"]["app_plan"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string | null
+          id: string
+          language?: Database["public"]["Enums"]["app_language"]
+          plan?: Database["public"]["Enums"]["app_plan"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          language?: Database["public"]["Enums"]["app_language"]
+          plan?: Database["public"]["Enums"]["app_plan"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      referrals: {
+        Row: {
+          bundesland: string | null
+          contact: string | null
+          created_at: string
+          id: string
+          languages: string[] | null
+          name: string
+          notes: string | null
+          plz: string | null
+          type: string
+          website: string | null
+        }
+        Insert: {
+          bundesland?: string | null
+          contact?: string | null
+          created_at?: string
+          id?: string
+          languages?: string[] | null
+          name: string
+          notes?: string | null
+          plz?: string | null
+          type: string
+          website?: string | null
+        }
+        Update: {
+          bundesland?: string | null
+          contact?: string | null
+          created_at?: string
+          id?: string
+          languages?: string[] | null
+          name?: string
+          notes?: string | null
+          plz?: string | null
+          type?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          generated_at: string
+          id: string
+          pdf_url: string | null
+          recipient_id: string
+          summary: Json
+        }
+        Insert: {
+          generated_at?: string
+          id?: string
+          pdf_url?: string | null
+          recipient_id: string
+          summary?: Json
+        }
+        Update: {
+          generated_at?: string
+          id?: string
+          pdf_url?: string | null
+          recipient_id?: string
+          summary?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_recipient_id_fkey"
+            columns: ["recipient_id"]
+            isOneToOne: false
+            referencedRelation: "care_recipients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscriptions: {
+        Row: {
+          current_period_end: string | null
+          id: string
+          plan: Database["public"]["Enums"]["app_plan"]
+          status: string
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          current_period_end?: string | null
+          id?: string
+          plan?: Database["public"]["Enums"]["app_plan"]
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          current_period_end?: string | null
+          id?: string
+          plan?: Database["public"]["Enums"]["app_plan"]
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_language: "en" | "de"
+      app_plan: "free" | "pro"
+      app_role: "admin" | "user"
+      recipient_profile: "autism" | "elderly"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +481,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_language: ["en", "de"],
+      app_plan: ["free", "pro"],
+      app_role: ["admin", "user"],
+      recipient_profile: ["autism", "elderly"],
+    },
   },
 } as const
