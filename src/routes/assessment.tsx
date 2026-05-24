@@ -66,10 +66,10 @@ function AssessmentPage() {
   }, [answers]);
 
   function setAnswer(code: string, patch: Partial<Answers[string]>) {
-    setAnswers((prev) => ({
-      ...prev,
-      [code]: { value: null, notes: "", ...prev[code], ...patch },
-    }));
+    setAnswers((prev) => {
+      const existing = prev[code] ?? { value: null, notes: "" };
+      return { ...prev, [code]: { ...existing, ...patch } };
+    });
   }
 
   const moduleResults = useMemo(() => {
