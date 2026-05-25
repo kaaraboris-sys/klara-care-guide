@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SurveyRouteImport } from './routes/survey'
+import { Route as ReportRouteImport } from './routes/report'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ModulesRouteImport } from './routes/modules'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
@@ -20,6 +21,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const SurveyRoute = SurveyRouteImport.update({
   id: '/survey',
   path: '/survey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportRoute = ReportRouteImport.update({
+  id: '/report',
+  path: '/report',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/how-it-works': typeof HowItWorksRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
+  '/report': typeof ReportRoute
   '/survey': typeof SurveyRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/how-it-works': typeof HowItWorksRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
+  '/report': typeof ReportRoute
   '/survey': typeof SurveyRoute
 }
 export interface FileRoutesById {
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/how-it-works': typeof HowItWorksRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
+  '/report': typeof ReportRoute
   '/survey': typeof SurveyRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/modules'
     | '/pricing'
+    | '/report'
     | '/survey'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/modules'
     | '/pricing'
+    | '/report'
     | '/survey'
   id:
     | '__root__'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/modules'
     | '/pricing'
+    | '/report'
     | '/survey'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +130,7 @@ export interface RootRouteChildren {
   HowItWorksRoute: typeof HowItWorksRoute
   ModulesRoute: typeof ModulesRoute
   PricingRoute: typeof PricingRoute
+  ReportRoute: typeof ReportRoute
   SurveyRoute: typeof SurveyRoute
 }
 
@@ -128,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/survey'
       fullPath: '/survey'
       preLoaderRoute: typeof SurveyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report': {
+      id: '/report'
+      path: '/report'
+      fullPath: '/report'
+      preLoaderRoute: typeof ReportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -182,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   HowItWorksRoute: HowItWorksRoute,
   ModulesRoute: ModulesRoute,
   PricingRoute: PricingRoute,
+  ReportRoute: ReportRoute,
   SurveyRoute: SurveyRoute,
 }
 export const routeTree = rootRouteImport
