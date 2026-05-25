@@ -242,7 +242,7 @@ function AssessmentPage() {
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <Button asChild>
-                  <Link to="/pricing">Unlock AI report from diary →</Link>
+                  <Link to="/report">Generate AI report →</Link>
                 </Button>
                 <Button
                   variant="outline"
