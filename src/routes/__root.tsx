@@ -79,7 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Klara helps caregivers in Germany prepare for the MDK Pflegegrad assessment with plain-language guidance, a care diary, and an AI report.",
       },
-      { property: "og:title", content: "Klara — Clarity for German long-term care" },
+      { property: "og:title", content: "Klara — Prepare for the Pflegegrad assessment" },
       {
         property: "og:description",
         content:
@@ -87,6 +87,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Klara — Prepare for the Pflegegrad assessment" },
+      { name: "description", content: "Klara's Compass is a web application designed to support caregivers of German elderly and individuals with autism." },
+      { property: "og:description", content: "Klara's Compass is a web application designed to support caregivers of German elderly and individuals with autism." },
+      { name: "twitter:description", content: "Klara's Compass is a web application designed to support caregivers of German elderly and individuals with autism." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3c7198be-88d2-46e5-966b-1fb9ff568f92/id-preview-acc6279a--5c97b2a9-7d1f-4e17-b4a6-558687f2c36e.lovable.app-1779742768968.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3c7198be-88d2-46e5-966b-1fb9ff568f92/id-preview-acc6279a--5c97b2a9-7d1f-4e17-b4a6-558687f2c36e.lovable.app-1779742768968.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
