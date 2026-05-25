@@ -14,6 +14,7 @@ export function SiteHeader() {
     { to: "/survey", label: t("nav.survey") },
     { to: "/diary", label: "Care diary" },
     { to: "/assessment", label: "Full assessment" },
+    { to: "/report", label: "Report" },
     { to: "/pricing", label: t("nav.pricing") },
   ] as const;
 

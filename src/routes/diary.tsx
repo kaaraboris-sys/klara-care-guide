@@ -163,19 +163,25 @@ function DiaryPage() {
           </CardHeader>
           <CardContent>
             <Progress value={progress} />
-            {uniqueDays >= TARGET_DAYS ? (
-              <div className="mt-4 flex items-center gap-2 text-sm text-foreground">
-                <CheckCircle2 className="h-4 w-4 text-primary" />
-                You have enough entries to generate a report.
-                <Link
-                  to="/assessment"
-                  className="ml-2 inline-flex items-center gap-1 text-primary hover:underline"
-                >
-                  <FileText className="h-4 w-4" />
-                  Continue to assessment
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <Button asChild size="sm">
+                <Link to="/report">
+                  <FileText className="mr-2 h-4 w-4" />
+                  Generate AI report
                 </Link>
-              </div>
-            ) : null}
+              </Button>
+              {uniqueDays >= TARGET_DAYS ? (
+                <span className="inline-flex items-center gap-1 text-sm text-foreground">
+                  <CheckCircle2 className="h-4 w-4 text-primary" />
+                  You have enough entries for a strong report.
+                </span>
+              ) : (
+                <span className="text-xs text-muted-foreground">
+                  Tip: 14 days gives the assessor the clearest picture, but you can generate a
+                  draft any time.
+                </span>
+              )}
+            </div>
           </CardContent>
         </Card>
 
