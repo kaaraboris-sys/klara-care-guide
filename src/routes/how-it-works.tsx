@@ -21,6 +21,10 @@ import {
   MessageCircle,
   CalendarClock,
 } from "lucide-react";
+import heroFamily from "@/assets/hero-family.jpg";
+import careChild from "@/assets/care-child.jpg";
+import careElderly from "@/assets/care-elderly.jpg";
+import careNurse from "@/assets/care-nurse.jpg";
 
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
