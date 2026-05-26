@@ -21,6 +21,10 @@ import {
   MessageCircle,
   CalendarClock,
 } from "lucide-react";
+import heroFamily from "@/assets/hero-family.jpg";
+import careChild from "@/assets/care-child.jpg";
+import careElderly from "@/assets/care-elderly.jpg";
+import careNurse from "@/assets/care-nurse.jpg";
 
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
@@ -116,6 +120,15 @@ function HowPage() {
           {t("how.title")}
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">{t("how.sub")}</p>
+
+        <img
+          src={heroFamily}
+          alt="A family caregiver, an elderly grandmother and a young child together at home"
+          width={1920}
+          height={1080}
+          className="mt-10 aspect-[21/9] w-full rounded-3xl object-cover shadow-md ring-1 ring-border"
+        />
+
 
         {/* What is Pflegegrad */}
         <div className="mt-12 rounded-2xl border border-border bg-card p-8">
@@ -228,48 +241,79 @@ function HowPage() {
 
         {/* Special considerations */}
         <div className="mt-16 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-card p-6">
-            <div className="flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
-                <Accessibility className="h-5 w-5" />
+          <div className="overflow-hidden rounded-2xl border border-border bg-card">
+            <img
+              src={careChild}
+              alt="Parent calmly playing with an autistic child"
+              width={1920}
+              height={1080}
+              loading="lazy"
+              className="aspect-[16/9] w-full object-cover"
+            />
+            <div className="p-6">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
+                  <Accessibility className="h-5 w-5" />
+                </div>
+                <h2 className="text-xl font-semibold text-foreground">Special considerations — autism</h2>
               </div>
-              <h2 className="text-xl font-semibold text-foreground">Special considerations — autism</h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Autism-related support needs are often <strong>underestimated</strong> in standard
+                assessments. Key areas to document:
+              </p>
+              <ul className="mt-4 space-y-3">
+                {AUTISM.map(({ icon: Icon, text }) => (
+                  <li key={text} className="flex gap-3 text-sm text-foreground">
+                    <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span>{text}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Autism-related support needs are often <strong>underestimated</strong> in standard
-              assessments. Key areas to document:
-            </p>
-            <ul className="mt-4 space-y-3">
-              {AUTISM.map(({ icon: Icon, text }) => (
-                <li key={text} className="flex gap-3 text-sm text-foreground">
-                  <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <span>{text}</span>
-                </li>
-              ))}
-            </ul>
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-6">
-            <div className="flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
-                <Eye className="h-5 w-5" />
+          <div className="overflow-hidden rounded-2xl border border-border bg-card">
+            <img
+              src={careElderly}
+              alt="Adult daughter holding her elderly mother's hand at home"
+              width={1920}
+              height={1080}
+              loading="lazy"
+              className="aspect-[16/9] w-full object-cover"
+            />
+            <div className="p-6">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
+                  <Eye className="h-5 w-5" />
+                </div>
+                <h2 className="text-xl font-semibold text-foreground">Special considerations — elderly</h2>
               </div>
-              <h2 className="text-xl font-semibold text-foreground">Special considerations — elderly</h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Elderly people often <strong>minimise difficulties</strong> during formal assessments.
+                Important areas to emphasise:
+              </p>
+              <ul className="mt-4 space-y-3">
+                {ELDERLY.map(({ icon: Icon, text }) => (
+                  <li key={text} className="flex gap-3 text-sm text-foreground">
+                    <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span>{text}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Elderly people often <strong>minimise difficulties</strong> during formal assessments.
-              Important areas to emphasise:
-            </p>
-            <ul className="mt-4 space-y-3">
-              {ELDERLY.map(({ icon: Icon, text }) => (
-                <li key={text} className="flex gap-3 text-sm text-foreground">
-                  <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <span>{text}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
+
+        {/* Mid-page assessment-process visual */}
+        <img
+          src={careNurse}
+          alt="A home-care nurse assisting an elderly man with a walker"
+          width={1920}
+          height={1080}
+          loading="lazy"
+          className="mt-16 aspect-[21/9] w-full rounded-3xl object-cover shadow-md ring-1 ring-border"
+        />
+
 
         {/* Original 4-step Klara workflow */}
         <div className="mt-16">

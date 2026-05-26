@@ -2,6 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { PublicShell } from "@/components/layout/PublicShell";
 import { ArrowRight, ClipboardCheck, BookOpen, FileText, Sparkles, Heart, Users } from "lucide-react";
+import heroFamily from "@/assets/hero-family.jpg";
+import careChild from "@/assets/care-child.jpg";
+import careElderly from "@/assets/care-elderly.jpg";
+import careNurse from "@/assets/care-nurse.jpg";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -20,8 +24,8 @@ function HomePage() {
     <PublicShell>
       {/* Hero */}
       <section className="border-b border-border bg-gradient-to-b from-secondary/40 to-background">
-        <div className="mx-auto max-w-6xl px-4 py-20 md:py-28">
-          <div className="max-w-3xl">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 md:grid-cols-2 md:items-center md:py-28">
+          <div>
             <span className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
               NBA · SGB XI §15 · BRi 2024
             </span>
@@ -46,6 +50,23 @@ function HomePage() {
                 {t("home.cta_secondary")}
               </Link>
             </div>
+          </div>
+          <div className="relative">
+            <img
+              src={heroFamily}
+              alt="A caregiver, an elderly grandmother and a young child sharing a quiet moment at home"
+              width={1920}
+              height={1080}
+              className="aspect-[4/3] w-full rounded-3xl object-cover shadow-xl ring-1 ring-border"
+            />
+            <img
+              src={careNurse}
+              alt="Home-care nurse supporting an elderly man with a walker"
+              width={1920}
+              height={1080}
+              loading="lazy"
+              className="absolute -bottom-8 -left-6 hidden w-44 rounded-2xl object-cover shadow-lg ring-4 ring-background md:block lg:w-56"
+            />
           </div>
         </div>
       </section>
@@ -99,32 +120,52 @@ function HomePage() {
         <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">
           {t("home.for_who_body")}
         </p>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-card p-6">
-            <div className="flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-lg bg-accent/30 text-primary">
-                <Heart className="h-5 w-5" />
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="overflow-hidden rounded-2xl border border-border bg-card">
+            <img
+              src={careChild}
+              alt="A parent supporting their young child during sensory play"
+              width={1920}
+              height={1080}
+              loading="lazy"
+              className="aspect-[16/9] w-full object-cover"
+            />
+            <div className="p-6">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-lg bg-accent/30 text-primary">
+                  <Heart className="h-5 w-5" />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground">
+                  {t("home.autism_title")}
+                </h3>
               </div>
-              <h3 className="text-lg font-semibold text-foreground">
-                {t("home.autism_title")}
-              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {t("home.autism_body")}
+              </p>
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {t("home.autism_body")}
-            </p>
           </div>
-          <div className="rounded-2xl border border-border bg-card p-6">
-            <div className="flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-lg bg-accent/30 text-primary">
-                <Users className="h-5 w-5" />
+          <div className="overflow-hidden rounded-2xl border border-border bg-card">
+            <img
+              src={careElderly}
+              alt="A daughter holding her elderly mother's hand at the kitchen table"
+              width={1920}
+              height={1080}
+              loading="lazy"
+              className="aspect-[16/9] w-full object-cover"
+            />
+            <div className="p-6">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-lg bg-accent/30 text-primary">
+                  <Users className="h-5 w-5" />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground">
+                  {t("home.elderly_title")}
+                </h3>
               </div>
-              <h3 className="text-lg font-semibold text-foreground">
-                {t("home.elderly_title")}
-              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {t("home.elderly_body")}
+              </p>
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {t("home.elderly_body")}
-            </p>
           </div>
         </div>
 
