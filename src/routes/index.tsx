@@ -24,8 +24,8 @@ function HomePage() {
     <PublicShell>
       {/* Hero */}
       <section className="border-b border-border bg-gradient-to-b from-secondary/40 to-background">
-        <div className="mx-auto max-w-6xl px-4 py-20 md:py-28">
-          <div className="max-w-3xl">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 md:grid-cols-2 md:items-center md:py-28">
+          <div>
             <span className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
               NBA · SGB XI §15 · BRi 2024
             </span>
@@ -50,6 +50,23 @@ function HomePage() {
                 {t("home.cta_secondary")}
               </Link>
             </div>
+          </div>
+          <div className="relative">
+            <img
+              src={heroFamily}
+              alt="A caregiver, an elderly grandmother and a young child sharing a quiet moment at home"
+              width={1920}
+              height={1080}
+              className="aspect-[4/3] w-full rounded-3xl object-cover shadow-xl ring-1 ring-border"
+            />
+            <img
+              src={careNurse}
+              alt="Home-care nurse supporting an elderly man with a walker"
+              width={1920}
+              height={1080}
+              loading="lazy"
+              className="absolute -bottom-8 -left-6 hidden w-44 rounded-2xl object-cover shadow-lg ring-4 ring-background md:block lg:w-56"
+            />
           </div>
         </div>
       </section>
