@@ -121,6 +121,15 @@ function HowPage() {
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">{t("how.sub")}</p>
 
+        <img
+          src={heroFamily}
+          alt="A family caregiver, an elderly grandmother and a young child together at home"
+          width={1920}
+          height={1080}
+          className="mt-10 aspect-[21/9] w-full rounded-3xl object-cover shadow-md ring-1 ring-border"
+        />
+
+
         {/* What is Pflegegrad */}
         <div className="mt-12 rounded-2xl border border-border bg-card p-8">
           <Badge variant="secondary" className="mb-3">The basics</Badge>
