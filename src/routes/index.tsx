@@ -2,6 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { PublicShell } from "@/components/layout/PublicShell";
 import { ArrowRight, ClipboardCheck, BookOpen, FileText, Sparkles, Heart, Users } from "lucide-react";
+import heroFamily from "@/assets/hero-family.jpg";
+import careChild from "@/assets/care-child.jpg";
+import careElderly from "@/assets/care-elderly.jpg";
+import careNurse from "@/assets/care-nurse.jpg";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
