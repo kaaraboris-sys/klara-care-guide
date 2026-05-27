@@ -336,7 +336,7 @@ function FieldRenderer({
       <Label className="text-sm font-medium text-foreground">{field.label}</Label>
       {field.module ? (
         <Badge variant="outline" className="text-[10px]">
-          Module {field.module}
+          {t("diary.module_badge", { n: field.module })}
         </Badge>
       ) : null}
     </div>
