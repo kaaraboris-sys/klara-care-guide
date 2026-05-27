@@ -344,7 +344,7 @@ function CriterionRow({
         <div className="space-y-4 pl-7">
           <div className="rounded-md bg-muted/40 p-3">
             <p className="text-sm text-foreground">
-              <span className="font-medium">In plain words: </span>
+              <span className="font-medium">{t("assessment.in_plain_words")} </span>
               {criterion.paraphrase}
             </p>
             <p className="mt-2 flex items-start gap-2 text-xs text-muted-foreground">
