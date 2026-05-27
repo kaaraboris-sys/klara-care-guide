@@ -12,9 +12,9 @@ export function SiteHeader() {
     { to: "/how-it-works", label: t("nav.how") },
     { to: "/modules", label: t("nav.modules") },
     { to: "/survey", label: t("nav.survey") },
-    { to: "/diary", label: "Care diary" },
-    { to: "/assessment", label: "Full assessment" },
-    { to: "/report", label: "Report" },
+    { to: "/diary", label: t("nav.diary") },
+    { to: "/assessment", label: t("nav.assessment") },
+    { to: "/report", label: t("nav.report") },
     { to: "/pricing", label: t("nav.pricing") },
   ] as const;
 

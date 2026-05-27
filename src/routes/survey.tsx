@@ -155,7 +155,7 @@ function SurveyPage() {
           <span>
             {idx + 1} / {STEPS.length}
           </span>
-          <span>Modul {step.module}</span>
+          <span>{t("survey.module_label")} {step.module}</span>
         </div>
         <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
           <div className="h-full bg-primary transition-all" style={{ width: `${progress}%` }} />
