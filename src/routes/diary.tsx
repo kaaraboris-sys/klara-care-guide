@@ -261,6 +261,7 @@ function DiaryForm({
   onChange: (key: string, value: unknown) => void;
   onSave: () => void;
 }) {
+  const { t } = useTranslation();
   return (
     <Card>
       <CardHeader>
@@ -270,7 +271,7 @@ function DiaryForm({
       <CardContent className="space-y-6">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-4">
           <div className="flex-1">
-            <Label htmlFor="entry-date">Date of entry</Label>
+            <Label htmlFor="entry-date">{t("diary.entry_date")}</Label>
             <Input
               id="entry-date"
               type="date"
@@ -281,7 +282,7 @@ function DiaryForm({
             />
           </div>
           <Button onClick={onSave} className="sm:w-auto">
-            Save entry
+            {t("diary.save_entry")}
           </Button>
         </div>
 
