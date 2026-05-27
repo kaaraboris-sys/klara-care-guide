@@ -54,6 +54,7 @@ function loadAnswers(): Answers {
 }
 
 function AssessmentPage() {
+  const { t } = useTranslation();
   const [answers, setAnswers] = useState<Answers>({});
   const [activeModule, setActiveModule] = useState("1");
 
