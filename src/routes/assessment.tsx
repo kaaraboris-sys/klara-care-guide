@@ -271,27 +271,28 @@ function ScoreSummary({
   progress: number;
   results: { id: number; title: string; weighted: number; weightPct: number }[];
 }) {
+  const { t } = useTranslation();
   return (
     <Card>
       <CardHeader className="pb-3">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <CardTitle className="text-base text-muted-foreground">Live estimate</CardTitle>
+            <CardTitle className="text-base text-muted-foreground">{t("assessment.live_estimate")}</CardTitle>
             <p className="mt-1 text-3xl font-bold text-foreground">{pg.label}</p>
           </div>
           <div className="text-right">
             <p className="text-2xl font-semibold text-foreground">{totalPoints.toFixed(1)}</p>
-            <p className="text-xs text-muted-foreground">of 100 weighted points</p>
+            <p className="text-xs text-muted-foreground">{t("assessment.of_100")}</p>
           </div>
         </div>
       </CardHeader>
       <CardContent>
         <Progress value={progress} className="h-2" />
-        <p className="mt-2 text-xs text-muted-foreground">{progress}% of criteria answered</p>
+        <p className="mt-2 text-xs text-muted-foreground">{t("assessment.percent_answered", { p: progress })}</p>
         <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
           {results.map((r) => (
             <div key={r.id} className="rounded-md border bg-card p-2 text-center">
-              <p className="text-xs text-muted-foreground">M{r.id}</p>
+              <p className="text-xs text-muted-foreground">{t("assessment.tab_label", { n: r.id })}</p>
               <p className="text-sm font-semibold text-foreground">{r.weighted}</p>
               <p className="text-[10px] text-muted-foreground">/ {r.weightPct} max</p>
             </div>
