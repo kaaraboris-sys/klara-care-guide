@@ -57,6 +57,7 @@ function loadDiary(): DiaryEntry[] {
 }
 
 function ReportPage() {
+  const { t } = useTranslation();
   const [answers, setAnswers] = useState<Answers>({});
   const [diary, setDiary] = useState<DiaryEntry[]>([]);
   const [template, setTemplate] = useState<"autism" | "elderly">("elderly");
