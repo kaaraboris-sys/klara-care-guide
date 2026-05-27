@@ -314,7 +314,7 @@ function DiaryForm({
         </Accordion>
 
         <div className="flex justify-end">
-          <Button onClick={onSave}>Save entry</Button>
+          <Button onClick={onSave}>{t("diary.save_entry")}</Button>
         </div>
       </CardContent>
     </Card>
@@ -330,6 +330,7 @@ function FieldRenderer({
   value: unknown;
   onChange: (v: unknown) => void;
 }) {
+  const { t } = useTranslation();
   const labelEl = (
     <div className="flex items-baseline justify-between gap-3">
       <Label className="text-sm font-medium text-foreground">{field.label}</Label>
