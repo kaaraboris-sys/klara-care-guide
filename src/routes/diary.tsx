@@ -408,7 +408,7 @@ function FieldRenderer({
             onChange={(e) => onChange(e.target.value ? Number(e.target.value) : "")}
             className="w-32"
           />
-          <span className="text-sm text-muted-foreground">minutes</span>
+          <span className="text-sm text-muted-foreground">{t("common.minutes")}</span>
         </div>
       </div>
     );
