@@ -377,12 +377,12 @@ function CriterionRow({
 
           <div>
             <label className="text-xs font-medium text-muted-foreground">
-              Notes for the assessor (optional but recommended)
+              {t("assessment.notes_label")}
             </label>
             <Textarea
               value={answer?.notes ?? ""}
               onChange={(e) => onChange({ notes: e.target.value })}
-              placeholder="A short, specific example helps a lot. e.g. 'Refuses morning wash 4/7 days, takes 30 min to redirect.'"
+              placeholder={t("assessment.notes_placeholder")}
               className="mt-1"
               maxLength={1000}
             />
