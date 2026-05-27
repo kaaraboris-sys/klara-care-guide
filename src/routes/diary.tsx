@@ -74,6 +74,7 @@ function saveEntries(entries: DiaryEntry[]) {
 }
 
 function DiaryPage() {
+  const { t } = useTranslation();
   const [template, setTemplate] = useState<"autism" | "elderly">("elderly");
   const [entries, setEntries] = useState<DiaryEntry[]>([]);
   const [date, setDate] = useState<string>(todayISO());
