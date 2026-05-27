@@ -423,7 +423,7 @@ function FieldRenderer({
       <Textarea
         value={v}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="A short note in your own words…"
+        placeholder={t("diary.note_placeholder")}
         rows={3}
       />
     </div>
