@@ -132,14 +132,13 @@ function DiaryPage() {
       <section className="bg-secondary/30 border-b border-border">
         <div className="mx-auto max-w-5xl px-4 py-10">
           <Badge variant="secondary" className="mb-3">
-            Pro feature · saving locally for now
+            {t("diary.pro_badge")}
           </Badge>
           <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            Care diary
+            {t("diary.title")}
           </h1>
           <p className="mt-3 max-w-3xl text-muted-foreground">
-            One short page per day. Aim for 14 consecutive days before your MDK visit — Klara
-            will turn the entries into a one-page summary you can hand to the assessor.
+            {t("diary.intro")}
           </p>
         </div>
       </section>
@@ -147,19 +146,17 @@ function DiaryPage() {
       <section className="mx-auto max-w-5xl px-4 py-8 space-y-6">
         <Alert>
           <Info className="h-4 w-4" />
-          <AlertTitle>Be honest, not modest</AlertTitle>
+          <AlertTitle>{t("diary.honest_title")}</AlertTitle>
           <AlertDescription>
-            The assessor rewards specific descriptions of how much help is actually needed —
-            prompting, supervision and emotional regulation all count. Score a typical day,
-            not your best day.
+            {t("diary.honest_body")}
           </AlertDescription>
         </Alert>
 
         <Card>
           <CardHeader>
-            <CardTitle>Progress toward 14 days</CardTitle>
+            <CardTitle>{t("diary.progress_title")}</CardTitle>
             <CardDescription>
-              {uniqueDays} of {TARGET_DAYS} days logged for the{" "}
+              {t("diary.progress_desc", { n: uniqueDays, total: TARGET_DAYS })}
               <span className="font-medium text-foreground">{tpl.title}</span>.
             </CardDescription>
           </CardHeader>
@@ -169,18 +166,17 @@ function DiaryPage() {
               <Button asChild size="sm">
                 <Link to="/report">
                   <FileText className="mr-2 h-4 w-4" />
-                  Generate AI report
+                  {t("diary.generate_report")}
                 </Link>
               </Button>
               {uniqueDays >= TARGET_DAYS ? (
                 <span className="inline-flex items-center gap-1 text-sm text-foreground">
                   <CheckCircle2 className="h-4 w-4 text-primary" />
-                  You have enough entries for a strong report.
+                  {t("diary.enough_entries")}
                 </span>
               ) : (
                 <span className="text-xs text-muted-foreground">
-                  Tip: 14 days gives the assessor the clearest picture, but you can generate a
-                  draft any time.
+                  {t("diary.tip")}
                 </span>
               )}
             </div>
@@ -189,8 +185,8 @@ function DiaryPage() {
 
         <Tabs value={template} onValueChange={(v) => setTemplate(v as "autism" | "elderly")}>
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="elderly">Elderly / disability</TabsTrigger>
-            <TabsTrigger value="autism">Autism / developmental</TabsTrigger>
+            <TabsTrigger value="elderly">{t("diary.tab_elderly")}</TabsTrigger>
+            <TabsTrigger value="autism">{t("diary.tab_autism")}</TabsTrigger>
           </TabsList>
 
           {(Object.keys(TEMPLATES) as Array<"autism" | "elderly">).map((id) => (
@@ -209,13 +205,13 @@ function DiaryPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Entries — {tpl.title}</CardTitle>
-            <CardDescription>Click an entry to load it for editing.</CardDescription>
+            <CardTitle>{t("diary.entries_title", { tpl: tpl.title })}</CardTitle>
+            <CardDescription>{t("diary.entries_desc")}</CardDescription>
           </CardHeader>
           <CardContent>
             {filtered.length === 0 ? (
               <p className="text-sm text-muted-foreground">
-                No entries yet. Fill in today above and click Save.
+                {t("diary.no_entries")}
               </p>
             ) : (
               <ul className="divide-y divide-border">
@@ -228,14 +224,14 @@ function DiaryPage() {
                       <CalendarDays className="h-4 w-4 text-muted-foreground" />
                       <span className="font-medium">{e.date}</span>
                       <span className="text-muted-foreground">
-                        · {Object.keys(e.values).length} fields filled
+                        · {t("diary.fields_filled", { n: Object.keys(e.values).length })}
                       </span>
                     </button>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => deleteEntry(e.id)}
-                      aria-label={`Delete entry for ${e.date}`}
+                      aria-label={t("diary.delete_aria", { date: e.date })}
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
