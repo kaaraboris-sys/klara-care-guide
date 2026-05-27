@@ -46,68 +46,18 @@ export const Route = createFileRoute("/how-it-works")({
   component: HowPage,
 });
 
-const GRADES = [
-  {
-    n: 1,
-    range: "12.5 – < 27 points",
-    label: "Minor impairment of independence",
-    implies:
-      "Some help is needed in daily life, but the person is largely self-reliant. Limited cash benefit; access to counselling and minor relief services.",
-  },
-  {
-    n: 2,
-    range: "27 – < 47.5 points",
-    label: "Significant impairment",
-    implies:
-      "Regular daily support needed. Eligible for care allowance (Pflegegeld), home-care services, day care, and respite care.",
-  },
-  {
-    n: 3,
-    range: "47.5 – < 70 points",
-    label: "Severe impairment",
-    implies:
-      "Substantial support across most areas of daily life. Higher benefits, eligibility for residential or intensive home care.",
-  },
-  {
-    n: 4,
-    range: "70 – < 90 points",
-    label: "Most severe impairment",
-    implies:
-      "Continuous, complex care needs. Full access to inpatient care benefits and the highest tier of home-care support.",
-  },
-  {
-    n: 5,
-    range: "≥ 90 points",
-    label: "Most severe impairment with special demands",
-    implies:
-      "Maximum care needs — typically continuous supervision, complete dependence in self-care, or specialised medical needs. Highest benefit level.",
-  },
-];
+const GRADE_KEYS = ["g1", "g2", "g3", "g4", "g5"] as const;
+const MOD_KEYS = ["m1", "m2", "m3", "m4", "m5", "m6"] as const;
+const MOD_ICONS = [Activity, Brain, Sparkles, HeartPulse, Pill, Users] as const;
+const MOD_WEIGHTS = ["10%", "15% *", "15% *", "40%", "20%", "15%"] as const;
+const PROCESS_KEYS = ["p1", "p2", "p3", "p4", "p5", "p6", "p7"] as const;
+const AUTISM_ICONS = [CalendarClock, AlertTriangle, Waves, MessageCircle, Repeat] as const;
+const ELDERLY_ICONS = [AlertTriangle, Moon, Pill, Compass, Utensils] as const;
+const AUTISM_KEYS = ["i1", "i2", "i3", "i4", "i5"] as const;
 
-const MODULES = [
-  { icon: Activity, title: "1 · Mobility", weight: "10%", body: "Changing position, sitting, standing, walking, stairs." },
-  { icon: Brain, title: "2 · Cognitive & communicative abilities", weight: "15% *", body: "Orientation, recognition, decisions, conversation." },
-  { icon: Sparkles, title: "3 · Behaviour & psychological issues", weight: "15% *", body: "Meltdowns, aggression, anxiety, night-time disturbance." },
-  { icon: HeartPulse, title: "4 · Self-care", weight: "40%", body: "Washing, dressing, toileting, eating (×3 weighted), drinking." },
-  { icon: Pill, title: "5 · Coping with illness & therapy", weight: "20%", body: "Medication, injections, doctor visits, therapy, diet." },
-  { icon: Users, title: "6 · Everyday life & social contacts", weight: "15%", body: "Structuring the day, planning activities, social contact." },
-];
-
-const AUTISM = [
-  { icon: CalendarClock, text: "Prompting and supervision time required" },
-  { icon: AlertTriangle, text: "Behavioural regulation episodes and triggers" },
-  { icon: Waves, text: "Sensory needs and environmental adaptations" },
-  { icon: MessageCircle, text: "Social communication support" },
-  { icon: Repeat, text: "Structured daily routines needed" },
-];
-
-const ELDERLY = [
-  { icon: AlertTriangle, text: "Fall incidents and near-falls" },
-  { icon: Moon, text: "Night-time care interventions (most commonly underreported)" },
-  { icon: Pill, text: "Medication management and compliance" },
-  { icon: Compass, text: "Orientation and memory changes" },
-  { icon: Utensils, text: "Meal preparation and nutrition support" },
-];
+function HtmlText({ html }: { html: string }) {
+  return <span dangerouslySetInnerHTML={{ __html: html }} />;
+}
 
 function HowPage() {
   const { t } = useTranslation();
@@ -129,48 +79,39 @@ function HowPage() {
           className="mt-10 aspect-[21/9] w-full rounded-3xl object-cover shadow-md ring-1 ring-border"
         />
 
-
         {/* What is Pflegegrad */}
         <div className="mt-12 rounded-2xl border border-border bg-card p-8">
-          <Badge variant="secondary" className="mb-3">The basics</Badge>
-          <h2 className="text-2xl font-semibold text-foreground">What is a Pflegegrad?</h2>
+          <Badge variant="secondary" className="mb-3">{t("how.basics_badge")}</Badge>
+          <h2 className="text-2xl font-semibold text-foreground">{t("how.basics_title")}</h2>
           <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-            A <strong>Pflegegrad</strong> (care grade) is the level of long-term care need assigned
-            under German social law (<em>SGB XI §15</em>). It determines which benefits a person and
-            their family receive from the statutory long-term care insurance —
-            cash allowances, home-care services, day care, residential care, and aids.
+            <HtmlText html={t("how.basics_p1")} />
           </p>
           <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-            The grade is decided after an assessment by the <strong>Medizinischer Dienst (MD/MDK)</strong>,
-            using the <strong>Neues Begutachtungsassessment (NBA)</strong>. The assessor scores how
-            independent the person is across six life domains, weights the scores, and adds them up.
-            The total — from 0 to 100 points — maps to one of five grades.
+            <HtmlText html={t("how.basics_p2")} />
           </p>
         </div>
 
         {/* The 5 grades */}
         <div className="mt-12">
-          <h2 className="text-2xl font-semibold text-foreground">What each grade implies</h2>
-          <p className="mt-2 text-muted-foreground">
-            Higher grade = more support needs recognised, and more benefits unlocked.
-          </p>
+          <h2 className="text-2xl font-semibold text-foreground">{t("how.grades_title")}</h2>
+          <p className="mt-2 text-muted-foreground">{t("how.grades_sub")}</p>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {GRADES.map((g) => (
-              <Card key={g.n} className="border-border">
+            {GRADE_KEYS.map((g, i) => (
+              <Card key={g} className="border-border">
                 <CardHeader className="pb-3">
                   <div className="flex items-center gap-3">
                     <span className="grid h-10 w-10 place-items-center rounded-lg bg-primary text-primary-foreground font-semibold">
-                      {g.n}
+                      {i + 1}
                     </span>
                     <div>
-                      <CardTitle className="text-base">Pflegegrad {g.n}</CardTitle>
-                      <p className="text-xs text-muted-foreground">{g.range}</p>
+                      <CardTitle className="text-base">{t("how.grade_label")} {i + 1}</CardTitle>
+                      <p className="text-xs text-muted-foreground">{t(`how.grade.${g}_range`)}</p>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <p className="text-sm font-medium text-foreground">{g.label}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{g.implies}</p>
+                  <p className="text-sm font-medium text-foreground">{t(`how.grade.${g}_label`)}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(`how.grade.${g}_implies`)}</p>
                 </CardContent>
               </Card>
             ))}
@@ -179,59 +120,48 @@ function HowPage() {
 
         {/* The 6 modules */}
         <div className="mt-16">
-          <h2 className="text-2xl font-semibold text-foreground">The 6 NBA modules</h2>
-          <p className="mt-2 text-muted-foreground">
-            Each module is scored, then weighted into the final total.
-          </p>
+          <h2 className="text-2xl font-semibold text-foreground">{t("how.mods_title")}</h2>
+          <p className="mt-2 text-muted-foreground">{t("how.mods_sub")}</p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {MODULES.map(({ icon: Icon, title, weight, body }) => (
-              <div key={title} className="rounded-xl border border-border bg-card p-5">
-                <div className="flex items-center justify-between">
-                  <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary">
-                    <Icon className="h-5 w-5" />
+            {MOD_KEYS.map((k, i) => {
+              const Icon = MOD_ICONS[i];
+              return (
+                <div key={k} className="rounded-xl border border-border bg-card p-5">
+                  <div className="flex items-center justify-between">
+                    <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <Badge variant="outline" className="text-xs">{MOD_WEIGHTS[i]}</Badge>
                   </div>
-                  <Badge variant="outline" className="text-xs">{weight}</Badge>
+                  <h3 className="mt-3 text-sm font-semibold text-foreground">{t(`how.mod.${k}_title`)}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t(`how.mod.${k}_body`)}</p>
                 </div>
-                <h3 className="mt-3 text-sm font-semibold text-foreground">{title}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{body}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
-          <p className="mt-3 text-xs text-muted-foreground">
-            * Modules 2 and 3 share a single weighted contribution — only the higher of the two counts.
-          </p>
+          <p className="mt-3 text-xs text-muted-foreground">{t("how.mods_note")}</p>
         </div>
 
         {/* Assessment process flowchart */}
         <div className="mt-16">
-          <h2 className="text-2xl font-semibold text-foreground">The assessment process</h2>
-          <p className="mt-2 text-muted-foreground">
-            From the first application to the official decision.
-          </p>
+          <h2 className="text-2xl font-semibold text-foreground">{t("how.process_title")}</h2>
+          <p className="mt-2 text-muted-foreground">{t("how.process_sub")}</p>
 
           <div className="mt-8 rounded-2xl border border-border bg-card p-6 md:p-10">
             <ol className="flex flex-col gap-0">
-              {[
-                { t: "1 · Apply to the care insurance (Pflegekasse)", d: "A short written or phone application — benefits start from the application date." },
-                { t: "2 · MD/MDK schedules a home visit", d: "Usually within a few weeks. You'll receive a date by post." },
-                { t: "3 · Prepare with Klara", d: "Run the quick check, fill the 14-day diary, work through the full assessment. Generate your AI report." },
-                { t: "4 · Assessor visit (60–90 min)", d: "The assessor observes, asks questions across all 6 modules, and takes notes." },
-                { t: "5 · Scoring & weighting", d: "Raw scores per module → weighted points → total out of 100." },
-                { t: "6 · Decision letter", d: "The Pflegekasse issues the Pflegegrad in writing, typically within 25 working days." },
-                { t: "7 · Objection (Widerspruch) — if needed", d: "You have 1 month to formally object. A new assessment can be requested." },
-              ].map((s, i, arr) => (
-                <li key={s.t} className="relative flex gap-4 pb-6 last:pb-0">
+              {PROCESS_KEYS.map((p, i) => (
+                <li key={p} className="relative flex gap-4 pb-6 last:pb-0">
                   <div className="flex flex-col items-center">
                     <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground text-sm font-semibold">
                       {i + 1}
                     </div>
-                    {i < arr.length - 1 && (
+                    {i < PROCESS_KEYS.length - 1 && (
                       <div className="mt-1 w-px flex-1 bg-border" aria-hidden />
                     )}
                   </div>
                   <div className="pb-2 pt-1">
-                    <p className="font-medium text-foreground">{s.t}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
+                    <p className="font-medium text-foreground">{t(`how.process.${p}_t`)}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t(`how.process.${p}_d`)}</p>
                   </div>
                 </li>
               ))}
@@ -255,19 +185,21 @@ function HowPage() {
                 <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
                   <Accessibility className="h-5 w-5" />
                 </div>
-                <h2 className="text-xl font-semibold text-foreground">Special considerations — autism</h2>
+                <h2 className="text-xl font-semibold text-foreground">{t("how.autism_title")}</h2>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Autism-related support needs are often <strong>underestimated</strong> in standard
-                assessments. Key areas to document:
+                <HtmlText html={t("how.autism_intro")} />
               </p>
               <ul className="mt-4 space-y-3">
-                {AUTISM.map(({ icon: Icon, text }) => (
-                  <li key={text} className="flex gap-3 text-sm text-foreground">
-                    <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                    <span>{text}</span>
-                  </li>
-                ))}
+                {AUTISM_KEYS.map((k, i) => {
+                  const Icon = AUTISM_ICONS[i];
+                  return (
+                    <li key={k} className="flex gap-3 text-sm text-foreground">
+                      <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span>{t(`how.autism.${k}`)}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
@@ -286,19 +218,21 @@ function HowPage() {
                 <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
                   <Eye className="h-5 w-5" />
                 </div>
-                <h2 className="text-xl font-semibold text-foreground">Special considerations — elderly</h2>
+                <h2 className="text-xl font-semibold text-foreground">{t("how.elderly_title")}</h2>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Elderly people often <strong>minimise difficulties</strong> during formal assessments.
-                Important areas to emphasise:
+                <HtmlText html={t("how.elderly_intro")} />
               </p>
               <ul className="mt-4 space-y-3">
-                {ELDERLY.map(({ icon: Icon, text }) => (
-                  <li key={text} className="flex gap-3 text-sm text-foreground">
-                    <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                    <span>{text}</span>
-                  </li>
-                ))}
+                {AUTISM_KEYS.map((k, i) => {
+                  const Icon = ELDERLY_ICONS[i];
+                  return (
+                    <li key={k} className="flex gap-3 text-sm text-foreground">
+                      <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span>{t(`how.elderly.${k}`)}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
@@ -314,10 +248,9 @@ function HowPage() {
           className="mt-16 aspect-[21/9] w-full rounded-3xl object-cover shadow-md ring-1 ring-border"
         />
 
-
         {/* Original 4-step Klara workflow */}
         <div className="mt-16">
-          <h2 className="text-2xl font-semibold text-foreground">How Klara helps, step by step</h2>
+          <h2 className="text-2xl font-semibold text-foreground">{t("how.klara_steps_title")}</h2>
           <ol className="mt-6 space-y-4">
             {steps.map((s) => (
               <li key={s} className="rounded-2xl border border-border bg-card p-6">
@@ -341,14 +274,11 @@ function HowPage() {
             to="/assessment"
             className="rounded-md border border-input bg-background px-5 py-3 text-base font-medium text-foreground hover:bg-secondary"
           >
-            Full assessment
+            {t("how.full_assessment_cta")}
           </Link>
         </div>
 
-        <p className="mt-8 text-xs text-muted-foreground">
-          Reference: SGB XI §15 · Begutachtungs-Richtlinien (BRi) 2024. This page is informational
-          and does not replace official MDK assessment or legal advice.
-        </p>
+        <p className="mt-8 text-xs text-muted-foreground">{t("how.reference")}</p>
       </section>
     </PublicShell>
   );
