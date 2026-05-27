@@ -122,18 +122,17 @@ function AssessmentPage() {
           <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
             <div>
               <Badge variant="secondary" className="mb-2">
-                Pro feature preview
+                {t("assessment.pro_badge")}
               </Badge>
               <h1 className="text-3xl font-bold tracking-tight text-foreground lg:text-4xl">
-                Full MDK assessment
+                {t("assessment.title")}
               </h1>
               <p className="mt-2 max-w-2xl text-muted-foreground">
-                The same structure the Medizinischer Dienst uses, with plain-language paraphrases
-                and honest-answer prompts for caregivers. Your answers are saved on this device.
+                {t("assessment.intro")}
               </p>
             </div>
             <Button variant="outline" asChild>
-              <Link to="/survey">Try the 5-min check instead</Link>
+              <Link to="/survey">{t("assessment.try_quick")}</Link>
             </Button>
           </div>
 
@@ -146,10 +145,9 @@ function AssessmentPage() {
 
           <Alert className="mt-6">
             <Info className="h-4 w-4" />
-            <AlertTitle>Answer for a typical 24-hour day</AlertTitle>
+            <AlertTitle>{t("assessment.alert_title")}</AlertTitle>
             <AlertDescription>
-              Not their best day. Not their worst. What is normal across day and night?
-              The assessor rewards specific, honest descriptions — not minimised answers.
+              {t("assessment.alert_body")}
             </AlertDescription>
           </Alert>
 
@@ -159,7 +157,7 @@ function AssessmentPage() {
                 const r = moduleResults.find((x) => x.id === m.id)!;
                 return (
                   <TabsTrigger key={m.id} value={String(m.id)} className="text-xs">
-                    M{m.id}
+                    {t("assessment.tab_label", { n: m.id })}
                     <span className="ml-1 text-muted-foreground">
                       {r.answered}/{r.total}
                     </span>
@@ -180,14 +178,14 @@ function AssessmentPage() {
                           <p className="mt-1 text-sm text-muted-foreground">{m.titleDe}</p>
                         </div>
                         <Badge variant="outline">
-                          {m.weightPct}% of total
-                          {m.id === 2 || m.id === 3 ? " (shared M2/M3)" : ""}
+                          {t("assessment.weight_of_total", { p: m.weightPct })}
+                          {m.id === 2 || m.id === 3 ? t("assessment.shared_m2_m3") : ""}
                         </Badge>
                       </div>
                       <CardDescription className="pt-2">{m.description}</CardDescription>
                       <div className="mt-3 flex items-center gap-3 text-xs text-muted-foreground">
                         <span>
-                          Raw {r.raw} → weighted <strong className="text-foreground">{r.weighted}</strong> pts
+                          {t("assessment.raw_weighted", { raw: r.raw })} <strong className="text-foreground">{r.weighted}</strong> {t("assessment.pts")}
                         </span>
                         <Progress value={(r.answered / r.total) * 100} className="h-1.5 max-w-xs" />
                       </div>
@@ -210,13 +208,13 @@ function AssessmentPage() {
                           disabled={m.id === 1}
                           onClick={() => setActiveModule(String(m.id - 1))}
                         >
-                          ← Previous module
+                          {t("assessment.prev_module")}
                         </Button>
                         <Button
                           disabled={m.id === 6}
                           onClick={() => setActiveModule(String(m.id + 1))}
                         >
-                          Next module →
+                          {t("assessment.next_module")}
                         </Button>
                       </div>
                     </CardContent>
@@ -229,30 +227,29 @@ function AssessmentPage() {
           <Card className="mt-8 border-accent/40 bg-accent/5">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
-                <FileText className="h-5 w-5" /> Estimated result
+                <FileText className="h-5 w-5" /> {t("assessment.result_title")}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold text-foreground">{pg.label}</p>
               <p className="mt-1 text-sm text-muted-foreground">
-                Based on {totalPoints.toFixed(2)} of 100 weighted points.
+                {t("assessment.based_on", { p: totalPoints.toFixed(2) })}
               </p>
               <Separator className="my-4" />
               <p className="text-sm text-muted-foreground">
-                This is a self-completed estimate, not an official assessment. The MDK visit will
-                review the same criteria with an in-person observation.
+                {t("assessment.self_estimate")}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <Button asChild>
-                  <Link to="/report">Generate AI report →</Link>
+                  <Link to="/report">{t("assessment.generate_report")}</Link>
                 </Button>
                 <Button
                   variant="outline"
                   onClick={() => {
-                    if (confirm("Clear all answers on this device?")) setAnswers({});
+                    if (confirm(t("assessment.clear_confirm"))) setAnswers({});
                   }}
                 >
-                  Start over
+                  {t("common.restart")}
                 </Button>
               </div>
             </CardContent>
