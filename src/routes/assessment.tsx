@@ -312,6 +312,7 @@ function CriterionRow({
   answer: { value: number | null; notes: string } | undefined;
   onChange: (patch: Partial<{ value: number | null; notes: string }>) => void;
 }) {
+  const { t } = useTranslation();
   const scale = criterion.scale === "freq" ? SCALE_FREQ : SCALE_0_3;
   const current = answer?.value ?? null;
   const answered = current != null;
