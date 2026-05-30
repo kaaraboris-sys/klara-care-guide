@@ -105,7 +105,7 @@ function HowPage() {
                     </span>
                     <div>
                       <CardTitle className="text-base">{t("how.grade_label")} {i + 1}</CardTitle>
-                      <p className="text-xs text-muted-foreground">{t(`how.grade.${g}_range`)}</p>
+                      <p className="text-xs font-medium text-emerald-600 dark:text-emerald-400">{t(`how.grade.${g}_benefits`)}</p>
                     </div>
                   </div>
                 </CardHeader>
@@ -116,6 +116,7 @@ function HowPage() {
               </Card>
             ))}
           </div>
+          <p className="mt-3 text-xs text-muted-foreground">{t("how.benefits_note")}</p>
         </div>
 
         {/* The 6 modules */}
