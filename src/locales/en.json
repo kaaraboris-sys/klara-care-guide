@@ -110,6 +110,7 @@
       "g5_label": "Most severe impairment with special demands",
       "g5_implies": "Maximum care needs — typically continuous supervision, complete dependence in self-care, or specialised medical needs. Highest benefit level."
     },
+    "benefits_note": "Cash benefit (Pflegegeld) is paid to family caregivers. Higher amounts apply if professional care services (Pflegesachleistung) are used instead. Figures are rounded 2025 rates.",
     "mods_title": "The 6 NBA modules",
     "mods_sub": "Each module is scored, then weighted into the final total.",
     "mods_note": "* Modules 2 and 3 share a single weighted contribution — only the higher of the two counts.",
