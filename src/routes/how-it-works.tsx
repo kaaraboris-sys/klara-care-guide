@@ -119,6 +119,43 @@ function HowPage() {
           <p className="mt-3 text-xs text-muted-foreground">{t("how.benefits_note")}</p>
         </div>
 
+        {/* Detailed benefits table */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold text-foreground">{t("how.benefits_table_title")}</h2>
+          <p className="mt-2 text-muted-foreground">{t("how.benefits_table_sub")}</p>
+          <div className="mt-6 overflow-x-auto rounded-2xl border border-border bg-card">
+            <table className="w-full min-w-[760px] border-collapse text-sm">
+              <thead className="bg-secondary/60">
+                <tr className="text-left text-foreground">
+                  <th className="px-4 py-3 font-semibold">{t("how.benefits_table.col_grade")}</th>
+                  <th className="px-4 py-3 font-semibold">{t("how.benefits_table.col_cash")}</th>
+                  <th className="px-4 py-3 font-semibold">{t("how.benefits_table.col_services")}</th>
+                  <th className="px-4 py-3 font-semibold">{t("how.benefits_table.col_relief")}</th>
+                  <th className="px-4 py-3 font-semibold">{t("how.benefits_table.col_short")}</th>
+                  <th className="px-4 py-3 font-semibold">{t("how.benefits_table.col_respite")}</th>
+                  <th className="px-4 py-3 font-semibold">{t("how.benefits_table.col_residential")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {GRADE_KEYS.map((g, i) => (
+                  <tr key={g} className="border-t border-border">
+                    <td className="px-4 py-3 font-medium text-foreground">
+                      {t("how.grade_label")} {i + 1}
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">{t(`how.benefits_table.${g}_cash`)}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{t(`how.benefits_table.${g}_services`)}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{t(`how.benefits_table.${g}_relief`)}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{t(`how.benefits_table.${g}_short`)}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{t(`how.benefits_table.${g}_respite`)}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{t(`how.benefits_table.${g}_residential`)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-3 text-xs text-muted-foreground">{t("how.benefits_table_note")}</p>
+        </div>
+
         {/* The 6 modules */}
         <div className="mt-16">
           <h2 className="text-2xl font-semibold text-foreground">{t("how.mods_title")}</h2>
