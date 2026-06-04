@@ -361,6 +361,19 @@
     "draft_title": "Berichtsentwurf",
     "draft_desc": "Prüfen und korrigieren Sie alles, was nicht zu Ihrer Alltagsrealität passt, bevor Sie drucken."
   },
+  "auth": {
+    "title": "Willkommen bei Klara",
+    "subtitle": "Melden Sie sich an oder erstellen Sie ein Konto, um Tagebuch, Begutachtung und Bericht zu nutzen.",
+    "signin": "Anmelden",
+    "signup": "Registrieren",
+    "signout": "Abmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "create_account": "Konto erstellen",
+    "continue_google": "Mit Google fortfahren",
+    "or": "oder",
+    "check_email": "Bitte prüfen Sie Ihre E-Mails, um Ihr Konto zu bestätigen."
+  },
   "footer": {
     "disclaimer": "Klara ist ein akademischer Prototyp (THD Digital Health Master 2026). Ersetzt keine offizielle MDK-Begutachtung oder Rechtsberatung. NBA: SGB XI §15 · BRi 2024."
   }
