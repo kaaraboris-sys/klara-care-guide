@@ -21,7 +21,7 @@ import {
 } from "@/lib/mdk-criteria";
 import { AlertCircle, CheckCircle2, FileText, Info, Lightbulb } from "lucide-react";
 
-export const Route = createFileRoute("/assessment")({
+export const Route = createFileRoute("/_authenticated/assessment")({
   head: () => ({
     meta: [
       { title: "Full MDK assessment — Klara" },

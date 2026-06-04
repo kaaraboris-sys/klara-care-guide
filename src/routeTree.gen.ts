@@ -10,22 +10,19 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SurveyRouteImport } from './routes/survey'
-import { Route as ReportRouteImport } from './routes/report'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ModulesRouteImport } from './routes/modules'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
-import { Route as DiaryRouteImport } from './routes/diary'
-import { Route as AssessmentRouteImport } from './routes/assessment'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedReportRouteImport } from './routes/_authenticated/report'
+import { Route as AuthenticatedDiaryRouteImport } from './routes/_authenticated/diary'
+import { Route as AuthenticatedAssessmentRouteImport } from './routes/_authenticated/assessment'
 
 const SurveyRoute = SurveyRouteImport.update({
   id: '/survey',
   path: '/survey',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReportRoute = ReportRouteImport.update({
-  id: '/report',
-  path: '/report',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -43,14 +40,13 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
   path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DiaryRoute = DiaryRouteImport.update({
-  id: '/diary',
-  path: '/diary',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AssessmentRoute = AssessmentRouteImport.update({
-  id: '/assessment',
-  path: '/assessment',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -58,79 +54,101 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedReportRoute = AuthenticatedReportRouteImport.update({
+  id: '/report',
+  path: '/report',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDiaryRoute = AuthenticatedDiaryRouteImport.update({
+  id: '/diary',
+  path: '/diary',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAssessmentRoute = AuthenticatedAssessmentRouteImport.update({
+  id: '/assessment',
+  path: '/assessment',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/assessment': typeof AssessmentRoute
-  '/diary': typeof DiaryRoute
+  '/auth': typeof AuthRoute
   '/how-it-works': typeof HowItWorksRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
-  '/report': typeof ReportRoute
   '/survey': typeof SurveyRoute
+  '/assessment': typeof AuthenticatedAssessmentRoute
+  '/diary': typeof AuthenticatedDiaryRoute
+  '/report': typeof AuthenticatedReportRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/assessment': typeof AssessmentRoute
-  '/diary': typeof DiaryRoute
+  '/auth': typeof AuthRoute
   '/how-it-works': typeof HowItWorksRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
-  '/report': typeof ReportRoute
   '/survey': typeof SurveyRoute
+  '/assessment': typeof AuthenticatedAssessmentRoute
+  '/diary': typeof AuthenticatedDiaryRoute
+  '/report': typeof AuthenticatedReportRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/assessment': typeof AssessmentRoute
-  '/diary': typeof DiaryRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/how-it-works': typeof HowItWorksRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
-  '/report': typeof ReportRoute
   '/survey': typeof SurveyRoute
+  '/_authenticated/assessment': typeof AuthenticatedAssessmentRoute
+  '/_authenticated/diary': typeof AuthenticatedDiaryRoute
+  '/_authenticated/report': typeof AuthenticatedReportRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/assessment'
-    | '/diary'
+    | '/auth'
     | '/how-it-works'
     | '/modules'
     | '/pricing'
-    | '/report'
     | '/survey'
+    | '/assessment'
+    | '/diary'
+    | '/report'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/assessment'
-    | '/diary'
+    | '/auth'
     | '/how-it-works'
     | '/modules'
     | '/pricing'
-    | '/report'
     | '/survey'
+    | '/assessment'
+    | '/diary'
+    | '/report'
   id:
     | '__root__'
     | '/'
-    | '/assessment'
-    | '/diary'
+    | '/_authenticated'
+    | '/auth'
     | '/how-it-works'
     | '/modules'
     | '/pricing'
-    | '/report'
     | '/survey'
+    | '/_authenticated/assessment'
+    | '/_authenticated/diary'
+    | '/_authenticated/report'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AssessmentRoute: typeof AssessmentRoute
-  DiaryRoute: typeof DiaryRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   HowItWorksRoute: typeof HowItWorksRoute
   ModulesRoute: typeof ModulesRoute
   PricingRoute: typeof PricingRoute
-  ReportRoute: typeof ReportRoute
   SurveyRoute: typeof SurveyRoute
 }
 
@@ -141,13 +159,6 @@ declare module '@tanstack/react-router' {
       path: '/survey'
       fullPath: '/survey'
       preLoaderRoute: typeof SurveyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/report': {
-      id: '/report'
-      path: '/report'
-      fullPath: '/report'
-      preLoaderRoute: typeof ReportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -171,18 +182,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/diary': {
-      id: '/diary'
-      path: '/diary'
-      fullPath: '/diary'
-      preLoaderRoute: typeof DiaryRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/assessment': {
-      id: '/assessment'
-      path: '/assessment'
-      fullPath: '/assessment'
-      preLoaderRoute: typeof AssessmentRouteImport
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -192,19 +203,64 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/report': {
+      id: '/_authenticated/report'
+      path: '/report'
+      fullPath: '/report'
+      preLoaderRoute: typeof AuthenticatedReportRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/diary': {
+      id: '/_authenticated/diary'
+      path: '/diary'
+      fullPath: '/diary'
+      preLoaderRoute: typeof AuthenticatedDiaryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/assessment': {
+      id: '/_authenticated/assessment'
+      path: '/assessment'
+      fullPath: '/assessment'
+      preLoaderRoute: typeof AuthenticatedAssessmentRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAssessmentRoute: typeof AuthenticatedAssessmentRoute
+  AuthenticatedDiaryRoute: typeof AuthenticatedDiaryRoute
+  AuthenticatedReportRoute: typeof AuthenticatedReportRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAssessmentRoute: AuthenticatedAssessmentRoute,
+  AuthenticatedDiaryRoute: AuthenticatedDiaryRoute,
+  AuthenticatedReportRoute: AuthenticatedReportRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AssessmentRoute: AssessmentRoute,
-  DiaryRoute: DiaryRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   HowItWorksRoute: HowItWorksRoute,
   ModulesRoute: ModulesRoute,
   PricingRoute: PricingRoute,
-  ReportRoute: ReportRoute,
   SurveyRoute: SurveyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

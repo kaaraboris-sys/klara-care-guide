@@ -18,7 +18,7 @@ import {
 import { TEMPLATES, type DiaryEntry } from "@/lib/diary-templates";
 import { generateReport } from "@/lib/report.functions";
 
-export const Route = createFileRoute("/report")({
+export const Route = createFileRoute("/_authenticated/report")({
   head: () => ({
     meta: [
       { title: "MDK preparation report — Klara" },
