@@ -361,6 +361,19 @@
     "draft_title": "Draft report",
     "draft_desc": "Review and edit anything that doesn't match your day-to-day reality before printing."
   },
+  "auth": {
+    "title": "Welcome to Klara",
+    "subtitle": "Sign in or create an account to use the diary, assessment, and report.",
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "signout": "Sign out",
+    "email": "Email",
+    "password": "Password",
+    "create_account": "Create account",
+    "continue_google": "Continue with Google",
+    "or": "or",
+    "check_email": "Check your email to confirm your account."
+  },
   "footer": {
     "disclaimer": "Klara is an academic prototype (THD Digital Health Master's 2026). It does not replace official MDK assessment or legal advice. NBA: SGB XI §15 · BRi 2024."
   }

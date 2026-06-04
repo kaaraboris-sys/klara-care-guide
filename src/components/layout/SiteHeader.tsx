@@ -1,12 +1,16 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
 
 export function SiteHeader() {
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
+  const { isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
 
   const nav = [
     { to: "/how-it-works", label: t("nav.how") },
@@ -21,6 +25,11 @@ export function SiteHeader() {
   const toggleLang = () => {
     const next = i18n.language?.startsWith("de") ? "en" : "de";
     i18n.changeLanguage(next);
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate({ to: "/", replace: true });
   };
 
   return (
@@ -60,12 +69,35 @@ export function SiteHeader() {
             <Globe className="h-4 w-4" />
             {i18n.language?.startsWith("de") ? "DE" : "EN"}
           </button>
-          <Link
-            to="/survey"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            {t("home.cta_primary")}
-          </Link>
+          {isAuthenticated ? (
+            <>
+              <span className="hidden lg:inline max-w-[160px] truncate text-sm text-muted-foreground" title={user?.email ?? ""}>
+                {user?.email}
+              </span>
+              <button
+                onClick={handleSignOut}
+                className="inline-flex items-center gap-1.5 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+              >
+                <LogOut className="h-4 w-4" />
+                {t("auth.signout")}
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/auth"
+                className="inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              >
+                {t("auth.signin")}
+              </Link>
+              <Link
+                to="/auth"
+                className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                {t("home.cta_primary")}
+              </Link>
+            </>
+          )}
         </div>
 
         <button
@@ -104,13 +136,26 @@ export function SiteHeader() {
             <Globe className="h-4 w-4" />
             {i18n.language?.startsWith("de") ? "Deutsch" : "English"}
           </button>
-          <Link
-            to="/survey"
-            onClick={() => setOpen(false)}
-            className="mt-2 rounded-md bg-primary px-4 py-3 text-center text-base font-medium text-primary-foreground"
-          >
-            {t("home.cta_primary")}
-          </Link>
+          {isAuthenticated ? (
+            <button
+              onClick={() => {
+                handleSignOut();
+                setOpen(false);
+              }}
+              className="mt-2 flex items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-3 text-base font-medium text-foreground"
+            >
+              <LogOut className="h-4 w-4" />
+              {t("auth.signout")}
+            </button>
+          ) : (
+            <Link
+              to="/auth"
+              onClick={() => setOpen(false)}
+              className="mt-2 rounded-md bg-primary px-4 py-3 text-center text-base font-medium text-primary-foreground"
+            >
+              {t("auth.signin")}
+            </Link>
+          )}
         </div>
       </div>
     </header>

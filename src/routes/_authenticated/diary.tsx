@@ -29,7 +29,7 @@ import {
 import { CalendarDays, CheckCircle2, FileText, Info, Trash2 } from "lucide-react";
 import { TEMPLATES, type DiaryEntry, type DiaryField, type DiaryTemplate } from "@/lib/diary-templates";
 
-export const Route = createFileRoute("/diary")({
+export const Route = createFileRoute("/_authenticated/diary")({
   head: () => ({
     meta: [
       { title: "Care diary — Klara" },
