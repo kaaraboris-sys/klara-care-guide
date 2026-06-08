@@ -29,12 +29,34 @@ function HomePage() {
             <span className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
               NBA · SGB XI §15 · BRi 2024
             </span>
-            <h1 className="mt-5 text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+            <h1 className="mt-5 text-3xl font-semibold tracking-tight text-foreground md:text-4xl lg:text-5xl">
               {t("home.hero_title")}
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
               {t("home.hero_sub")}
             </p>
+
+            {/* Static calculator / example */}
+            <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-5">
+              <p className="text-xs font-medium uppercase tracking-wide text-primary">
+                {t("home.hero_calc_title")}
+              </p>
+              <p className="mt-2 text-base text-foreground">
+                {t("home.hero_calc_body")}
+              </p>
+              <div className="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-1">
+                <span className="text-3xl font-semibold text-foreground md:text-4xl">
+                  {t("home.hero_calc_month")}
+                </span>
+                <span className="text-base text-muted-foreground">
+                  · {t("home.hero_calc_year")}
+                </span>
+              </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                {t("home.hero_calc_note")}
+              </p>
+            </div>
+
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/survey"

@@ -28,6 +28,9 @@ function PricingPage() {
             {t("pricing.title")}
           </h1>
           <p className="mt-4 text-lg text-muted-foreground">{t("pricing.sub")}</p>
+          <p className="mx-auto mt-4 inline-block rounded-full border border-primary/30 bg-primary/5 px-4 py-2 text-sm font-medium text-primary">
+            {t("pricing.frame")}
+          </p>
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
