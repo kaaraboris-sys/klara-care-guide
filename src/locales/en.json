@@ -37,8 +37,13 @@
     "of": "of"
   },
   "home": {
-    "hero_title": "Prepare for the Pflegegrad assessment — with confidence",
-    "hero_sub": "Klara guides caregivers in Germany through the MDK assessment for elderly relatives and people with autism. Plain-language explanations, a 14-day care diary, and a quick check that estimates the likely care grade.",
+    "hero_title": "Most families receive a lower Pflegegrad than they are entitled to. Every month that goes unchallenged costs €300–600.",
+    "hero_sub": "Klara helps caregivers in Germany prepare for the MDK assessment so the grade you receive matches the care you actually give. Plain-language explanations, a 14-day care diary, and a 5-minute check.",
+    "hero_calc_title": "What one grade is worth",
+    "hero_calc_body": "The difference between Pflegegrad 2 and Pflegegrad 3 is",
+    "hero_calc_month": "€360 per month",
+    "hero_calc_year": "€4,320 per year",
+    "hero_calc_note": "Cash benefit (Pflegegeld) alone — before counting Pflegesachleistung, Entlastungsbetrag or residential top-ups.",
     "cta_primary": "Take the 5-minute check",
     "cta_secondary": "How Klara works",
     "trust_title": "Built around what the assessor actually scores",

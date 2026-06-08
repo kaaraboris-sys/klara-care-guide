@@ -37,8 +37,13 @@
     "of": "von"
   },
   "home": {
-    "hero_title": "Bereiten Sie sich sicher auf die Pflegegrad-Begutachtung vor",
-    "hero_sub": "Klara begleitet pflegende Angehörige durch die MDK-Begutachtung — für ältere Menschen und Menschen mit Autismus. Verständliche Erklärungen, ein 14-Tage-Pflegetagebuch und ein Schnellcheck, der den voraussichtlichen Pflegegrad schätzt.",
+    "hero_title": "Die meisten Familien erhalten einen niedrigeren Pflegegrad, als ihnen zusteht. Jeder Monat ohne Widerspruch kostet 300–600 €.",
+    "hero_sub": "Klara hilft pflegenden Angehörigen in Deutschland, sich auf die MDK-Begutachtung vorzubereiten — damit der Pflegegrad der tatsächlich geleisteten Pflege entspricht. Verständliche Erklärungen, ein 14-Tage-Tagebuch und ein 5-Minuten-Check.",
+    "hero_calc_title": "Was ein Pflegegrad wert ist",
+    "hero_calc_body": "Der Unterschied zwischen Pflegegrad 2 und Pflegegrad 3 beträgt",
+    "hero_calc_month": "360 € pro Monat",
+    "hero_calc_year": "4.320 € pro Jahr",
+    "hero_calc_note": "Nur Pflegegeld — ohne Pflegesachleistung, Entlastungsbetrag oder stationäre Zuschläge.",
     "cta_primary": "5-Minuten-Check starten",
     "cta_secondary": "So funktioniert Klara",
     "trust_title": "Aufgebaut nach dem, was die Gutachter:innen wirklich bewerten",
