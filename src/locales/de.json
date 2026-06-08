@@ -218,7 +218,8 @@
   },
   "pricing": {
     "title": "Einfache Preise",
-    "sub": "Das meiste in Klara ist kostenlos. Pro schaltet die vollständige Begutachtung und den KI-Bericht frei.",
+    "sub": "9 €/Monat für Pro. Ein korrekt anerkannter Pflegegrad ist bis zu 360 € jeden Monat wert — Pro rechnet sich schon im ersten Monat.",
+    "frame": "9 €/Monat vs. 360 €+/Monat durch den richtigen Pflegegrad.",
     "free_title": "Kostenlos",
     "free_price": "0 €",
     "free_per": "für immer",

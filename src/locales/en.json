@@ -218,7 +218,8 @@
   },
   "pricing": {
     "title": "Simple pricing",
-    "sub": "Most of Klara is free. Pro unlocks the full assessment and AI report.",
+    "sub": "€9/month for Pro. One correctly recognised grade is worth up to €360 every month — Pro pays for itself the first month it helps.",
+    "frame": "€9/month vs. €360+/month gained from the right Pflegegrad.",
     "free_title": "Free",
     "free_price": "€0",
     "free_per": "forever",
