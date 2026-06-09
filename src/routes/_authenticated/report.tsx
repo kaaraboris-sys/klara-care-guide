@@ -58,24 +58,24 @@ function loadDiary(): DiaryEntry[] {
 }
 
 function ReportPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [answers, setAnswers] = useState<Answers>({});
   const [diary, setDiary] = useState<DiaryEntry[]>([]);
   const [template, setTemplate] = useState<"autism" | "elderly">("elderly");
-  const [language, setLanguage] = useState<"en" | "de">("en");
   const [markdown, setMarkdown] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [unlocked, setUnlocked] = useState(false);
+
+  const language: "en" | "de" = i18n.language?.startsWith("de") ? "de" : "en";
 
   const runReport = useServerFn(generateReport);
 
   useEffect(() => {
     setAnswers(loadAssessment());
     setDiary(loadDiary());
-    if (typeof navigator !== "undefined" && navigator.language?.startsWith("de")) {
-      setLanguage("de");
-    }
   }, []);
+
 
   const assessmentPayload = useMemo(() => {
     const modules = MODULES.map((m) => {
