@@ -231,26 +231,13 @@ function ReportPage() {
                   </>
                 )}
               </Button>
-              <div className="inline-flex rounded-md border p-0.5 text-sm">
-                <button
-                  onClick={() => setLanguage("en")}
-                  className={`rounded px-3 py-1 ${language === "en" ? "bg-secondary text-foreground" : "text-muted-foreground"}`}
-                >
-                  English
-                </button>
-                <button
-                  onClick={() => setLanguage("de")}
-                  className={`rounded px-3 py-1 ${language === "de" ? "bg-secondary text-foreground" : "text-muted-foreground"}`}
-                >
-                  Deutsch
-                </button>
-              </div>
-              {markdown ? (
+              {markdown && unlocked ? (
                 <Button variant="outline" onClick={() => window.print()}>
                   <Printer className="mr-2 h-4 w-4" /> Print / Save as PDF
                 </Button>
               ) : null}
             </div>
+
 
             {!canGenerate ? (
               <Alert>
