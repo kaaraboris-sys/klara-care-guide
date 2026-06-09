@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
-import { FileText, Loader2, Printer, Sparkles, AlertCircle } from "lucide-react";
+import { FileText, Loader2, Printer, Sparkles, AlertCircle, Lock } from "lucide-react";
+
 import {
   MODULES,
   bracketPoints,
