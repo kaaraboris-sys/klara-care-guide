@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
-import { FileText, Loader2, Printer, Sparkles, AlertCircle } from "lucide-react";
+import { FileText, Loader2, Printer, Sparkles, AlertCircle, Lock } from "lucide-react";
+
 import {
   MODULES,
   bracketPoints,
@@ -57,24 +58,24 @@ function loadDiary(): DiaryEntry[] {
 }
 
 function ReportPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [answers, setAnswers] = useState<Answers>({});
   const [diary, setDiary] = useState<DiaryEntry[]>([]);
   const [template, setTemplate] = useState<"autism" | "elderly">("elderly");
-  const [language, setLanguage] = useState<"en" | "de">("en");
   const [markdown, setMarkdown] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [unlocked, setUnlocked] = useState(false);
+
+  const language: "en" | "de" = i18n.language?.startsWith("de") ? "de" : "en";
 
   const runReport = useServerFn(generateReport);
 
   useEffect(() => {
     setAnswers(loadAssessment());
     setDiary(loadDiary());
-    if (typeof navigator !== "undefined" && navigator.language?.startsWith("de")) {
-      setLanguage("de");
-    }
   }, []);
+
 
   const assessmentPayload = useMemo(() => {
     const modules = MODULES.map((m) => {
@@ -230,26 +231,13 @@ function ReportPage() {
                   </>
                 )}
               </Button>
-              <div className="inline-flex rounded-md border p-0.5 text-sm">
-                <button
-                  onClick={() => setLanguage("en")}
-                  className={`rounded px-3 py-1 ${language === "en" ? "bg-secondary text-foreground" : "text-muted-foreground"}`}
-                >
-                  English
-                </button>
-                <button
-                  onClick={() => setLanguage("de")}
-                  className={`rounded px-3 py-1 ${language === "de" ? "bg-secondary text-foreground" : "text-muted-foreground"}`}
-                >
-                  Deutsch
-                </button>
-              </div>
-              {markdown ? (
+              {markdown && unlocked ? (
                 <Button variant="outline" onClick={() => window.print()}>
                   <Printer className="mr-2 h-4 w-4" /> Print / Save as PDF
                 </Button>
               ) : null}
             </div>
+
 
             {!canGenerate ? (
               <Alert>
@@ -282,20 +270,58 @@ function ReportPage() {
         {markdown ? (
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <FileText className="h-5 w-5 text-primary" />
-                Draft report
-              </CardTitle>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <CardTitle className="flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-primary" />
+                  {unlocked ? "Your report" : "Sample preview"}
+                </CardTitle>
+                {!unlocked ? (
+                  <Badge variant="secondary" className="gap-1">
+                    <Lock className="h-3 w-3" /> Preview only
+                  </Badge>
+                ) : null}
+              </div>
               <CardDescription>
-                Review and edit anything that doesn't match your day-to-day reality before
-                printing.
+                {unlocked
+                  ? "Review and edit anything that doesn't match your day-to-day reality before printing."
+                  : `Estimated grade: ${assessmentPayload.pflegegrad.label}. Read through the wording below — when you're happy with it, unlock to download or print the full report.`}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Separator className="mb-4" />
-              <article className="prose prose-sm max-w-none dark:prose-invert prose-headings:text-foreground prose-strong:text-foreground prose-p:text-foreground prose-li:text-foreground">
-                <ReactMarkdown>{markdown}</ReactMarkdown>
-              </article>
+              <div className="relative">
+                <article
+                  className={`prose prose-sm max-w-none dark:prose-invert prose-headings:text-foreground prose-strong:text-foreground prose-p:text-foreground prose-li:text-foreground ${
+                    unlocked ? "" : "max-h-[420px] overflow-hidden"
+                  }`}
+                >
+                  <ReactMarkdown>{markdown}</ReactMarkdown>
+                </article>
+                {!unlocked ? (
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-card to-transparent" />
+                ) : null}
+              </div>
+              {!unlocked ? (
+                <div className="mt-6 rounded-lg border border-primary/30 bg-primary/5 p-5">
+                  <div className="flex items-start gap-3">
+                    <Lock className="mt-0.5 h-5 w-5 text-primary" />
+                    <div className="flex-1">
+                      <h3 className="text-base font-semibold text-foreground">
+                        Unlock the full report — €9 once
+                      </h3>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        Download the complete MDK-ready PDF, print it, and bring it to the
+                        assessor. €9 once vs. up to €360 every month you go undergraded.
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <Button asChild>
+                          <Link to="/pricing">Unlock & download</Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
             </CardContent>
           </Card>
         ) : null}
@@ -303,3 +329,4 @@ function ReportPage() {
     </PublicShell>
   );
 }
+
