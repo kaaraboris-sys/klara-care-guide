@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useEffect, useMemo, useState } from "react";
 import { PublicShell } from "@/components/layout/PublicShell";
@@ -57,6 +57,8 @@ function loadSaved(): Saved | null {
 
 function SurveyPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [age, setAge] = useState<"adult" | null>(null);
   const [profile, setProfile] = useState<"autism" | "elderly" | null>(null);
   const [idx, setIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
@@ -115,6 +117,43 @@ function SurveyPage() {
     else if (pct >= 12.5) pg = 1;
     return { pg, pct: Math.round(pct) };
   }, [done, answers]);
+
+  if (!age) {
+    return (
+      <PublicShell>
+        <section className="mx-auto max-w-2xl px-4 py-16">
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+            {t("survey.title")}
+          </h1>
+          <p className="mt-3 text-base text-muted-foreground">{t("survey.sub")}</p>
+          <div className="mt-6 flex items-start gap-2 rounded-xl border border-border bg-secondary/50 p-4 text-sm text-muted-foreground">
+            <Info className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+            <span>{t("survey.disclaimer")}</span>
+          </div>
+
+          <h2 className="mt-10 text-lg font-semibold text-foreground">
+            {t("survey.age_title")}
+          </h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <button
+              onClick={() => setAge("adult")}
+              className="rounded-2xl border border-border bg-card p-5 text-left transition-colors hover:border-primary hover:bg-secondary/40"
+            >
+              <span className="text-base font-medium text-foreground">{t("survey.age_adult")}</span>
+              <p className="mt-1 text-sm text-muted-foreground">{t("survey.age_adult_sub")}</p>
+            </button>
+            <button
+              onClick={() => navigate({ to: "/survey/child" })}
+              className="rounded-2xl border border-border bg-card p-5 text-left transition-colors hover:border-primary hover:bg-secondary/40"
+            >
+              <span className="text-base font-medium text-foreground">{t("survey.age_child")}</span>
+              <p className="mt-1 text-sm text-muted-foreground">{t("survey.age_child_sub")}</p>
+            </button>
+          </div>
+        </section>
+      </PublicShell>
+    );
+  }
 
   if (!profile) {
     return (
