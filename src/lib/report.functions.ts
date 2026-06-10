@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 
 type GenerateInput = {
   language: "en" | "de";
+  subject?: "adult" | "child";
   assessment?: {
     totalPoints: number;
     pflegegrad: { grade: number; label: string };
