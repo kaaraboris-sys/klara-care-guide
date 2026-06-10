@@ -145,6 +145,7 @@ function ReportPage() {
       const result = await runReport({
         data: {
           language,
+          subject,
           assessment: totalAnswered > 0 ? assessmentPayload : undefined,
           diary:
             diaryForTemplate.length > 0
