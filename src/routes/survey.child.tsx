@@ -1,45 +1,56 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useEffect, useMemo, useState } from "react";
 import { PublicShell } from "@/components/layout/PublicShell";
 import { ArrowLeft, ArrowRight, Check, Info, AlertCircle } from "lucide-react";
 
-export const Route = createFileRoute("/survey")({
+export const Route = createFileRoute("/survey/child")({
   head: () => ({
     meta: [
-      { title: "5-minute Pflegegrad check — Klara" },
-      { name: "description", content: "Answer 10 plain-language questions to estimate the German care grade your relative is likely to receive." },
-      { property: "og:title", content: "5-minute Pflegegrad check" },
-      { property: "og:description", content: "Free estimate of the likely Pflegegrad." },
+      { title: "Pflegegrad check for children — Klara" },
+      {
+        name: "description",
+        content:
+          "Estimate the German care grade (Pflegegrad) for a child or young person under 18, with child-specific MDK questions.",
+      },
+      { property: "og:title", content: "Pflegegrad check for children — Klara" },
+      {
+        property: "og:description",
+        content: "A child-specific 5-minute estimate of the Pflegegrad.",
+      },
     ],
   }),
-  component: SurveyPage,
+  component: ChildSurveyPage,
 });
 
-type Step =
-  | { id: string; module: 1 | 2 | 3 | 4 | 5 | 6; weight: number; kind: "scale" | "freq" };
+type Step = {
+  id: string;
+  module: 1 | 2 | 3 | 4 | 5 | 6;
+  weight: number;
+  kind: "scale" | "freq";
+  /** When true, the item is dropped for children under 3 (age-typical dependency). */
+  skipUnder3?: boolean;
+};
 
 const STEPS: Step[] = [
-  { id: "mobility",   module: 1, weight: 1.0, kind: "scale" },
-  { id: "cognition",  module: 2, weight: 1.5, kind: "scale" },
-  { id: "behaviour",  module: 3, weight: 1.5, kind: "freq"  },
-  { id: "hygiene",    module: 4, weight: 1.3, kind: "scale" },
-  { id: "dressing",   module: 4, weight: 1.3, kind: "scale" },
-  { id: "eating",     module: 4, weight: 2.0, kind: "scale" },
-  { id: "toilet",     module: 4, weight: 1.5, kind: "scale" },
-  { id: "medication", module: 5, weight: 1.2, kind: "scale" },
-  { id: "structure",  module: 6, weight: 1.0, kind: "scale" },
-  { id: "social",     module: 6, weight: 1.0, kind: "scale" },
+  { id: "child_mobility",   module: 1, weight: 1.0, kind: "scale" },
+  { id: "child_cognition",  module: 2, weight: 1.5, kind: "scale" },
+  { id: "child_behaviour",  module: 3, weight: 1.5, kind: "freq"  },
+  { id: "child_hygiene",    module: 4, weight: 1.3, kind: "scale", skipUnder3: true },
+  { id: "child_dressing",   module: 4, weight: 1.3, kind: "scale", skipUnder3: true },
+  { id: "child_eating",     module: 4, weight: 2.0, kind: "scale" },
+  { id: "child_toilet",     module: 4, weight: 1.5, kind: "scale", skipUnder3: true },
+  { id: "child_therapy",    module: 5, weight: 1.3, kind: "scale" },
+  { id: "child_structure",  module: 6, weight: 1.0, kind: "scale" },
+  { id: "child_social",     module: 6, weight: 1.0, kind: "scale" },
 ];
 
-// Monthly Pflegegeld gap (EUR) between this grade and one grade lower.
-// PG3 uses 360 to reflect blended cash+services uplift commonly cited.
 const MONTHLY_GAP: Record<number, number> = { 1: 131, 2: 216, 3: 360, 4: 201, 5: 190 };
 
-const STORAGE_KEY = "klara.survey.v1";
+const STORAGE_KEY = "klara.survey.child.v1";
 
 type Saved = {
-  profile: "autism" | "elderly" | null;
+  under3: boolean | null;
   idx: number;
   answers: Record<string, number>;
   done: boolean;
@@ -55,61 +66,59 @@ function loadSaved(): Saved | null {
   }
 }
 
-function SurveyPage() {
+function ChildSurveyPage() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [age, setAge] = useState<"adult" | null>(null);
-  const [profile, setProfile] = useState<"autism" | "elderly" | null>(null);
+  const [under3, setUnder3] = useState<boolean | null>(null);
   const [idx, setIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [done, setDone] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const [showRequired, setShowRequired] = useState(false);
-  const [savedBanner, setSavedBanner] = useState<number | null>(null); // module number just completed
+  const [savedBanner, setSavedBanner] = useState<number | null>(null);
 
-  // Hydrate from localStorage
   useEffect(() => {
     const s = loadSaved();
     if (s) {
-      setProfile(s.profile);
+      setUnder3(s.under3);
       setIdx(s.idx);
       setAnswers(s.answers);
       setDone(s.done);
-      if (s.profile) setAge("adult");
     }
     setHydrated(true);
   }, []);
 
-  // Auto-save
   useEffect(() => {
     if (!hydrated || typeof window === "undefined") return;
     window.localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify({ profile, idx, answers, done } as Saved),
+      JSON.stringify({ under3, idx, answers, done } as Saved),
     );
-  }, [hydrated, profile, idx, answers, done]);
+  }, [hydrated, under3, idx, answers, done]);
 
-  // Dismiss saved banner after a few seconds
   useEffect(() => {
     if (savedBanner == null) return;
     const id = window.setTimeout(() => setSavedBanner(null), 3500);
     return () => window.clearTimeout(id);
   }, [savedBanner]);
 
-  const step = STEPS[idx];
+  const activeSteps = useMemo(
+    () => STEPS.filter((s) => !(under3 && s.skipUnder3)),
+    [under3],
+  );
+
+  const step = activeSteps[idx];
   const totalModules = 6;
-  // Progress by step count gives the smoothest movement (10 steps).
-  const progress = Math.round(((idx + (done ? 1 : 0)) / STEPS.length) * 100);
+  const progress = Math.round(((idx + (done ? 1 : 0)) / activeSteps.length) * 100);
 
   const result = useMemo(() => {
     if (!done) return null;
     let raw = 0;
     let max = 0;
-    for (const s of STEPS) {
+    for (const s of activeSteps) {
       raw += (answers[s.id] ?? 0) * s.weight;
       max += 3 * s.weight;
     }
-    const pct = (raw / max) * 100;
+    const pct = max > 0 ? (raw / max) * 100 : 0;
     let pg = 0;
     if (pct >= 90) pg = 5;
     else if (pct >= 70) pg = 4;
@@ -117,73 +126,48 @@ function SurveyPage() {
     else if (pct >= 27) pg = 2;
     else if (pct >= 12.5) pg = 1;
     return { pg, pct: Math.round(pct) };
-  }, [done, answers]);
+  }, [done, answers, activeSteps]);
 
-  if (!age) {
+  // Age sub-gate
+  if (under3 === null) {
     return (
       <PublicShell>
         <section className="mx-auto max-w-2xl px-4 py-16">
           <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-            {t("survey.title")}
+            {t("survey.child.title")}
           </h1>
-          <p className="mt-3 text-base text-muted-foreground">{t("survey.sub")}</p>
+          <p className="mt-3 text-base text-muted-foreground">{t("survey.child.sub")}</p>
           <div className="mt-6 flex items-start gap-2 rounded-xl border border-border bg-secondary/50 p-4 text-sm text-muted-foreground">
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
             <span>{t("survey.disclaimer")}</span>
           </div>
 
           <h2 className="mt-10 text-lg font-semibold text-foreground">
-            {t("survey.age_title")}
+            {t("survey.child.under3_title")}
           </h2>
+          <p className="mt-1 text-sm text-muted-foreground">{t("survey.child.under3_hint")}</p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             <button
-              onClick={() => setAge("adult")}
+              onClick={() => setUnder3(false)}
               className="rounded-2xl border border-border bg-card p-5 text-left transition-colors hover:border-primary hover:bg-secondary/40"
             >
-              <span className="text-base font-medium text-foreground">{t("survey.age_adult")}</span>
-              <p className="mt-1 text-sm text-muted-foreground">{t("survey.age_adult_sub")}</p>
+              <span className="text-base font-medium text-foreground">
+                {t("survey.child.age_3plus")}
+              </span>
             </button>
             <button
-              onClick={() => navigate({ to: "/survey/child" })}
+              onClick={() => setUnder3(true)}
               className="rounded-2xl border border-border bg-card p-5 text-left transition-colors hover:border-primary hover:bg-secondary/40"
             >
-              <span className="text-base font-medium text-foreground">{t("survey.age_child")}</span>
-              <p className="mt-1 text-sm text-muted-foreground">{t("survey.age_child_sub")}</p>
+              <span className="text-base font-medium text-foreground">
+                {t("survey.child.age_under3")}
+              </span>
             </button>
           </div>
-        </section>
-      </PublicShell>
-    );
-  }
-
-  if (!profile) {
-    return (
-      <PublicShell>
-        <section className="mx-auto max-w-2xl px-4 py-16">
-          <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-            {t("survey.title")}
-          </h1>
-          <p className="mt-3 text-base text-muted-foreground">{t("survey.sub")}</p>
-          <div className="mt-6 flex items-start gap-2 rounded-xl border border-border bg-secondary/50 p-4 text-sm text-muted-foreground">
-            <Info className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-            <span>{t("survey.disclaimer")}</span>
-          </div>
-
-          <h2 className="mt-10 text-lg font-semibold text-foreground">
-            {t("survey.who_title")}
-          </h2>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {(["autism", "elderly"] as const).map((p) => (
-              <button
-                key={p}
-                onClick={() => setProfile(p)}
-                className="rounded-2xl border border-border bg-card p-5 text-left transition-colors hover:border-primary hover:bg-secondary/40"
-              >
-                <span className="text-base font-medium text-foreground">
-                  {t(`survey.who_${p}`)}
-                </span>
-              </button>
-            ))}
+          <div className="mt-8">
+            <Link to="/survey" className="text-sm text-muted-foreground hover:text-foreground">
+              ← {t("common.back")}
+            </Link>
           </div>
         </section>
       </PublicShell>
@@ -191,7 +175,8 @@ function SurveyPage() {
   }
 
   if (done && result) {
-    const label = result.pg === 0 ? t("survey.result_none") : t("survey.result_pg", { n: result.pg });
+    const label =
+      result.pg === 0 ? t("survey.result_none") : t("survey.result_pg", { n: result.pg });
     const gap = result.pg > 0 ? MONTHLY_GAP[result.pg] : 0;
     const yearly = gap * 12;
 
@@ -202,7 +187,6 @@ function SurveyPage() {
             {t("survey.result_title")}
           </p>
 
-          {/* Big emotional reveal */}
           {result.pg > 0 ? (
             <div className="mt-4 text-center">
               <p className="text-[120px] font-semibold leading-none tracking-tight text-primary md:text-[160px]">
@@ -219,24 +203,19 @@ function SurveyPage() {
           )}
 
           <p className="mt-6 text-center text-base leading-relaxed text-foreground">
-            {t("survey.result_reveal_label")} <strong>{label}</strong>.
+            {t("survey.child.result_reveal_label")} <strong>{label}</strong>.
           </p>
 
-          {/* Gap card */}
           {result.pg > 0 && gap > 0 && (
             <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-6 text-center">
-              <p className="text-sm font-medium text-primary">
-                {t("survey.result_gap_title")}
-              </p>
+              <p className="text-sm font-medium text-primary">{t("survey.result_gap_title")}</p>
               <p className="mt-3 text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
                 {t("survey.result_gap_month", { m: gap })}
               </p>
               <p className="mt-2 text-lg text-muted-foreground">
                 {t("survey.result_gap_year", { y: yearly.toLocaleString("de-DE") })}
               </p>
-              <p className="mt-3 text-xs text-muted-foreground">
-                {t("survey.result_gap_note")}
-              </p>
+              <p className="mt-3 text-xs text-muted-foreground">{t("survey.result_gap_note")}</p>
             </div>
           )}
 
@@ -245,7 +224,6 @@ function SurveyPage() {
             <span>{t("survey.disclaimer")}</span>
           </div>
 
-          {/* Payment moment — framed against the monthly gap */}
           <div className="mt-8 rounded-2xl border border-border bg-card p-6">
             <p className="text-sm text-muted-foreground">
               {gap > 0 ? t("survey.result_next_frame", { m: gap }) : t("pricing.frame")}
@@ -263,9 +241,9 @@ function SurveyPage() {
                   setAnswers({});
                   setIdx(0);
                   setDone(false);
-                  setProfile(null);
-                  setAge(null);
-                  if (typeof window !== "undefined") window.localStorage.removeItem(STORAGE_KEY);
+                  setUnder3(null);
+                  if (typeof window !== "undefined")
+                    window.localStorage.removeItem(STORAGE_KEY);
                 }}
                 className="rounded-md border border-input bg-background px-5 py-3 text-base font-medium text-foreground hover:bg-secondary"
               >
@@ -303,11 +281,10 @@ function SurveyPage() {
     }
     setShowRequired(false);
     const currentModule = step.module;
-    const nextStep = STEPS[idx + 1];
+    const nextStep = activeSteps[idx + 1];
     const movingToNewModule = !nextStep || nextStep.module !== currentModule;
 
-    if (idx === STEPS.length - 1) {
-      // Final module completed
+    if (idx === activeSteps.length - 1) {
       setSavedBanner(currentModule);
       setDone(true);
       return;
@@ -318,12 +295,11 @@ function SurveyPage() {
     setIdx((i) => i + 1);
   }
 
-  const showHalfway = step.module === 4; // first question of module 4 = 3 of 6 modules done
+  const showHalfway = step.module === 4;
 
   return (
     <PublicShell>
       <section className="mx-auto max-w-2xl px-4 py-12 md:py-16">
-        {/* Saved banner */}
         {savedBanner != null && (
           <div
             role="status"
@@ -334,17 +310,15 @@ function SurveyPage() {
           </div>
         )}
 
-        {/* Step + module label */}
         <div className="flex items-center justify-between text-sm text-muted-foreground">
           <span>
-            {idx + 1} / {STEPS.length}
+            {idx + 1} / {activeSteps.length}
           </span>
           <span className="font-medium text-foreground">
             {t("survey.module_progress", { n: step.module, total: totalModules })}
           </span>
         </div>
 
-        {/* Progress bar */}
         <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-secondary">
           <div
             className="h-full bg-primary transition-all duration-500"
@@ -353,18 +327,17 @@ function SurveyPage() {
         </div>
         <p className="mt-2 text-xs text-muted-foreground">{t("survey.autosave_hint")}</p>
 
-        {/* Halfway encouragement */}
         {showHalfway && (
           <div className="mt-4 rounded-lg border border-primary/30 bg-primary/5 px-4 py-3 text-sm text-foreground">
-            {t("survey.halfway")}
+            {t("survey.child.halfway")}
           </div>
         )}
 
         <h1 className="mt-8 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
-          {t(`survey.q.${step.id}`)}
+          {t(`survey.child.q.${step.id}`)}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          {t(`survey.q.${step.id}_help`)}
+          {t(`survey.child.q.${step.id}_help`)}
         </p>
 
         <div className="mt-8 grid gap-3">
@@ -391,7 +364,6 @@ function SurveyPage() {
           })}
         </div>
 
-        {/* Blank-answer flag */}
         {showRequired && !canNext && (
           <div className="mt-4 flex items-start gap-2 rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive">
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
@@ -414,7 +386,7 @@ function SurveyPage() {
             onClick={handleNext}
             className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-base font-medium text-primary-foreground hover:bg-primary/90"
           >
-            {idx === STEPS.length - 1 ? t("survey.result_title") : t("common.next")}
+            {idx === activeSteps.length - 1 ? t("survey.result_title") : t("common.next")}
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>

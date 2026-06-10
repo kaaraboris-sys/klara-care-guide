@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 
 type GenerateInput = {
   language: "en" | "de";
+  subject?: "adult" | "child";
   assessment?: {
     totalPoints: number;
     pflegegrad: { grade: number; label: string };
@@ -35,8 +36,14 @@ export const generateReport = createServerFn({ method: "POST" })
         ? "Schreibe den gesamten Bericht auf Deutsch, in klarer Alltagssprache."
         : "Write the entire report in clear, plain English.";
 
+    const subjectInstruction =
+      data.subject === "child"
+        ? "The care recipient is a CHILD or young person under 18. Use 'the child' (or 'your child' when addressing the caregiver), refer to parents/guardians rather than relatives, and frame care needs relative to age-typical development. Note when items are not assessed for children under 3."
+        : "The care recipient is an ADULT. Use 'the person' or 'your relative'.";
+
     const system = `You are Klara, an assistant that prepares German MDK / Medicproof Pflegegrad
 assessment reports for family caregivers. ${langInstruction}
+${subjectInstruction}
 The report goes to the assessor (Gutachter). Be specific, neutral, and concrete.
 Never minimise care needs. Quote concrete examples from the diary and notes.
 Structure the output as Markdown with the following sections:
@@ -53,6 +60,7 @@ Structure the output as Markdown with the following sections:
 Keep it under ~700 words. No disclaimers about being an AI.`;
 
     const payload = {
+      subject: data.subject ?? "adult",
       assessment: data.assessment ?? null,
       diary: data.diary ?? null,
     };

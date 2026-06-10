@@ -37,6 +37,7 @@ type Answers = Record<string, { value: number | null; notes: string }>;
 
 const ASSESSMENT_KEY = "klara.assessment.v1";
 const DIARY_KEY = "klara.diary.entries.v1";
+const CHILD_SURVEY_KEY = "klara.survey.child.v1";
 
 function loadAssessment(): Answers {
   if (typeof window === "undefined") return {};
@@ -66,6 +67,7 @@ function ReportPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [unlocked, setUnlocked] = useState(false);
+  const [subject, setSubject] = useState<"adult" | "child">("adult");
 
   const language: "en" | "de" = i18n.language?.startsWith("de") ? "de" : "en";
 
@@ -74,6 +76,14 @@ function ReportPage() {
   useEffect(() => {
     setAnswers(loadAssessment());
     setDiary(loadDiary());
+    // If the user took the child survey track, default report subject to "child".
+    try {
+      if (typeof window !== "undefined" && localStorage.getItem(CHILD_SURVEY_KEY)) {
+        setSubject("child");
+      }
+    } catch {
+      /* ignore */
+    }
   }, []);
 
 
@@ -135,6 +145,7 @@ function ReportPage() {
       const result = await runReport({
         data: {
           language,
+          subject,
           assessment: totalAnswered > 0 ? assessmentPayload : undefined,
           diary:
             diaryForTemplate.length > 0

@@ -16,6 +16,7 @@ import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SurveyChildRouteImport } from './routes/survey.child'
 import { Route as AuthenticatedReportRouteImport } from './routes/_authenticated/report'
 import { Route as AuthenticatedDiaryRouteImport } from './routes/_authenticated/diary'
 import { Route as AuthenticatedAssessmentRouteImport } from './routes/_authenticated/assessment'
@@ -54,6 +55,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SurveyChildRoute = SurveyChildRouteImport.update({
+  id: '/child',
+  path: '/child',
+  getParentRoute: () => SurveyRoute,
+} as any)
 const AuthenticatedReportRoute = AuthenticatedReportRouteImport.update({
   id: '/report',
   path: '/report',
@@ -76,10 +82,11 @@ export interface FileRoutesByFullPath {
   '/how-it-works': typeof HowItWorksRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
-  '/survey': typeof SurveyRoute
+  '/survey': typeof SurveyRouteWithChildren
   '/assessment': typeof AuthenticatedAssessmentRoute
   '/diary': typeof AuthenticatedDiaryRoute
   '/report': typeof AuthenticatedReportRoute
+  '/survey/child': typeof SurveyChildRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -87,10 +94,11 @@ export interface FileRoutesByTo {
   '/how-it-works': typeof HowItWorksRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
-  '/survey': typeof SurveyRoute
+  '/survey': typeof SurveyRouteWithChildren
   '/assessment': typeof AuthenticatedAssessmentRoute
   '/diary': typeof AuthenticatedDiaryRoute
   '/report': typeof AuthenticatedReportRoute
+  '/survey/child': typeof SurveyChildRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -100,10 +108,11 @@ export interface FileRoutesById {
   '/how-it-works': typeof HowItWorksRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
-  '/survey': typeof SurveyRoute
+  '/survey': typeof SurveyRouteWithChildren
   '/_authenticated/assessment': typeof AuthenticatedAssessmentRoute
   '/_authenticated/diary': typeof AuthenticatedDiaryRoute
   '/_authenticated/report': typeof AuthenticatedReportRoute
+  '/survey/child': typeof SurveyChildRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/assessment'
     | '/diary'
     | '/report'
+    | '/survey/child'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/assessment'
     | '/diary'
     | '/report'
+    | '/survey/child'
   id:
     | '__root__'
     | '/'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/_authenticated/assessment'
     | '/_authenticated/diary'
     | '/_authenticated/report'
+    | '/survey/child'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -149,7 +161,7 @@ export interface RootRouteChildren {
   HowItWorksRoute: typeof HowItWorksRoute
   ModulesRoute: typeof ModulesRoute
   PricingRoute: typeof PricingRoute
-  SurveyRoute: typeof SurveyRoute
+  SurveyRoute: typeof SurveyRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -203,6 +215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/survey/child': {
+      id: '/survey/child'
+      path: '/child'
+      fullPath: '/survey/child'
+      preLoaderRoute: typeof SurveyChildRouteImport
+      parentRoute: typeof SurveyRoute
+    }
     '/_authenticated/report': {
       id: '/_authenticated/report'
       path: '/report'
@@ -242,6 +261,17 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface SurveyRouteChildren {
+  SurveyChildRoute: typeof SurveyChildRoute
+}
+
+const SurveyRouteChildren: SurveyRouteChildren = {
+  SurveyChildRoute: SurveyChildRoute,
+}
+
+const SurveyRouteWithChildren =
+  SurveyRoute._addFileChildren(SurveyRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
@@ -249,18 +279,8 @@ const rootRouteChildren: RootRouteChildren = {
   HowItWorksRoute: HowItWorksRoute,
   ModulesRoute: ModulesRoute,
   PricingRoute: PricingRoute,
-  SurveyRoute: SurveyRoute,
+  SurveyRoute: SurveyRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
