@@ -264,6 +264,7 @@ function SurveyPage() {
                   setIdx(0);
                   setDone(false);
                   setProfile(null);
+                  setAge(null);
                   if (typeof window !== "undefined") window.localStorage.removeItem(STORAGE_KEY);
                 }}
                 className="rounded-md border border-input bg-background px-5 py-3 text-base font-medium text-foreground hover:bg-secondary"
