@@ -75,6 +75,7 @@ function SurveyPage() {
       setIdx(s.idx);
       setAnswers(s.answers);
       setDone(s.done);
+      if (s.profile) setAge("adult");
     }
     setHydrated(true);
   }, []);
