@@ -53,13 +53,23 @@ function loadAnswers(): Answers {
   }
 }
 
+const AGE_KEY = "klara.assessment.age.v1";
+
 function AssessmentPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [age, setAge] = useState<"adult" | null>(null);
+  const [ageHydrated, setAgeHydrated] = useState(false);
   const [answers, setAnswers] = useState<Answers>({});
   const [activeModule, setActiveModule] = useState("1");
 
   useEffect(() => {
     setAnswers(loadAnswers());
+    if (typeof window !== "undefined") {
+      const a = window.localStorage.getItem(AGE_KEY);
+      if (a === "adult") setAge("adult");
+    }
+    setAgeHydrated(true);
   }, []);
 
   useEffect(() => {
