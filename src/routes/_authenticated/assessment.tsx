@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { PublicShell } from "@/components/layout/PublicShell";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -53,13 +53,23 @@ function loadAnswers(): Answers {
   }
 }
 
+const AGE_KEY = "klara.assessment.age.v1";
+
 function AssessmentPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [age, setAge] = useState<"adult" | null>(null);
+  const [ageHydrated, setAgeHydrated] = useState(false);
   const [answers, setAnswers] = useState<Answers>({});
   const [activeModule, setActiveModule] = useState("1");
 
   useEffect(() => {
     setAnswers(loadAnswers());
+    if (typeof window !== "undefined") {
+      const a = window.localStorage.getItem(AGE_KEY);
+      if (a === "adult") setAge("adult");
+    }
+    setAgeHydrated(true);
   }, []);
 
   useEffect(() => {
@@ -114,6 +124,51 @@ function AssessmentPage() {
   const totalAnswered = moduleResults.reduce((a, m) => a + m.answered, 0);
   const totalCriteria = moduleResults.reduce((a, m) => a + m.total, 0);
   const progress = Math.round((totalAnswered / totalCriteria) * 100);
+
+  if (ageHydrated && !age) {
+    return (
+      <PublicShell>
+        <section className="mx-auto max-w-2xl px-4 py-16">
+          <Badge variant="secondary" className="mb-2">
+            {t("assessment.pro_badge")}
+          </Badge>
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+            {t("assessment.title")}
+          </h1>
+          <p className="mt-3 text-base text-muted-foreground">
+            {t("assessment.intro")}
+          </p>
+          <Alert className="mt-6">
+            <Info className="h-4 w-4" />
+            <AlertDescription>{t("survey.disclaimer")}</AlertDescription>
+          </Alert>
+
+          <h2 className="mt-10 text-lg font-semibold text-foreground">
+            {t("survey.age_title")}
+          </h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <button
+              onClick={() => {
+                if (typeof window !== "undefined") window.localStorage.setItem(AGE_KEY, "adult");
+                setAge("adult");
+              }}
+              className="rounded-2xl border border-border bg-card p-5 text-left transition-colors hover:border-primary hover:bg-secondary/40"
+            >
+              <span className="text-base font-medium text-foreground">{t("survey.age_adult")}</span>
+              <p className="mt-1 text-sm text-muted-foreground">{t("survey.age_adult_sub")}</p>
+            </button>
+            <button
+              onClick={() => navigate({ to: "/survey/child" })}
+              className="rounded-2xl border border-border bg-card p-5 text-left transition-colors hover:border-primary hover:bg-secondary/40"
+            >
+              <span className="text-base font-medium text-foreground">{t("survey.age_child")}</span>
+              <p className="mt-1 text-sm text-muted-foreground">{t("survey.age_child_sub")}</p>
+            </button>
+          </div>
+        </section>
+      </PublicShell>
+    );
+  }
 
   return (
     <PublicShell>

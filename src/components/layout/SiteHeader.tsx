@@ -19,6 +19,7 @@ export function SiteHeader() {
     { to: "/diary", label: t("nav.diary") },
     { to: "/assessment", label: t("nav.assessment") },
     { to: "/report", label: t("nav.report") },
+    { to: "/directory", label: t("nav.directory") },
     { to: "/pricing", label: t("nav.pricing") },
   ] as const;
 

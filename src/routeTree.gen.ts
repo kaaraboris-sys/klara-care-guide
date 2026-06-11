@@ -13,6 +13,7 @@ import { Route as SurveyRouteImport } from './routes/survey'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ModulesRouteImport } from './routes/modules'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as DirectoryRouteImport } from './routes/directory'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -39,6 +40,11 @@ const ModulesRoute = ModulesRouteImport.update({
 const HowItWorksRoute = HowItWorksRouteImport.update({
   id: '/how-it-works',
   path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DirectoryRoute = DirectoryRouteImport.update({
+  id: '/directory',
+  path: '/directory',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -79,6 +85,7 @@ const AuthenticatedAssessmentRoute = AuthenticatedAssessmentRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/directory': typeof DirectoryRoute
   '/how-it-works': typeof HowItWorksRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
@@ -91,6 +98,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/directory': typeof DirectoryRoute
   '/how-it-works': typeof HowItWorksRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/directory': typeof DirectoryRoute
   '/how-it-works': typeof HowItWorksRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/directory'
     | '/how-it-works'
     | '/modules'
     | '/pricing'
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/directory'
     | '/how-it-works'
     | '/modules'
     | '/pricing'
@@ -144,6 +155,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/directory'
     | '/how-it-works'
     | '/modules'
     | '/pricing'
@@ -158,6 +170,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  DirectoryRoute: typeof DirectoryRoute
   HowItWorksRoute: typeof HowItWorksRoute
   ModulesRoute: typeof ModulesRoute
   PricingRoute: typeof PricingRoute
@@ -192,6 +205,13 @@ declare module '@tanstack/react-router' {
       path: '/how-it-works'
       fullPath: '/how-it-works'
       preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/directory': {
+      id: '/directory'
+      path: '/directory'
+      fullPath: '/directory'
+      preLoaderRoute: typeof DirectoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -276,6 +296,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  DirectoryRoute: DirectoryRoute,
   HowItWorksRoute: HowItWorksRoute,
   ModulesRoute: ModulesRoute,
   PricingRoute: PricingRoute,
