@@ -1,5 +1,19 @@
 {
   "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "functions": {
+    "dist/server/server.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/server/server.js"
+    }
+  ]
+}{
+  "buildCommand": "npm run build",
   "outputDirectory": "dist/client",
   "installCommand": "npm install"
 }
