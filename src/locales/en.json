@@ -313,7 +313,7 @@
     "result_gap_year": "€{{y}} per year",
     "result_gap_note": "Estimated gap if currently graded one level lower. Pflegegeld figures only.",
     "result_explain": "Based on your answers, your relative is likely to receive {{label}}. The official MDK assessment looks at many more details — Klara's full assessment walks you through every question.",
-    "result_next": "Prepare in detail with Klara — €9/month",
+    "result_next": "Prepare in detail with Klara — €9 per report",
     "result_next_frame": "€9 once vs. up to €{{m}} every month you go undergraded.",
     "result_restart": "Start the check again",
     "age_title": "Who are you completing this for?",
