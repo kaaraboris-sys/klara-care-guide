@@ -218,8 +218,8 @@
   },
   "pricing": {
     "title": "Simple pricing",
-    "sub": "€9/month for Pro. One correctly recognised grade is worth up to €360 every month — Pro pays for itself the first month it helps.",
-    "frame": "€9/month vs. €360+/month gained from the right Pflegegrad.",
+    "sub": "€9 per report. One correctly recognised grade is worth up to €360 every month — your report pays for itself the first month it helps.",
+    "frame": "€9 once per report vs. €360+/month gained from the right Pflegegrad.",
     "free_title": "Free",
     "free_price": "€0",
     "free_per": "forever",
@@ -233,17 +233,31 @@
     ],
     "pro_title": "Pro",
     "pro_price": "€9",
-    "pro_per": "per month",
+    "pro_per": "report",
     "pro_items": [
       "Everything in Free",
       "Full official MDK assessment form",
       "Plain-language paraphrase for every question",
       "Unlimited 14-day care diary (autism + elderly)",
       "AI-generated MDK preparation report (PDF)",
-      "Multiple care recipients per account"
+      "Pay only when you generate a report"
     ],
     "cta_free": "Get started free",
-    "cta_pro": "Start Pro"
+    "cta_pro": "Generate a report — €9"
+  },
+  "intro": {
+    "welcome_badge": "Welcome to Klara",
+    "title": "A quick tour before you start",
+    "sub": "Three tools work together to prepare you for the MDK visit.",
+    "s1_title": "1 · Quick check (5 min)",
+    "s1_body": "Answer 10 plain-language questions to see the Pflegegrad your relative is likely to receive. No signup.",
+    "s2_title": "2 · Care diary (14 days)",
+    "s2_body": "Log a short page each day. The diary captures the patterns the assessor scores — not just hours of help.",
+    "s3_title": "3 · Full assessment + report",
+    "s3_body": "Work through every official MDK question, then generate a one-page AI report (€9) to bring to the visit.",
+    "skip": "Skip tour",
+    "start": "Start the quick check",
+    "dont_show": "Don't show this again"
   },
   "survey": {
     "title": "5-minute Pflegegrad check",
@@ -299,7 +313,7 @@
     "result_gap_year": "€{{y}} per year",
     "result_gap_note": "Estimated gap if currently graded one level lower. Pflegegeld figures only.",
     "result_explain": "Based on your answers, your relative is likely to receive {{label}}. The official MDK assessment looks at many more details — Klara's full assessment walks you through every question.",
-    "result_next": "Prepare in detail with Klara — €9/month",
+    "result_next": "Prepare in detail with Klara — €9 per report",
     "result_next_frame": "€9 once vs. up to €{{m}} every month you go undergraded.",
     "result_restart": "Start the check again",
     "age_title": "Who are you completing this for?",

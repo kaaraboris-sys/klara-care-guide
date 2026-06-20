@@ -218,8 +218,8 @@
   },
   "pricing": {
     "title": "Einfache Preise",
-    "sub": "9 €/Monat für Pro. Ein korrekt anerkannter Pflegegrad ist bis zu 360 € jeden Monat wert — Pro rechnet sich schon im ersten Monat.",
-    "frame": "9 €/Monat vs. 360 €+/Monat durch den richtigen Pflegegrad.",
+    "sub": "9 € pro Bericht. Ein korrekt anerkannter Pflegegrad ist bis zu 360 € jeden Monat wert — Ihr Bericht rechnet sich schon im ersten Monat.",
+    "frame": "9 € einmalig pro Bericht vs. 360 €+/Monat durch den richtigen Pflegegrad.",
     "free_title": "Kostenlos",
     "free_price": "0 €",
     "free_per": "für immer",
@@ -233,17 +233,31 @@
     ],
     "pro_title": "Pro",
     "pro_price": "9 €",
-    "pro_per": "pro Monat",
+    "pro_per": "Bericht",
     "pro_items": [
       "Alles aus Kostenlos",
       "Vollständiges offizielles MDK-Formular",
       "Verständliche Umschreibung jeder Frage",
       "Unbegrenztes 14-Tage-Pflegetagebuch (Autismus + Altenpflege)",
       "KI-generierter Vorbereitungsbericht (PDF)",
-      "Mehrere zu pflegende Personen pro Konto"
+      "Nur zahlen, wenn Sie einen Bericht erstellen"
     ],
     "cta_free": "Kostenlos starten",
-    "cta_pro": "Pro starten"
+    "cta_pro": "Bericht erstellen — 9 €"
+  },
+  "intro": {
+    "welcome_badge": "Willkommen bei Klara",
+    "title": "Eine kurze Tour, bevor Sie starten",
+    "sub": "Drei Werkzeuge bereiten Sie zusammen auf den MDK-Besuch vor.",
+    "s1_title": "1 · Schnellcheck (5 Min.)",
+    "s1_body": "Beantworten Sie 10 verständliche Fragen und sehen Sie den voraussichtlichen Pflegegrad. Ohne Anmeldung.",
+    "s2_title": "2 · Pflegetagebuch (14 Tage)",
+    "s2_body": "Eine kurze Seite pro Tag. Das Tagebuch erfasst genau die Muster, die bewertet werden — nicht nur die Stunden.",
+    "s3_title": "3 · Vollständige Begutachtung + Bericht",
+    "s3_body": "Bearbeiten Sie jede offizielle MDK-Frage und erstellen Sie einen einseitigen KI-Bericht (9 €) für den Termin.",
+    "skip": "Tour überspringen",
+    "start": "Schnellcheck starten",
+    "dont_show": "Nicht mehr anzeigen"
   },
   "survey": {
     "title": "5-Minuten-Pflegegrad-Check",
@@ -299,7 +313,7 @@
     "result_gap_year": "{{y}} € pro Jahr",
     "result_gap_note": "Geschätzte Differenz, falls aktuell eine Stufe niedriger eingestuft. Nur Pflegegeld.",
     "result_explain": "Auf Basis Ihrer Antworten erhält Ihre Angehörige voraussichtlich {{label}}. Die offizielle Begutachtung berücksichtigt viel mehr Details — Klaras vollständige Begutachtung führt Sie durch jede Frage.",
-    "result_next": "Mit Klara im Detail vorbereiten — 9 €/Monat",
+    "result_next": "Mit Klara im Detail vorbereiten — 9 € pro Bericht",
     "result_next_frame": "9 € einmal vs. bis zu {{m}} € jeden Monat, in dem Sie zu niedrig eingestuft sind.",
     "result_restart": "Check neu starten",
     "age_title": "Für wen füllen Sie den Check aus?",
