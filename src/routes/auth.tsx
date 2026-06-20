@@ -3,7 +3,7 @@ import { createFileRoute, useNavigate, useSearch, Link } from "@tanstack/react-r
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
+
 import { PublicShell } from "@/components/layout/PublicShell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -72,16 +72,16 @@ function AuthPage() {
   const handleGoogle = async () => {
     setError(null);
     setLoading(true);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin + (search.redirect ?? "/diary"),
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: window.location.origin + (search.redirect ?? "/diary"),
+      },
     });
-    if (result.error) {
-      setError(result.error instanceof Error ? result.error.message : String(result.error));
+    if (error) {
+      setError(error.message);
       setLoading(false);
-      return;
     }
-    if (result.redirected) return;
-    navigate({ to: search.redirect ?? "/diary" });
   };
 
   return (
