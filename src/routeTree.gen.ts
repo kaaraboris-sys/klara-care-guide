@@ -9,12 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WiderrufRouteImport } from './routes/widerruf'
 import { Route as SurveyRouteImport } from './routes/survey'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ModulesRouteImport } from './routes/modules'
+import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as DirectoryRouteImport } from './routes/directory'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AgbRouteImport } from './routes/agb'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SurveyChildRouteImport } from './routes/survey.child'
@@ -22,6 +26,11 @@ import { Route as AuthenticatedReportRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedDiaryRouteImport } from './routes/_authenticated/diary'
 import { Route as AuthenticatedAssessmentRouteImport } from './routes/_authenticated/assessment'
 
+const WiderrufRoute = WiderrufRouteImport.update({
+  id: '/widerruf',
+  path: '/widerruf',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SurveyRoute = SurveyRouteImport.update({
   id: '/survey',
   path: '/survey',
@@ -37,6 +46,11 @@ const ModulesRoute = ModulesRouteImport.update({
   path: '/modules',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
   id: '/how-it-works',
   path: '/how-it-works',
@@ -47,9 +61,19 @@ const DirectoryRoute = DirectoryRouteImport.update({
   path: '/directory',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgbRoute = AgbRouteImport.update({
+  id: '/agb',
+  path: '/agb',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
@@ -84,12 +108,16 @@ const AuthenticatedAssessmentRoute = AuthenticatedAssessmentRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agb': typeof AgbRoute
   '/auth': typeof AuthRoute
+  '/datenschutz': typeof DatenschutzRoute
   '/directory': typeof DirectoryRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/impressum': typeof ImpressumRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
   '/survey': typeof SurveyRouteWithChildren
+  '/widerruf': typeof WiderrufRoute
   '/assessment': typeof AuthenticatedAssessmentRoute
   '/diary': typeof AuthenticatedDiaryRoute
   '/report': typeof AuthenticatedReportRoute
@@ -97,12 +125,16 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agb': typeof AgbRoute
   '/auth': typeof AuthRoute
+  '/datenschutz': typeof DatenschutzRoute
   '/directory': typeof DirectoryRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/impressum': typeof ImpressumRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
   '/survey': typeof SurveyRouteWithChildren
+  '/widerruf': typeof WiderrufRoute
   '/assessment': typeof AuthenticatedAssessmentRoute
   '/diary': typeof AuthenticatedDiaryRoute
   '/report': typeof AuthenticatedReportRoute
@@ -112,12 +144,16 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/agb': typeof AgbRoute
   '/auth': typeof AuthRoute
+  '/datenschutz': typeof DatenschutzRoute
   '/directory': typeof DirectoryRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/impressum': typeof ImpressumRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
   '/survey': typeof SurveyRouteWithChildren
+  '/widerruf': typeof WiderrufRoute
   '/_authenticated/assessment': typeof AuthenticatedAssessmentRoute
   '/_authenticated/diary': typeof AuthenticatedDiaryRoute
   '/_authenticated/report': typeof AuthenticatedReportRoute
@@ -127,12 +163,16 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/agb'
     | '/auth'
+    | '/datenschutz'
     | '/directory'
     | '/how-it-works'
+    | '/impressum'
     | '/modules'
     | '/pricing'
     | '/survey'
+    | '/widerruf'
     | '/assessment'
     | '/diary'
     | '/report'
@@ -140,12 +180,16 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/agb'
     | '/auth'
+    | '/datenschutz'
     | '/directory'
     | '/how-it-works'
+    | '/impressum'
     | '/modules'
     | '/pricing'
     | '/survey'
+    | '/widerruf'
     | '/assessment'
     | '/diary'
     | '/report'
@@ -154,12 +198,16 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/agb'
     | '/auth'
+    | '/datenschutz'
     | '/directory'
     | '/how-it-works'
+    | '/impressum'
     | '/modules'
     | '/pricing'
     | '/survey'
+    | '/widerruf'
     | '/_authenticated/assessment'
     | '/_authenticated/diary'
     | '/_authenticated/report'
@@ -169,16 +217,27 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AgbRoute: typeof AgbRoute
   AuthRoute: typeof AuthRoute
+  DatenschutzRoute: typeof DatenschutzRoute
   DirectoryRoute: typeof DirectoryRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  ImpressumRoute: typeof ImpressumRoute
   ModulesRoute: typeof ModulesRoute
   PricingRoute: typeof PricingRoute
   SurveyRoute: typeof SurveyRouteWithChildren
+  WiderrufRoute: typeof WiderrufRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/widerruf': {
+      id: '/widerruf'
+      path: '/widerruf'
+      fullPath: '/widerruf'
+      preLoaderRoute: typeof WiderrufRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/survey': {
       id: '/survey'
       path: '/survey'
@@ -200,6 +259,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ModulesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/how-it-works': {
       id: '/how-it-works'
       path: '/how-it-works'
@@ -214,11 +280,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DirectoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agb': {
+      id: '/agb'
+      path: '/agb'
+      fullPath: '/agb'
+      preLoaderRoute: typeof AgbRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -295,13 +375,27 @@ const SurveyRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AgbRoute: AgbRoute,
   AuthRoute: AuthRoute,
+  DatenschutzRoute: DatenschutzRoute,
   DirectoryRoute: DirectoryRoute,
   HowItWorksRoute: HowItWorksRoute,
+  ImpressumRoute: ImpressumRoute,
   ModulesRoute: ModulesRoute,
   PricingRoute: PricingRoute,
   SurveyRoute: SurveyRouteWithChildren,
+  WiderrufRoute: WiderrufRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
