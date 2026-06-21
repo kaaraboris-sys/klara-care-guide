@@ -7,10 +7,10 @@ import { ArrowLeft, ArrowRight, Check, Info, AlertCircle } from "lucide-react";
 export const Route = createFileRoute("/survey")({
   head: () => ({
     meta: [
-      { title: "5-minute Pflegegrad check — Klara" },
-      { name: "description", content: "Answer 10 plain-language questions to estimate the German care grade your relative is likely to receive." },
-      { property: "og:title", content: "5-minute Pflegegrad check" },
-      { property: "og:description", content: "Free estimate of the likely Pflegegrad." },
+      { title: "5-Minuten-Pflegegrad-Check — Klara" },
+      { name: "description", content: "Beantworten Sie 10 Fragen und erhalten Sie eine kostenlose Schaetzung des Pflegegrads Ihres Angehoerigen." },
+      { property: "og:title", content: "5-Minuten-Pflegegrad-Check — Klara" },
+      { property: "og:description", content: "Kostenlose Schaetzung des Pflegegrads — ohne Anmeldung." },
     ],
   }),
   component: SurveyPage,
@@ -34,7 +34,7 @@ const STEPS: Step[] = [
 
 // Monthly Pflegegeld gap (EUR) between this grade and one grade lower.
 // PG3 uses 360 to reflect blended cash+services uplift commonly cited.
-const MONTHLY_GAP: Record<number, number> = { 1: 131, 2: 216, 3: 360, 4: 201, 5: 190 };
+const MONTHLY_GAP: Record<number, number> = { 1: 131, 2: 347, 3: 599, 4: 800, 5: 990 };
 
 const STORAGE_KEY = "klara.survey.v1";
 
