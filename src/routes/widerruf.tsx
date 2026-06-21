@@ -28,14 +28,14 @@ function WiderrufPage() {
         <section className="mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-3">Ausübung des Widerrufs</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Um Ihr Widerrufsrecht auszuüben, müssen Sie uns ([Name], [Adresse], [email@example.com]) mittels einer eindeutigen Erklärung (z. B. per E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden.
+            Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (Boris Nuhu Kaara, Auenweg 17, 94032 Passau, kaaraboris@gmail.com) mittels einer eindeutigen Erklärung (z. B. per E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden.
           </p>
         </section>
 
         <section className="mb-8 border border-border rounded-md px-4 py-4">
           <h2 className="text-lg font-semibold text-foreground mb-3">Muster-Widerrufsformular</h2>
           <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-{`An: [Name], [Adresse], [email@example.com]
+{`An: Boris Nuhu Kaara, Auenweg 17, 94032 Passau, kaaraboris@gmail.com
 
 Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag über den Kauf der folgenden digitalen Leistung:
 

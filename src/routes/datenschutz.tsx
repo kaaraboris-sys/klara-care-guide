@@ -18,7 +18,7 @@ function DatenschutzPage() {
           <h2 className="text-lg font-semibold text-foreground mb-3">1. Verantwortlicher</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
             Verantwortlicher im Sinne der DSGVO ist:<br />
-            [Vollständiger Name], [Adresse] — siehe <a href="/impressum" className="underline hover:text-foreground">Impressum</a>.
+            Boris Nuhu Kaara, Auenweg 17, 94032 Passau — siehe <a href="/impressum" className="underline hover:text-foreground">Impressum</a>.
           </p>
         </section>
 
@@ -54,7 +54,7 @@ function DatenschutzPage() {
         <section className="mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-3">5. Ihre Rechte</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Sie haben das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18) und Datenübertragbarkeit (Art. 20) gemäß DSGVO. Zur Ausübung dieser Rechte wenden Sie sich an: [email@example.com]
+            Sie haben das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18) und Datenübertragbarkeit (Art. 20) gemäß DSGVO. Zur Ausübung dieser Rechte wenden Sie sich an: kaaraboris@gmail.com
           </p>
         </section>
 

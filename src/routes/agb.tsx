@@ -17,7 +17,7 @@ function AgbPage() {
         <section className="mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-3">§1 Geltungsbereich</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Diese AGB gelten für alle Leistungen von Klara (betrieben von [Name], [Adresse]) gegenüber Verbrauchern im Sinne von §13 BGB.
+            Diese AGB gelten für alle Leistungen von Klara (betrieben von Boris Nuhu Kaara, Auenweg 17, 94032 Passau) gegenüber Verbrauchern im Sinne von §13 BGB.
           </p>
         </section>
 
@@ -56,14 +56,14 @@ function AgbPage() {
         <section className="mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-3">§6 Geld-zurück-Garantie</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Klara bietet eine 30-Tage-Geld-zurück-Garantie, wenn der tatsächlich festgestellte Pflegegrad mehr als eine Stufe unter der Klara-Schätzung liegt und Sie dies durch den offiziellen MDK-Bescheid nachweisen. Anfragen an: [email@example.com].
+            Klara bietet eine 30-Tage-Geld-zurück-Garantie, wenn der tatsächlich festgestellte Pflegegrad mehr als eine Stufe unter der Klara-Schätzung liegt und Sie dies durch den offiziellen MDK-Bescheid nachweisen. Anfragen an: kaaraboris@gmail.com.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-3">§7 Anwendbares Recht</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Es gilt deutsches Recht. Gerichtsstand ist [Ort], soweit gesetzlich zulässig.
+            Es gilt deutsches Recht. Gerichtsstand ist Passau, soweit gesetzlich zulässig.
           </p>
         </section>
       </div>

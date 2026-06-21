@@ -15,9 +15,9 @@ function ImpressumPage() {
         <section className="mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-3">Verantwortlich</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            [Vollständiger Name]<br />
-            [Straße und Hausnummer]<br />
-            [PLZ Ort]<br />
+            Boris Nuhu Kaara<br />
+            Auenweg 17<br />
+            94032 Passau<br />
             Deutschland
           </p>
         </section>
@@ -25,8 +25,8 @@ function ImpressumPage() {
         <section className="mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-3">Kontakt</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            E-Mail: [email@example.com]<br />
-            Telefon: [+49 ...]
+            E-Mail: kaaraboris@gmail.com<br />
+            Telefon: +49 163 2116674
           </p>
         </section>
 
