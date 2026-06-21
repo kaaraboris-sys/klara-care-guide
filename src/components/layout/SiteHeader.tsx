@@ -14,12 +14,8 @@ export function SiteHeader() {
 
   const nav = [
     { to: "/how-it-works", label: t("nav.how") },
-    { to: "/modules", label: t("nav.modules") },
-    { to: "/survey", label: t("nav.survey") },
-    { to: "/diary", label: t("nav.diary") },
-    { to: "/assessment", label: t("nav.assessment") },
-    { to: "/directory", label: t("nav.directory") },
     { to: "/pricing", label: t("nav.pricing") },
+    { to: "/directory", label: t("nav.directory") },
   ] as const;
 
   const toggleLang = () => {
@@ -47,7 +43,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Hauptnavigation" className="hidden items-center gap-1 md:flex">
           {nav.map((n) => (
             <Link
               key={n.to}
@@ -61,14 +57,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <button
-            onClick={toggleLang}
-            className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-            aria-label={t("common.language")}
-          >
-            <Globe className="h-4 w-4" />
-            {i18n.language?.startsWith("de") ? "DE" : "EN"}
-          </button>
           {isAuthenticated ? (
             <>
               <span className="hidden lg:inline max-w-[160px] truncate text-sm text-muted-foreground" title={user?.email ?? ""}>
@@ -86,12 +74,12 @@ export function SiteHeader() {
             <>
               <Link
                 to="/auth"
-                className="inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                className="px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 {t("auth.signin")}
               </Link>
               <Link
-                to="/auth"
+                to="/survey"
                 className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 {t("home.cta_primary")}
@@ -103,7 +91,7 @@ export function SiteHeader() {
         <button
           className="inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground md:hidden"
           onClick={() => setOpen((o) => !o)}
-          aria-label="Toggle menu"
+          aria-label="Menue oeffnen"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -149,11 +137,11 @@ export function SiteHeader() {
             </button>
           ) : (
             <Link
-              to="/auth"
+              to="/survey"
               onClick={() => setOpen(false)}
               className="mt-2 rounded-md bg-primary px-4 py-3 text-center text-base font-medium text-primary-foreground"
             >
-              {t("auth.signin")}
+              {t("home.cta_primary")}
             </Link>
           )}
         </div>
