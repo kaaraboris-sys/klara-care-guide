@@ -12,22 +12,23 @@ import {
 import appCss from "../styles.css?url";
 import "@/lib/i18n";
 import { supabase } from "@/integrations/supabase/client";
+import { CookieBanner } from "@/components/layout/CookieBanner";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Seite nicht gefunden</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          Diese Seite existiert nicht oder wurde verschoben.
         </p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
+            Zur Startseite
           </Link>
         </div>
       </div>
@@ -43,10 +44,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          Seite konnte nicht geladen werden
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder gehen Sie zur Startseite.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -56,13 +57,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            Erneut versuchen
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            Zur Startseite
           </a>
         </div>
       </div>
@@ -75,26 +76,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Klara — Prepare for the Pflegegrad assessment" },
+      { title: "Klara — Pflegegrad-Vorbereitung für Familien" },
       {
         name: "description",
         content:
-          "Klara helps caregivers in Germany prepare for the MDK Pflegegrad assessment with plain-language guidance, a care diary, and an AI report.",
+          "Die meisten Familien erhalten einen niedrigeren Pflegegrad als ihnen zusteht. Klara hilft Ihnen, vorbereitet in die MDK-Begutachtung zu gehen.",
       },
-      { property: "og:title", content: "Klara — Prepare for the Pflegegrad assessment" },
+      { property: "og:title", content: "Klara — Pflegegrad-Vorbereitung für Familien" },
       {
         property: "og:description",
         content:
-          "Plain-language MDK preparation for families caring for elderly relatives or people with autism.",
+          "Die meisten Familien erhalten einen niedrigeren Pflegegrad als ihnen zusteht. Klara hilft Ihnen, vorbereitet in die MDK-Begutachtung zu gehen.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Klara — Prepare for the Pflegegrad assessment" },
-      { name: "description", content: "Klara's Compass is a web application designed to support caregivers of German elderly and individuals with autism." },
-      { property: "og:description", content: "Klara's Compass is a web application designed to support caregivers of German elderly and individuals with autism." },
-      { name: "twitter:description", content: "Klara's Compass is a web application designed to support caregivers of German elderly and individuals with autism." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3c7198be-88d2-46e5-966b-1fb9ff568f92/id-preview-acc6279a--5c97b2a9-7d1f-4e17-b4a6-558687f2c36e.lovable.app-1779742768968.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3c7198be-88d2-46e5-966b-1fb9ff568f92/id-preview-acc6279a--5c97b2a9-7d1f-4e17-b4a6-558687f2c36e.lovable.app-1779742768968.png" },
+      { property: "og:image", content: "/og-preview.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Klara — Pflegegrad-Vorbereitung für Familien" },
+      {
+        name: "twitter:description",
+        content:
+          "Die meisten Familien erhalten einen niedrigeren Pflegegrad als ihnen zusteht. Klara hilft Ihnen, vorbereitet in die MDK-Begutachtung zu gehen.",
+      },
+      { name: "twitter:image", content: "/og-preview.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -112,7 +115,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="de">
       <head>
         <HeadContent />
       </head>
@@ -138,6 +141,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
+      <CookieBanner />
     </QueryClientProvider>
   );
 }
