@@ -1,8 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+import { Globe } from "lucide-react";
 
 export function SiteFooter() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const toggleLang = () => {
+    const next = i18n.language?.startsWith("de") ? "en" : "de";
+    i18n.changeLanguage(next);
+  };
+
   return (
     <footer className="mt-24 border-t border-border bg-secondary/40">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3">
@@ -20,6 +27,14 @@ export function SiteFooter() {
           <p className="mt-2 text-xs text-muted-foreground">
             THD Digital Health Master's 2026
           </p>
+          <button
+            onClick={toggleLang}
+            className="mt-4 inline-flex items-center gap-1.5 rounded-md border border-input bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+            aria-label={t("common.language")}
+          >
+            <Globe className="h-3 w-3" />
+            {i18n.language?.startsWith("de") ? "Deutsch / EN" : "English / DE"}
+          </button>
         </div>
 
         <div>
