@@ -1,33 +1,32 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { PublicShell } from "@/components/layout/PublicShell";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Phone, Mail, Globe, Scale, HeartHandshake, Info } from "lucide-react";
+import { MapPin, Phone, Mail, Globe, Scale, HeartHandshake, Info, Search } from "lucide-react";
 
 export const Route = createFileRoute("/directory")({
   head: () => ({
     meta: [
-      { title: "Find help — caregivers & legal aid near you | Klara" },
+      { title: "Pflegedienste und Rechtsberatung in Ihrer Naehe | Klara" },
       {
         name: "description",
         content:
-          "Browse vetted caregivers and legal experts in the Pfarrkirchen area who can help with Pflegegrad assessments and appeals.",
+          "Pflegedienste, Pflegeheime, Alltagsunterstuetzung und Rechtsberatung fuer Familien mit Pflegebedarf.",
       },
-      { property: "og:title", content: "Find help — Klara" },
+      { property: "og:title", content: "Hilfe finden — Klara" },
       {
         property: "og:description",
-        content: "Caregivers and legal aid for German long-term care families.",
+        content: "Pflegedienste und Rechtsberatung fuer Familien mit Pflegebedarf.",
       },
     ],
   }),
   component: DirectoryPage,
 });
 
-type Caregiver = {
-  name: string;
+type Caregiver = {name: string;
   type: string;
   address: string;
   plz: string;
@@ -37,8 +36,17 @@ type Caregiver = {
   website?: string;
   price?: string;
   rating?: string;
-  serviceForm?: string;
 };
+
+const PROVIDER_TYPES = [
+  "Alle",
+  "Pflegeheim",
+  "Pflegedienst",
+  "Tages-/Nachtpflege",
+  "Alltagsunterstuetzung",
+  "Haushaltshilfe",
+  "Pflegeberatung",
+];
 
 const CAREGIVERS: Caregiver[] = [
   {
@@ -50,7 +58,7 @@ const CAREGIVERS: Caregiver[] = [
     phone: "08561 989100",
     email: "cwikc@altenheim-pfarrkirchen.de",
     website: "https://www.caritas-rottal-inn.de",
-    price: "ab 2.724,80 € (Eigenanteil/Monat)",
+    price: "ab 2.724,80 Euro (Eigenanteil/Monat)",
   },
   {
     name: "BRK-Sozialstation Pfarrkirchen-Simbach",
@@ -73,8 +81,7 @@ const CAREGIVERS: Caregiver[] = [
     email: "sst-pfarrkirchen@caritas-rottal-inn.de",
     website: "https://www.caritas-rottal-inn.de",
     rating: "2,0 (gut)",
-  },
-  {
+  },{
     name: "Senioren-Zentrum Pfarrkirchen",
     type: "Pflegeheim",
     address: "Robert-Erbertseder-Weg 1, 84347 Pfarrkirchen",
@@ -83,32 +90,32 @@ const CAREGIVERS: Caregiver[] = [
     phone: "08561 235080",
     email: "pfarrkirchen@pichlmayr.de",
     website: "https://www.pichlmayr.de",
-    price: "ab 2.646,34 € (Eigenanteil/Monat)",
+    price: "ab 2.646,34 Euro (Eigenanteil/Monat)",
   },
   {
-    name: "Seniorenassistenz Christine Hohlweg — Alltagsbegleitung",
-    type: "Alltagsunterstützung",
-    address: "Duschlstraße 40, 84347 Pfarrkirchen",
+    name: "Seniorenassistenz Christine Hohlweg",
+    type: "Alltagsunterstuetzung",
+    address: "Duschlstrasse 40, 84347 Pfarrkirchen",
     plz: "84347",
     distanceKm: 2,
     phone: "08561 5555",
     email: "info@senioren-pan.de",
     website: "https://www.senioren-pan.de",
-    price: "49,00 € / Stunde",
+    price: "49,00 Euro / Stunde",
   },
   {
     name: "Praxis PANda — Alltagsbegleitung",
-    type: "Alltagsunterstützung",
+    type: "Alltagsunterstuetzung",
     address: "Stadtplatz 4, 84347 Pfarrkirchen",
     plz: "84347",
     distanceKm: 2,
     phone: "0176 36233673",
     email: "kontakt@panda-heilpaedagogik.de",
     website: "https://www.panda-heilpaedagogik.de",
-    price: "51,00 € / Stunde",
+    price: "51,00 Euro / Stunde",
   },
   {
-    name: "Praxis PANda — Haushaltsnahe Dienstleistungen",
+    name: "Praxis PANda — Haushalt",
     type: "Haushaltshilfe",
     address: "Stadtplatz 4, 84347 Pfarrkirchen",
     plz: "84347",
@@ -116,12 +123,12 @@ const CAREGIVERS: Caregiver[] = [
     phone: "0176 36233673",
     email: "kontakt@panda-heilpaedagogik.de",
     website: "https://www.panda-heilpaedagogik.de",
-    price: "39,00 € / Stunde",
+    price: "39,00 Euro / Stunde",
   },
   {
-    name: "Korbis Pflegeteam (Sedlmeier) — Alltagsunterstützung",
-    type: "Alltagsunterstützung",
-    address: "Rottauenweg 9, 84389 Postmünster",
+    name: "Korbis Pflegeteam — Alltagsunterstuetzung",
+    type: "Alltagsunterstuetzung",
+    address: "Rottauenweg 9, 84389 Postmuenster",
     plz: "84389",
     distanceKm: 4,
     phone: "+49 85619835854",
@@ -129,9 +136,9 @@ const CAREGIVERS: Caregiver[] = [
     website: "https://www.korbis-pflegeteam.de",
   },
   {
-    name: "Korbis Pflegeteam (Sedlmeier) — Pflegedienst",
+    name: "Korbis Pflegeteam — Pflegedienst",
     type: "Pflegedienst",
-    address: "Rottauenweg 9, 84389 Postmünster",
+    address: "Rottauenweg 9, 84389 Postmuenster",
     plz: "84389",
     distanceKm: 4,
     phone: "+49 85619835854",
@@ -140,25 +147,15 @@ const CAREGIVERS: Caregiver[] = [
     rating: "1,0 (sehr gut)",
   },
   {
-    name: "Christanger Pflegeheim Postmünster",
+    name: "Christanger Pflegeheim Postmuenster",
     type: "Pflegeheim",
-    address: "Christanger 1-8, 84389 Postmünster",
+    address: "Christanger 1-8, 84389 Postmuenster",
     plz: "84389",
     distanceKm: 4,
     phone: "08561 3090",
     email: "info@christanger.de",
     website: "https://www.christanger.de",
-    price: "ab 2.802,36 € (Eigenanteil/Monat)",
-  },
-  {
-    name: "Berufsverband sozialer Fachkräfte — Alltagsbegleitung",
-    type: "Alltagsunterstützung",
-    address: "84378 Dietersburg",
-    plz: "84378",
-    distanceKm: 7,
-    phone: "0151 290 372 29",
-    email: "info@berufsverband-bayern.de",
-    price: "53,04 € / Stunde",
+    price: "ab 2.802,36 Euro (Eigenanteil/Monat)",
   },
   {
     name: "Kienle ambulanter Pflegedienst",
@@ -172,17 +169,16 @@ const CAREGIVERS: Caregiver[] = [
     rating: "1,8 (gut)",
   },
   {
-    name: "BRK Lebenszentrum Gräfin Arco Bad Birnbach",
+    name: "BRK Lebenszentrum Graefin Arco Bad Birnbach",
     type: "Pflegeheim",
-    address: "Bräugasse 10, 84364 Bad Birnbach",
+    address: "Braeugasse 10, 84364 Bad Birnbach",
     plz: "84364",
     distanceKm: 9,
     phone: "+49 8563977330",
     email: "info.ri-bir@brk.de",
     website: "https://www.lebenszentrum-graefin-arco.de",
-    price: "ab 2.795,73 € (Eigenanteil/Monat)",
-  },
-  {
+    price: "ab 2.795,73 Euro (Eigenanteil/Monat)",
+  },{
     name: "pro aktiv Tagespflege GmbH",
     type: "Tages-/Nachtpflege",
     address: "Breindoblweg 5, 84364 Bad Birnbach",
@@ -191,17 +187,6 @@ const CAREGIVERS: Caregiver[] = [
     phone: "08563 9774040",
     email: "pflege@pro-aktiv-pflege.de",
     website: "https://www.pro-aktiv-pflege.de",
-  },
-  {
-    name: "Haushaltsnahe Dienstleistungen Oliver Haider",
-    type: "Haushaltshilfe",
-    address: "Stögmeierweg 9, 84364 Bad Birnbach",
-    plz: "84364",
-    distanceKm: 9,
-    phone: "08563 9775656",
-    email: "info.haushaltsnahe-dienstleitung@web.de",
-    website: "https://www.oliver-haider-haushaltsnahe-dienstleistung.de",
-    price: "28,08 € / Stunde",
   },
   {
     name: "ZauDir — Pflegeberatung Christian Zauner",
@@ -222,72 +207,51 @@ const CAREGIVERS: Caregiver[] = [
     website: "https://www.medivital-tagespflege.de",
   },
   {
-    name: "MyHelp — Haushaltsnahe Dienstleistungen",
+    name: "Haushaltsnahe Dienstleistungen Oliver Haider",
     type: "Haushaltshilfe",
-    address: "Hollkronöd 1, 84332 Hebertsfelden",
-    plz: "84332",
-    distanceKm: 9,
-    phone: "01637355588",
-    email: "info.myhelp@web.de",
-    price: "40,56 € / Stunde",
-  },
-  {
-    name: "MyHelp — Alltagsbegleitung",
-    type: "Alltagsunterstützung",
-    address: "Hollkronöd 1, 84332 Hebertsfelden",
-    plz: "84332",
-    distanceKm: 9,
-    phone: "01637355588",
-    email: "info.myhelp@web.de",
-    price: "53,04 € / Stunde",
-  },
-  {
-    name: "Reinigung und Haushaltshilfe — am Service",
-    type: "Haushaltshilfe",
-    address: "Birnbacher Straße 6, 84364 Bad Birnbach / Brombach",
+    address: "Stogmeierweg 9, 84364 Bad Birnbach",
     plz: "84364",
     distanceKm: 9,
-    phone: "0152 35898829",
-    email: "info.am-service@web.de",
-    website: "https://am-service-de8.webnode.at/",
-    price: "30,00 € – 39,00 € / Stunde",
+    phone: "08563 9775656",
+    email: "info.haushaltsnahe-dienstleitung@web.de",
+    price: "28,08 Euro / Stunde",
   },
-];
-
-type Lawyer = {
-  name: string;
-  focus: string;
-  city: string;
-};
-
-const LAWYERS: Lawyer[] = [
-  { name: "Boris Kaara", focus: "Sozialrecht · Pflegegrad-Widerspruch", city: "Pfarrkirchen" },
-  { name: "Wilson Onyenemezu", focus: "Sozialrecht · MDK-Begutachtung", city: "Pfarrkirchen" },
-  { name: "Abel Yeboah", focus: "Sozialrecht · Pflegekassen", city: "Pfarrkirchen" },
-  { name: "Nada Abdelhalim", focus: "Sozialrecht · Widerspruch & Klage", city: "Pfarrkirchen" },
 ];
 
 function DirectoryPage() {
   const { t } = useTranslation();
   const [tab, setTab] = useState<"caregivers" | "legal">("caregivers");
+  const [search, setSearch] = useState("");
+  const [activeType, setActiveType] = useState("Alle");
+
+  const filtered = useMemo(() => {
+    return CAREGIVERS.filter((c) => {
+      const matchesType = activeType === "Alle" || c.type === activeType;
+      const q = search.toLowerCase();
+      const matchesSearch =
+        !q ||
+        c.name.toLowerCase().includes(q) ||
+        c.address.toLowerCase().includes(q) ||
+        c.plz.includes(q) ||
+        c.type.toLowerCase().includes(q);
+      return matchesType && matchesSearch;
+    });
+  }, [search, activeType]);
 
   return (
     <PublicShell>
       <section className="mx-auto max-w-5xl px-4 py-12 md:py-16">
-        <header className="mb-8">
+        <header className="mb-6">
           <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-            {t("nav.directory")}
+            Hilfe finden
           </h1>
           <p className="mt-3 max-w-2xl text-base text-muted-foreground">
-            Caregivers and legal experts in the Pfarrkirchen area who can support
-            you with Pflegegrad applications, appeals, and daily care.
+            Pflegedienste, Pflegeheime und Alltagsunterstuetzung in Ihrer Naehe.
           </p>
           <div className="mt-4 flex items-start gap-2 rounded-xl border border-border bg-secondary/50 p-3 text-sm text-muted-foreground">
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
             <span>
-              This directory is provided for information only. Klara is not
-              affiliated with the listed providers and does not receive
-              commissions.
+              Dieses Verzeichnis dient ausschliesslich zur Information. Klara ist nicht mit den aufgefuehrten Anbietern verbunden und erhaelt keine Provision oder Verguetung.
             </span>
           </div>
         </header>
@@ -296,17 +260,50 @@ function DirectoryPage() {
           <TabsList className="grid w-full grid-cols-2 md:max-w-md">
             <TabsTrigger value="caregivers" className="gap-2">
               <HeartHandshake className="h-4 w-4" />
-              Caregivers
+              Pflegeanbieter
             </TabsTrigger>
             <TabsTrigger value="legal" className="gap-2">
               <Scale className="h-4 w-4" />
-              Legal help
+              Rechtsberatung
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="caregivers" className="mt-6">
+            {/* Search + filter bar */}
+            <div className="mb-5 space-y-3">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  type="text"
+                  placeholder="PLZ, Ort oder Name suchen..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full rounded-md border border-input bg-background py-2 pl-9 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+                />
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {PROVIDER_TYPES.map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => setActiveType(type)}
+                    className={
+                      "rounded-full border px-3 py-1 text-xs font-medium transition-colors " +
+                      (activeType === type
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-foreground")
+                    }
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                {filtered.length} Anbieter gefunden
+              </p>
+            </div>
+
             <div className="grid gap-4 md:grid-cols-2">
-              {CAREGIVERS.map((c) => (
+              {filtered.map((c) => (
                 <Card key={c.name} className="h-full">
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between gap-3">
@@ -321,20 +318,18 @@ function DirectoryPage() {
                   <CardContent className="space-y-2 text-sm text-muted-foreground">
                     <p className="flex items-start gap-2">
                       <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                      <span>
-                        {c.address} · ca. {c.distanceKm} km
-                      </span>
+                      <span>{c.address} · ca. {c.distanceKm} km</span>
                     </p>
                     <p className="flex items-center gap-2">
                       <Phone className="h-4 w-4 shrink-0" />
-                      <a href={`tel:${c.phone.replace(/\s+/g, "")}`} className="hover:text-foreground">
+                      <a href={"tel:" + c.phone.replace(/\s+/g, "")} className="hover:text-foreground">
                         {c.phone}
                       </a>
                     </p>
                     {c.email && (
                       <p className="flex items-center gap-2">
                         <Mail className="h-4 w-4 shrink-0" />
-                        <a href={`mailto:${c.email}`} className="hover:text-foreground break-all">
+                        <a href={"mailto:" + c.email} className="hover:text-foreground break-all">
                           {c.email}
                         </a>
                       </p>
@@ -367,36 +362,47 @@ function DirectoryPage() {
                   </CardContent>
                 </Card>
               ))}
+              {filtered.length === 0 && (
+                <div className="col-span-2 rounded-xl border border-border bg-secondary/30 px-6 py-12 text-center text-sm text-muted-foreground">
+                  Keine Anbieter fuer diese Suche gefunden. Versuchen Sie eine andere PLZ oder entfernen Sie den Filter.
+                </div>
+              )}
             </div>
           </TabsContent>
 
           <TabsContent value="legal" className="mt-6">
-            <div className="mb-4 rounded-xl border border-border bg-secondary/40 p-4 text-sm text-muted-foreground">
-              Specialists in Sozialrecht who handle Pflegegrad applications,
-              MDK assessment objections, and appeals against pension/care
-              insurance decisions.
+            <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-700 mb-6">
+              Dieser Bereich ist noch im Aufbau. Die Eintraege werden nach Pruefung durch qualifizierte Sozialrechtsanwaelte befuellt. Bitte schauen Sie spaeter wieder vorbei oder wenden Sie sich direkt an den VdK oder die Verbraucherzentrale.
             </div>
             <div className="grid gap-4 md:grid-cols-2">
-              {LAWYERS.map((l) => (
-                <Card key={l.name}>
-                  <CardHeader className="pb-2">
-                    <div className="flex items-start justify-between gap-3">
-                      <CardTitle className="text-base">{l.name}</CardTitle>
-                      <Badge variant="secondary">Rechtsanwalt</Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-2 text-sm text-muted-foreground">
-                    <p>{l.focus}</p>
-                    <p className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 shrink-0" />
-                      {l.city}
-                    </p>
-                    <p className="pt-2 text-xs italic">
-                      Contact details available on request — placeholder listing.
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base">VdK Deutschland</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 text-sm text-muted-foreground">
+                  <p>Sozialverband · Beratung bei Pflegegrad-Widerspruch</p>
+                  <p className="flex items-center gap-2">
+                    <Globe className="h-4 w-4 shrink-0" />
+                    <a href="https://www.vdk.de" target="_blank" rel="noreferrer noopener" className="hover:text-foreground">
+                      www.vdk.de
+                    </a>
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base">Verbraucherzentrale Bayern</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 text-sm text-muted-foreground">
+                  <p>Pflegerechtliche Beratung und Unterstuetzung</p>
+                  <p className="flex items-center gap-2">
+                    <Globe className="h-4 w-4 shrink-0" />
+                    <a href="https://www.verbraucherzentrale-bayern.de" target="_blank" rel="noreferrer noopener" className="hover:text-foreground">
+                      verbraucherzentrale-bayern.de
+                    </a>
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </TabsContent>
         </Tabs>
