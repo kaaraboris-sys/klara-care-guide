@@ -56,7 +56,7 @@ function HomePage() {
       <section className="relative overflow-hidden border-b border-border bg-secondary/40">
         <img
           src={heroFamily}
-          alt="A caregiver, an elderly grandmother and a young child sharing a quiet moment at home"
+          alt="Eine pflegende Tochter, eine aeltere Grossmutter und ein Kind in ruhigem Moment zu Hause"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/30" />
@@ -80,7 +80,7 @@ function HomePage() {
                 onClick={() => setIntroOpen(true)}
                 className="inline-flex items-center justify-center rounded-md border border-input bg-background px-5 py-3 text-base font-medium text-foreground transition-colors hover:bg-secondary"
               >
-                {t("home.cta_secondary")}
+                Wie funktioniert das?
               </button>
             </div>
           </div>
@@ -129,7 +129,7 @@ function HomePage() {
             >
               <img
                 src={careChild}
-                alt="A parent supporting their young child during sensory play"
+                alt="Ein Elternteil unterstuetzt ein Kind mit Autismus beim Spielen"
                 loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -146,7 +146,7 @@ function HomePage() {
             >
               <img
                 src={careElderly}
-                alt="A daughter holding her elderly mother's hand at the kitchen table"
+                alt="Eine Tochter haelt die Hand ihrer aelteren Mutter am Kuechentisch"
                 loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -167,14 +167,17 @@ function HomePage() {
           <p className="text-xs font-medium uppercase tracking-wide text-primary">
             {t("home.hero_calc_title")}
           </p>
-          <div className="mt-2 flex flex-wrap items-baseline gap-x-6 gap-y-1">
-            <span className="text-3xl font-semibold text-foreground md:text-4xl">
+          <div className="mt-3 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <span className="text-5xl font-bold text-foreground md:text-6xl">
               {t("home.hero_calc_month")}
             </span>
-            <span className="text-base text-muted-foreground">
-              · {t("home.hero_calc_year")}
+            <span className="text-lg text-muted-foreground">
+              pro Monat
             </span>
           </div>
+          <p className="mt-1 text-base font-medium text-muted-foreground">
+            {t("home.hero_calc_year")} pro Jahr
+          </p>
           <p className="mt-3 text-sm text-muted-foreground">
             {t("home.hero_calc_body")}.
           </p>
