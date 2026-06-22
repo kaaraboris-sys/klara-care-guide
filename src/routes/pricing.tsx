@@ -55,7 +55,7 @@ function PricingPage() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <div className="flex flex-col rounded-2xl border border-border bg-card p-8 shadow-sm">
+          <div className="flex flex-col rounded-2xl border border-border bg-card p-5 md:p-8 shadow-sm">
             <h2 className="text-xl font-semibold text-foreground">Vorbereitungs-Report</h2>
             <p className="mt-1 text-sm text-muted-foreground">Fuer Familien vor der ersten Begutachtung</p>
             <div className="mt-4 flex items-baseline gap-2">
@@ -78,7 +78,7 @@ function PricingPage() {
             </a>
           </div>
 
-          <div className="flex flex-col rounded-2xl border border-primary bg-card p-8 shadow-sm ring-1 ring-primary/20">
+          <div className="flex flex-col rounded-2xl border border-primary bg-card p-5 md:p-8 shadow-sm ring-1 ring-primary/20">
             <div className="flex items-start justify-between">
               <div>
                 <h2 className="text-xl font-semibold text-foreground">Widerspruch-Paket</h2>

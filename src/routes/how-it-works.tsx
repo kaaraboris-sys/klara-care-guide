@@ -80,7 +80,7 @@ function HowPage() {
         />
 
         {/* What is Pflegegrad */}
-        <div className="mt-12 rounded-2xl border border-border bg-card p-8">
+        <div className="mt-12 rounded-2xl border border-border bg-card p-4 md:p-8">
           <Badge variant="secondary" className="mb-3">{t("how.basics_badge")}</Badge>
           <h2 className="text-2xl font-semibold text-foreground">{t("how.basics_title")}</h2>
           <p className="mt-3 text-base leading-relaxed text-muted-foreground">

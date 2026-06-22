@@ -9,7 +9,7 @@ function DatenschutzPage() {
   return (
     <PublicShell>
       <div className="mx-auto max-w-2xl px-4 py-16">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Datenschutzerklärung</h1>
+        <h1 className="text-2xl font-bold text-foreground mb-2 md:text-3xl">Datenschutzerklärung</h1>
         <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-md px-4 py-3 mb-8">
           Diese Datenschutzerklärung wurde für die spezifischen Datenflüsse von Klara erstellt. Bitte lassen Sie sie vor dem offiziellen Launch von einem Datenschutzanwalt prüfen.
         </p>

@@ -197,7 +197,7 @@ function ChildSurveyPage() {
               </p>
             </div>
           ) : (
-            <h1 className="mt-4 text-center text-4xl font-semibold tracking-tight text-foreground">
+            <h1 className="mt-4 text-center text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
               {label}
             </h1>
           )}

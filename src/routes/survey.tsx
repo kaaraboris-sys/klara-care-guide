@@ -205,7 +205,7 @@ function SurveyPage() {
           {/* Big emotional reveal */}
           {result.pg > 0 ? (
             <div className="mt-4 text-center">
-              <p className="text-[120px] font-semibold leading-none tracking-tight text-primary md:text-[160px]">
+              <p className="text-[80px] font-semibold leading-none tracking-tight text-primary md:text-[120px] lg:text-[160px]">
                 {result.pg}
               </p>
               <p className="mt-2 text-2xl font-semibold text-foreground md:text-3xl">
@@ -213,7 +213,7 @@ function SurveyPage() {
               </p>
             </div>
           ) : (
-            <h1 className="mt-4 text-center text-4xl font-semibold tracking-tight text-foreground">
+            <h1 className="mt-4 text-center text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
               {label}
             </h1>
           )}

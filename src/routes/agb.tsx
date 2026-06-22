@@ -9,7 +9,7 @@ function AgbPage() {
   return (
     <PublicShell>
       <div className="mx-auto max-w-2xl px-4 py-16">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Allgemeine Geschäftsbedingungen</h1>
+        <h1 className="text-2xl font-bold text-foreground mb-2 md:text-3xl">Allgemeine Geschäftsbedingungen</h1>
         <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-md px-4 py-3 mb-8">
           Diese AGB sind ein Entwurf und müssen vor dem offiziellen Launch von einem Rechtsanwalt geprüft werden.
         </p>
