@@ -195,22 +195,22 @@ function HomePage() {
 
       {/* First-visit intro dialog */}
       <Dialog open={introOpen} onOpenChange={(o) => !o && closeIntro(true)}>
-        <DialogContent className="max-w-3xl">
+        <DialogContent className="max-w-3xl w-[calc(100vw-2rem)] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <span className="inline-flex w-fit items-center rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
               {t("intro.welcome_badge")}
             </span>
-            <DialogTitle className="text-2xl">{t("intro.title")}</DialogTitle>
+            <DialogTitle className="text-lg md:text-2xl">{t("intro.title")}</DialogTitle>
             <DialogDescription>{t("intro.sub")}</DialogDescription>
           </DialogHeader>
 
-          <ol className="mt-2 grid gap-4 md:grid-cols-3">
+          <ol className="mt-2 grid gap-3 grid-cols-1 md:grid-cols-3">
             {steps.map(({ icon: Icon, img, k }) => (
               <li
                 key={k}
-                className="overflow-hidden rounded-xl border border-border bg-card"
+                className="overflow-hidden rounded-xl border border-border bg-card flex md:flex-col gap-3"
               >
-                <div className="relative aspect-[4/3]">
+                <div className="hidden md:block relative aspect-[4/3]">
                   <img
                     src={img}
                     alt=""
@@ -220,7 +220,10 @@ function HomePage() {
                     <Icon className="h-4 w-4" />
                   </div>
                 </div>
-                <div className="p-4">
+                <div className="md:hidden grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary m-3">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <div className="p-4 flex-1">
                   <h4 className="text-sm font-semibold text-foreground">
                     {t(`intro.${k}_title`)}
                   </h4>
@@ -232,7 +235,7 @@ function HomePage() {
             ))}
           </ol>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+          <div className="mt-4 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
             <button
               onClick={() => closeIntro(true)}
               className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground"
