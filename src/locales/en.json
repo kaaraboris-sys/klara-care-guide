@@ -217,33 +217,36 @@
     "reference": "Reference: SGB XI §15 · Begutachtungs-Richtlinien (BRi) 2024. This page is informational and does not replace official MDK assessment or legal advice."
   },
   "pricing": {
-    "title": "Simple pricing",
-    "sub": "€9 per report. One correctly recognised grade is worth up to €360 every month — your report pays for itself the first month it helps.",
-    "frame": "€9 once per report vs. €360+/month gained from the right Pflegegrad.",
-    "free_title": "Free",
-    "free_price": "€0",
-    "free_per": "forever",
-    "free_items": [
-      "Public information hub",
-      "The 6 NBA modules explained",
-      "5-minute Pflegegrad check",
-      "7-day care diary",
-      "Community forum",
-      "Directory of advisors and lawyers"
+    "title": "Two products. One goal.",
+    "sub": "Most families only need the Report. The Widerspruch Package is for the smaller number whose result came back lower than expected.",
+    "badge": "One-time payment · No subscription · No hidden costs",
+    "report_title": "Preparation Report",
+    "report_sub": "For families before the first assessment",
+    "report_price": "€9",
+    "report_per": "one-time · no subscription",
+    "report_items": [
+      "5-minute Pflegegrad check (free, no login)",
+      "14-day care diary (autism and elderly track)",
+      "Full MDK assessment across all 6 NBA modules",
+      "Plain-language explanation of every question",
+      "AI-generated one-page PDF report for the assessment visit",
+      "30-day money-back guarantee"
     ],
-    "pro_title": "Pro",
-    "pro_price": "€9",
-    "pro_per": "report",
-    "pro_items": [
-      "Everything in Free",
-      "Full official MDK assessment form",
-      "Plain-language paraphrase for every question",
-      "Unlimited 14-day care diary (autism + elderly)",
-      "AI-generated MDK preparation report (PDF)",
-      "Pay only when you generate a report"
+    "report_cta": "Buy Report",
+    "widerspruch_title": "Widerspruch Package",
+    "widerspruch_sub": "For families whose result came back too low",
+    "widerspruch_price": "from €19",
+    "widerspruch_per": "one-time · no subscription",
+    "widerspruch_badge": "Recommended",
+    "widerspruch_items": [
+      "Everything in the Preparation Report",
+      "AI-drafted Widerspruch letter with your diary evidence",
+      "Coaching script: exactly what to say if the Pflegekasse calls",
+      "Checklist of supporting documents to attach",
+      "30-day money-back guarantee"
     ],
-    "cta_free": "Get started free",
-    "cta_pro": "Generate a report — €9"
+    "widerspruch_cta": "Buy Package",
+    "disclaimer": "Klara is not a substitute for official MDK assessment or legal advice. Estimates are based on public BRi 2024 guidelines."
   },
   "intro": {
     "welcome_badge": "Welcome to Klara",
@@ -444,5 +447,18 @@
   },
   "footer": {
     "disclaimer": "Klara is an academic prototype (THD Digital Health Master's 2026). It does not replace official MDK assessment or legal advice. NBA: SGB XI §15 · BRi 2024."
+  },
+  "directory": {
+    "title": "Find help",
+    "sub": "Care providers and everyday support near you.",
+    "disclaimer": "This directory is for information only. Klara is not affiliated with the listed providers and receives no commission or payment.",
+    "search_placeholder": "Postcode, city or name...",
+    "type_all": "All",
+    "found": "{{n}} providers found",
+    "none_found": "No providers found for this search. Try a different postcode or remove the filter.",
+    "tab_caregivers": "Care providers",
+    "tab_legal": "Legal help",
+    "legal_coming_soon": "This section is under construction. Entries will be added after review by qualified Sozialrecht lawyers. Please check back later or contact the VdK or Verbraucherzentrale directly.",
+    "distance": "ca. {{n}} km"
   }
 }

@@ -217,33 +217,36 @@
     "reference": "Quelle: SGB XI §15 · Begutachtungs-Richtlinien (BRi) 2024. Diese Seite dient der Information und ersetzt keine offizielle MDK-Begutachtung oder Rechtsberatung."
   },
   "pricing": {
-    "title": "Einfache Preise",
-    "sub": "9 € pro Bericht. Ein korrekt anerkannter Pflegegrad ist bis zu 360 € jeden Monat wert — Ihr Bericht rechnet sich schon im ersten Monat.",
-    "frame": "9 € einmalig pro Bericht vs. 360 €+/Monat durch den richtigen Pflegegrad.",
-    "free_title": "Kostenlos",
-    "free_price": "0 €",
-    "free_per": "für immer",
-    "free_items": [
-      "Öffentlicher Informationsbereich",
-      "Die 6 NBA-Module erklärt",
-      "5-Minuten-Pflegegrad-Check",
-      "7-Tage-Pflegetagebuch",
-      "Community-Forum",
-      "Verzeichnis von Berater:innen und Anwält:innen"
+    "title": "Zwei Produkte. Ein Ziel.",
+    "sub": "Die meisten Familien brauchen nur den Report. Das Widerspruch-Paket ist für die kleinere Zahl, deren Ergebnis niedriger ausgefallen ist als erwartet.",
+    "badge": "Einmalige Zahlung · Kein Abo · Keine versteckten Kosten",
+    "report_title": "Vorbereitungs-Report",
+    "report_sub": "Für Familien vor der ersten Begutachtung",
+    "report_price": "9 €",
+    "report_per": "einmalig · kein Abo",
+    "report_items": [
+      "5-Minuten-Pflegegrad-Check (kostenlos, ohne Login)",
+      "14-Tage-Pflegetagebuch (Autismus- und Senioren-Track)",
+      "Vollständiges MDK-Assessment mit allen 6 NBA-Modulen",
+      "Verständliche Erklärung jeder Beurteilungsfrage",
+      "KI-generierter Ein-Seiten-PDF-Report für den Begutachtungstermin",
+      "30-Tage-Geld-zurück-Garantie"
     ],
-    "pro_title": "Pro",
-    "pro_price": "9 €",
-    "pro_per": "Bericht",
-    "pro_items": [
-      "Alles aus Kostenlos",
-      "Vollständiges offizielles MDK-Formular",
-      "Verständliche Umschreibung jeder Frage",
-      "Unbegrenztes 14-Tage-Pflegetagebuch (Autismus + Altenpflege)",
-      "KI-generierter Vorbereitungsbericht (PDF)",
-      "Nur zahlen, wenn Sie einen Bericht erstellen"
+    "report_cta": "Report kaufen",
+    "widerspruch_title": "Widerspruch-Paket",
+    "widerspruch_sub": "Für Familien, deren Ergebnis zu niedrig war",
+    "widerspruch_price": "ab 19 €",
+    "widerspruch_per": "einmalig · kein Abo",
+    "widerspruch_badge": "Empfohlen",
+    "widerspruch_items": [
+      "Alles aus dem Vorbereitungs-Report",
+      "KI-generierter Widerspruch-Brief mit Ihren Tagebuchbelegen",
+      "Coaching-Skript: Was Sie sagen, wenn die Pflegekasse anruft",
+      "Checkliste der beizufügenden Unterlagen",
+      "30-Tage-Geld-zurück-Garantie"
     ],
-    "cta_free": "Kostenlos starten",
-    "cta_pro": "Bericht erstellen — 9 €"
+    "widerspruch_cta": "Paket kaufen",
+    "disclaimer": "Klara ist kein Ersatz für offizielle MDK-Begutachtung oder Rechtsberatung. Prognosen sind Schätzungen auf Basis öffentlicher BRi-2024-Richtlinien."
   },
   "intro": {
     "welcome_badge": "Willkommen bei Klara",
@@ -444,5 +447,18 @@
   },
   "footer": {
     "disclaimer": "Klara ist ein akademischer Prototyp (THD Digital Health Master 2026). Ersetzt keine offizielle MDK-Begutachtung oder Rechtsberatung. NBA: SGB XI §15 · BRi 2024."
+  },
+  "directory": {
+    "title": "Hilfe finden",
+    "sub": "Pflegeanbieter und Alltagsunterstützung in Ihrer Nähe.",
+    "disclaimer": "Dieses Verzeichnis dient ausschließlich zur Information. Klara ist nicht mit den aufgeführten Anbietern verbunden und erhält keine Provision oder Vergütung.",
+    "search_placeholder": "PLZ, Ort oder Name suchen...",
+    "type_all": "Alle",
+    "found": "{{n}} Anbieter gefunden",
+    "none_found": "Keine Anbieter für diese Suche gefunden. Versuchen Sie eine andere PLZ oder entfernen Sie den Filter.",
+    "tab_caregivers": "Pflegeanbieter",
+    "tab_legal": "Rechtsberatung",
+    "legal_coming_soon": "Dieser Bereich ist noch im Aufbau. Die Einträge werden nach Prüfung durch qualifizierte Sozialrechtsanwälte befüllt. Bitte schauen Sie später wieder vorbei oder wenden Sie sich direkt an den VdK oder die Verbraucherzentrale.",
+    "distance": "ca. {{n}} km"
   }
 }

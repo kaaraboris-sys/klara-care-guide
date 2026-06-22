@@ -243,7 +243,7 @@ function DirectoryPage() {
       <section className="mx-auto max-w-5xl px-4 py-12 md:py-16">
         <header className="mb-6">
           <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-            Hilfe finden
+            {t("directory.title")}
           </h1>
           <p className="mt-3 max-w-2xl text-base text-muted-foreground">
             Pflegedienste, Pflegeheime und Alltagsunterstuetzung in Ihrer Naehe.
@@ -251,7 +251,7 @@ function DirectoryPage() {
           <div className="mt-4 flex items-start gap-2 rounded-xl border border-border bg-secondary/50 p-3 text-sm text-muted-foreground">
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
             <span>
-              Dieses Verzeichnis dient ausschliesslich zur Information. Klara ist nicht mit den aufgefuehrten Anbietern verbunden und erhaelt keine Provision oder Verguetung.
+              {t("directory.disclaimer")}
             </span>
           </div>
         </header>
@@ -275,7 +275,7 @@ function DirectoryPage() {
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <input
                   type="text"
-                  placeholder="PLZ, Ort oder Name suchen..."
+                  placeholder={t("directory.search_placeholder")}
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   className="w-full rounded-md border border-input bg-background py-2 pl-9 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
@@ -298,7 +298,7 @@ function DirectoryPage() {
                 ))}
               </div>
               <p className="text-xs text-muted-foreground">
-                {filtered.length} Anbieter gefunden
+                {t("directory.found", { n: filtered.length })}
               </p>
             </div>
 
@@ -318,7 +318,7 @@ function DirectoryPage() {
                   <CardContent className="space-y-2 text-sm text-muted-foreground">
                     <p className="flex items-start gap-2">
                       <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                      <span>{c.address} · ca. {c.distanceKm} km</span>
+                      <span>{c.address} · {t("directory.distance", { n: c.distanceKm })}</span>
                     </p>
                     <p className="flex items-center gap-2">
                       <Phone className="h-4 w-4 shrink-0" />
@@ -364,7 +364,7 @@ function DirectoryPage() {
               ))}
               {filtered.length === 0 && (
                 <div className="col-span-2 rounded-xl border border-border bg-secondary/30 px-6 py-12 text-center text-sm text-muted-foreground">
-                  Keine Anbieter fuer diese Suche gefunden. Versuchen Sie eine andere PLZ oder entfernen Sie den Filter.
+                  {t("directory.none_found")}
                 </div>
               )}
             </div>
@@ -372,7 +372,7 @@ function DirectoryPage() {
 
           <TabsContent value="legal" className="mt-6">
             <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-700 mb-6">
-              Dieser Bereich ist noch im Aufbau. Die Eintraege werden nach Pruefung durch qualifizierte Sozialrechtsanwaelte befuellt. Bitte schauen Sie spaeter wieder vorbei oder wenden Sie sich direkt an den VdK oder die Verbraucherzentrale.
+              {t("directory.legal_coming_soon")}
             </div>
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
