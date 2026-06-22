@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PublicShell } from "@/components/layout/PublicShell";
 import { ArrowRight, ClipboardCheck, BookOpen, FileText, X } from "lucide-react";
+import { useAuth } from "@/hooks/use-auth";
+import { toast } from "sonner";
 import heroFamily from "@/assets/hero-family.jpg";
 import careChild from "@/assets/care-child.jpg";
 import careElderly from "@/assets/care-elderly.jpg";
@@ -24,6 +26,19 @@ const INTRO_KEY = "klara.intro.seen.v1";
 function HomePage() {
   const { t } = useTranslation();
   const [introOpen, setIntroOpen] = useState(false);
+  const { isAuthenticated, user } = useAuth();
+  const [welcomed, setWelcomed] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated && user && !welcomed) {
+      const name = user.email?.split("@")[0] ?? "there";
+      toast.success("Willkommen zurueck, " + name + "!", {
+        description: "Bereit fuer die naechste Vorbereitung?",
+        duration: 4000,
+      });
+      setWelcomed(true);
+    }
+  }, [isAuthenticated, user, welcomed]);
 
   useEffect(() => {
     try {

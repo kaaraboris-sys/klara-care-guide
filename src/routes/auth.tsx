@@ -39,7 +39,7 @@ function AuthPage() {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: search.redirect ?? "/diary" });
+      if (data.session) navigate({ to: search.redirect ?? "/" });
     });
   }, [navigate, search.redirect]);
 
@@ -52,7 +52,7 @@ function AuthPage() {
       if (tab === "signin") {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        navigate({ to: search.redirect ?? "/diary" });
+        navigate({ to: search.redirect ?? "/" });
       } else {
         const { error } = await supabase.auth.signUp({
           email,
@@ -75,7 +75,7 @@ function AuthPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: window.location.origin + (search.redirect ?? "/diary"),
+        redirectTo: window.location.origin + (search.redirect ?? "/"),
       },
     });
     if (error) {
