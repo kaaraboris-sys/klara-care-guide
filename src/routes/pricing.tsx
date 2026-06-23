@@ -21,8 +21,8 @@ export const Route = createFileRoute("/pricing")({
 function PricingPage() {
   const { t } = useTranslation();
 
-  const reportItems: string[] = t("pricing.report_items", { returnObjects: true }) as string[];
-  const widerspruchItems: string[] = t("pricing.widerspruch_items", { returnObjects: true }) as string[];
+  const reportItems = t("pricing.report_items", { returnObjects: true }) as string[];
+  const widerspruchItems = t("pricing.widerspruch_items", { returnObjects: true }) as string[];
 
   return (
     <PublicShell>
@@ -55,13 +55,13 @@ function PricingPage() {
                 </li>
               ))}
             </ul>
-                         href="/auth"
+            <a
+              href="/auth"
               className="mt-8 inline-flex items-center justify-center rounded-md border border-input bg-background px-5 py-3 text-base font-medium text-foreground transition-colors hover:bg-secondary"
             >
               {t("pricing.report_cta")}
             </a>
           </div>
-
           <div className="flex flex-col rounded-2xl border border-primary bg-card p-5 md:p-8 shadow-sm ring-1 ring-primary/20">
             <div className="flex items-start justify-between">
               <div>
@@ -84,7 +84,8 @@ function PricingPage() {
                 </li>
               ))}
             </ul>
-                          href="/auth"
+            <a
+              href="/auth"
               className="mt-8 inline-flex items-center justify-center rounded-md bg-primary px-5 py-3 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
               {t("pricing.widerspruch_cta")}
