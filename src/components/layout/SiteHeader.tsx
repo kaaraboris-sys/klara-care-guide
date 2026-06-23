@@ -28,6 +28,8 @@ export function SiteHeader() {
     navigate({ to: "/", replace: true });
   };
 
+  const langLabel = i18n.language?.startsWith("de") ? "EN" : "DE";
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
@@ -56,7 +58,17 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
+       <div className="hidden items-center gap-2 md:flex">
+          {/* Language toggle — desktop */}
+          <button
+            onClick={toggleLang}
+            className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+            aria-label="Switch language"
+          >
+            <Globe className="h-4 w-4" />
+            {langLabel}
+          </button>
+
           {isAuthenticated ? (
             <>
               <span className="hidden lg:inline max-w-[160px] truncate text-sm text-muted-foreground" title={user?.email ?? ""}>
@@ -79,7 +91,7 @@ export function SiteHeader() {
                 {t("auth.signin")}
               </Link>
               <Link
-                to="/survey"
+               to="/survey"
                 className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 {t("home.cta_primary")}
@@ -113,8 +125,7 @@ export function SiteHeader() {
             >
               {n.label}
             </Link>
-          ))}
-          <button
+          ))}         <button
             onClick={() => {
               toggleLang();
               setOpen(false);
@@ -122,7 +133,7 @@ export function SiteHeader() {
             className="flex items-center gap-2 rounded-md px-3 py-3 text-left text-base font-medium text-foreground hover:bg-secondary"
           >
             <Globe className="h-4 w-4" />
-            {i18n.language?.startsWith("de") ? "Deutsch" : "English"}
+            {i18n.language?.startsWith("de") ? "English" : "Deutsch"}
           </button>
           {isAuthenticated ? (
             <button
