@@ -7,13 +7,14 @@ import {
   useRouter,
   HeadContent,
   Scripts,
-} from "@tanstack/react-router";
+} from "@tanstack/react-router";                                                        
 
 import appCss from "../styles.css?url";
 import "@/lib/i18n";
 import { supabase } from "@/integrations/supabase/client";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/react";
 
 function NotFoundComponent() {
   return (
@@ -77,13 +78,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Klara — Pflegegrad-Vorbereitung für Familien" },
+      { title: "Klara — Pflegegrad-Vorbereitung fur Familien" },
       {
         name: "description",
         content:
           "Die meisten Familien erhalten einen niedrigeren Pflegegrad als ihnen zusteht. Klara hilft Ihnen, vorbereitet in die MDK-Begutachtung zu gehen.",
       },
-      { property: "og:title", content: "Klara — Pflegegrad-Vorbereitung für Familien" },
+      { property: "og:title", content: "Klara — Pflegegrad-Vorbereitung fur Familien" },
       {
         property: "og:description",
         content:
@@ -92,7 +93,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:image", content: "/og-preview.png" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Klara — Pflegegrad-Vorbereitung für Familien" },
+      { name: "twitter:title", content: "Klara — Pflegegrad-Vorbereitung fur Familien" },
       {
         name: "twitter:description",
         content:
@@ -144,6 +145,7 @@ function RootComponent() {
       <Outlet />
       <CookieBanner />
       <Toaster position="top-center" richColors />
+      <Analytics />
     </QueryClientProvider>
   );
 }
