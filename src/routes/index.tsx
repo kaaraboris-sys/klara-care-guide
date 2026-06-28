@@ -95,7 +95,7 @@ function HomePage() {
                 onClick={() => setIntroOpen(true)}
                 className="inline-flex items-center justify-center rounded-md border border-input bg-background px-5 py-3 text-base font-medium text-foreground transition-colors hover:bg-secondary"
               >
-                Wie funktioniert das?
+                {t("home.how_it_works")}
               </button>
             </div>
           </div>
@@ -187,11 +187,11 @@ function HomePage() {
               {t("home.hero_calc_month")}
             </span>
             <span className="text-lg text-muted-foreground">
-              pro Monat
+              {t("home.hero_calc_month_label")}
             </span>
           </div>
           <p className="mt-1 text-base font-medium text-muted-foreground">
-            {t("home.hero_calc_year")} pro Jahr
+            {t("home.hero_calc_year")}
           </p>
           <p className="mt-3 text-sm text-muted-foreground">
             {t("home.hero_calc_body")}.

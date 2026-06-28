@@ -62,7 +62,9 @@
     "autism_title": "Wenn Sie jemanden mit Autismus pflegen",
     "autism_body": "Standard-Tagebücher übersehen das Wichtigste: Anleitung, Aufsicht, Verhaltensregulation, Sicherheit. Klara erfasst all das.",
     "elderly_title": "Wenn Sie ältere Angehörige pflegen",
-    "elderly_body": "Mobilität, Orientierung, Stürze, Nachtdienste, Medikamenten-Überwachung — Klara bildet exakt ab, was die Module 1–6 bewerten."
+    "elderly_body": "Mobilität, Orientierung, Stürze, Nachtdienste, Medikamenten-Überwachung — Klara bildet exakt ab, was die Module 1–6 bewerten.",
+    "how_it_works": "Wie funktioniert das?",
+    "hero_calc_month_label": "pro Monat"
   },
   "modules": {
     "title": "Die 6 NBA-Module",
@@ -244,7 +246,10 @@
       "Checkliste der beizufügenden Unterlagen"
     ],
     "widerspruch_cta": "Paket kaufen",
-    "disclaimer": "Klara ist kein Ersatz für offizielle MDK-Begutachtung oder Rechtsberatung. Prognosen sind Schätzungen auf Basis öffentlicher BRi-2024-Richtlinien."
+    "disclaimer": "Klara ist kein Ersatz für offizielle MDK-Begutachtung oder Rechtsberatung. Prognosen sind Schätzungen auf Basis öffentlicher BRi-2024-Richtlinien.",
+    "free_check_pre": "Noch unsicher?",
+    "free_check_link": "Starten Sie zuerst den kostenlosen 5-Minuten-Check",
+    "free_check_post": "— kein Login erforderlich."
   },
   "intro": {
     "welcome_badge": "Willkommen bei Klara",

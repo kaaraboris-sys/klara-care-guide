@@ -40,18 +40,11 @@ function PricingPage() {
         </div>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">
-          Noch unsicher?{" "}
+          {t("pricing.free_check_pre")}{" "}
           <a href="/survey" className="font-medium text-primary underline-offset-4 hover:underline">
-            Starten Sie zuerst den kostenlosen 5-Minuten-Check
+            {t("pricing.free_check_link")}
           </a>{" "}
-          — kein Login erforderlich.
-        </p>
-        <p className="mt-2 text-center text-sm text-muted-foreground">
-          Not sure yet?{" "}
-          <a href="/survey" className="font-medium text-primary underline-offset-4 hover:underline">
-            Try the free 5-minute check first
-          </a>{" "}
-          — no account needed.
+          {t("pricing.free_check_post")}
         </p>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">

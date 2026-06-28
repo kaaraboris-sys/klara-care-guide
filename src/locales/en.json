@@ -62,7 +62,9 @@
     "autism_title": "Caring for someone with autism",
     "autism_body": "Standard care diaries miss what matters most: prompting, supervision, behavioural regulation, and safety. Klara's autism diary captures all of it.",
     "elderly_title": "Caring for an elderly relative",
-    "elderly_body": "Mobility, orientation, falls, night-time care, medication supervision — Klara's elderly diary mirrors exactly what Module 1–6 score."
+    "elderly_body": "Mobility, orientation, falls, night-time care, medication supervision — Klara's elderly diary mirrors exactly what Module 1–6 score.",
+    "how_it_works": "How does it work?",
+    "hero_calc_month_label": "per month"
   },
   "modules": {
     "title": "The 6 NBA modules",
@@ -244,7 +246,10 @@
       "Checklist of supporting documents to attach"
     ],
     "widerspruch_cta": "Buy Package",
-    "disclaimer": "Klara is not a substitute for official MDK assessment or legal advice. Estimates are based on public BRi 2024 guidelines."
+    "disclaimer": "Klara is not a substitute for official MDK assessment or legal advice. Estimates are based on public BRi 2024 guidelines.",
+    "free_check_pre": "Not sure yet?",
+    "free_check_link": "Try the free 5-minute check first",
+    "free_check_post": "— no account needed."
   },
   "intro": {
     "welcome_badge": "Welcome to Klara",
