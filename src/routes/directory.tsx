@@ -26,8 +26,10 @@ export const Route = createFileRoute("/directory")({
   component: DirectoryPage,
 });
 
-type Caregiver = {name: string;
+type Caregiver = {
+  name: string;
   type: string;
+  city: string;
   address: string;
   plz: string;
   distanceKm: number;
@@ -52,6 +54,7 @@ const CAREGIVERS: Caregiver[] = [
   {
     name: "Caritas Alten- und Pflegeheim St. Vinzenz von Paul",
     type: "Pflegeheim",
+    city: "Pfarrkirchen",
     address: "Konrad-Wirnhier-Str. 13, 84347 Pfarrkirchen",
     plz: "84347",
     distanceKm: 2,
@@ -63,6 +66,7 @@ const CAREGIVERS: Caregiver[] = [
   {
     name: "BRK-Sozialstation Pfarrkirchen-Simbach",
     type: "Pflegedienst",
+    city: "Pfarrkirchen",
     address: "Arno-Jacoby-Str. 7, 84347 Pfarrkirchen",
     plz: "84347",
     distanceKm: 2,
@@ -74,6 +78,7 @@ const CAREGIVERS: Caregiver[] = [
   {
     name: "Caritas Sozialstation Pfarrkirchen",
     type: "Pflegedienst",
+    city: "Pfarrkirchen",
     address: "Ringstr. 3, 84347 Pfarrkirchen",
     plz: "84347",
     distanceKm: 2,
@@ -223,6 +228,11 @@ function DirectoryPage() {
   const [tab, setTab] = useState<"caregivers" | "legal">("caregivers");
   const [search, setSearch] = useState("");
   const [activeType, setActiveType] = useState("Alle");
+
+  const cities = useMemo(() => {
+    const all = [...new Set(CAREGIVERS.map((c) => c.city))].sort();
+    return all;
+  }, []);
 
   const filtered = useMemo(() => {
     return CAREGIVERS.filter((c) => {
