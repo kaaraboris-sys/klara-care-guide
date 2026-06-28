@@ -10,9 +10,6 @@ function DatenschutzPage() {
     <PublicShell>
       <div className="mx-auto max-w-2xl px-4 py-16">
         <h1 className="text-2xl font-bold text-foreground mb-2 md:text-3xl">Datenschutzerklärung</h1>
-        <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-md px-4 py-3 mb-8">
-          Diese Datenschutzerklärung wurde für die spezifischen Datenflüsse von Klara erstellt. Bitte lassen Sie sie vor dem offiziellen Launch von einem Datenschutzanwalt prüfen.
-        </p>
 
         <section className="mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-3">1. Verantwortlicher</h2>
@@ -36,9 +33,22 @@ function DatenschutzPage() {
         </section>
 
         <section className="mb-8">
+          <h2 className="text-lg font-semibold text-foreground mb-3">2a. Besonderheit: Testversion von Pflegetagebuch und vollständigem Assessment</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+            Für die aktuelle Testphase gilt für das Pflegetagebuch und das vollständige Assessment (alle 6 NBA-Module) eine abweichende Verarbeitung:
+          </p>
+          <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
+            <li>Ihre Eingaben (Tagebucheinträge, Assessmentantworten) werden ausschließlich lokal in Ihrem Browser verarbeitet (z. B. in sessionStorage) und nicht an unsere Server oder unsere Datenbank (Supabase) übermittelt oder dort gespeichert.</li>
+            <li>Schließen Sie den Browser-Tab oder löschen Sie den Browserverlauf, gehen diese Eingaben verloren. Wir haben keinen Zugriff darauf und können sie nicht wiederherstellen.</li>
+            <li>Eine Ausnahme besteht, wenn Sie aktiv den kostenpflichtigen PDF-Bericht anfordern: In diesem Fall werden Ihre zu diesem Zeitpunkt im Browser vorhandenen Antworten einmalig an unsere Server (Supabase Edge Function) übermittelt, um den Bericht zu erstellen. Die übermittelten Antworten selbst werden nach Erstellung des PDFs nicht dauerhaft in einer Datenbank gespeichert. Lediglich der Zahlungsvorgang über Stripe wird wie oben beschrieben verarbeitet.</li>
+            <li>Diese abweichende Verarbeitung gilt nur für die Testversion. Die spätere reguläre Version mit Benutzerkonto wird wie in Abschnitt 2 und 3 beschrieben funktionieren und erfordert dann die dort genannte ausdrückliche Einwilligung.</li>
+          </ul>
+        </section>
+
+        <section className="mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-3">3. Speicherung</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Ihre Daten werden in der Datenbank von Supabase (EU-Region Frankfurt, AWS eu-central-1) gespeichert. Die Verbindung ist TLS-verschlüsselt. Daten werden bei Löschung Ihres Kontos auf Anfrage entfernt.
+            Ihre Daten werden in der Datenbank von Supabase (EU-Region Frankfurt, AWS eu-central-1) gespeichert. Die Verbindung ist TLS-verschlüsselt. Daten werden bei Löschung Ihres Kontos auf Anfrage entfernt. Dies gilt nicht für das Pflegetagebuch und das vollständige Assessment in der aktuellen Testversion — siehe Abschnitt 2a.
           </p>
         </section>
 

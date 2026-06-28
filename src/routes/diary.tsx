@@ -29,7 +29,7 @@ import {
 import { CalendarDays, CheckCircle2, FileText, Info, Trash2 } from "lucide-react";
 import { TEMPLATES, type DiaryEntry, type DiaryField, type DiaryTemplate } from "@/lib/diary-templates";
 
-export const Route = createFileRoute("/_authenticated/diary")({
+export const Route = createFileRoute("/diary")({
   head: () => ({
     meta: [
       { title: "Care diary — Klara" },
@@ -129,6 +129,14 @@ function DiaryPage() {
 
   return (
     <PublicShell>
+      {/* Test-mode data notice */}
+      <div className="mx-auto max-w-5xl px-4 pt-4">
+        <div className="rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-200">
+          <strong>Testversion:</strong> Nichts, was Sie hier eingeben, wird gespeichert oder an unsere Server gesendet — außer wenn Sie aktiv den PDF-Bericht generieren. Wenn Sie diesen Tab schließen, gehen Ihre Eingaben verloren.
+          {" "}<span className="text-amber-700 dark:text-amber-300">(This is a test version. Nothing you enter is saved or sent to our servers, except when you generate the PDF report. Closing this tab loses your progress.)</span>
+        </div>
+      </div>
+
       <section className="bg-secondary/30 border-b border-border">
         <div className="mx-auto max-w-5xl px-4 py-10">
           <Badge variant="secondary" className="mb-3">

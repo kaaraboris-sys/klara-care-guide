@@ -229,21 +229,19 @@
       "14-day care diary (autism and elderly track)",
       "Full MDK assessment across all 6 NBA modules",
       "Plain-language explanation of every question",
-      "AI-generated one-page PDF report for the assessment visit",
-      "30-day money-back guarantee"
+      "AI-generated one-page PDF report for the assessment visit"
     ],
     "report_cta": "Buy Report",
     "widerspruch_title": "Widerspruch Package",
     "widerspruch_sub": "For families whose result came back too low",
-    "widerspruch_price": "from €19",
+    "widerspruch_price": "€19",
     "widerspruch_per": "one-time · no subscription",
     "widerspruch_badge": "Recommended",
     "widerspruch_items": [
       "Everything in the Preparation Report",
       "AI-drafted Widerspruch letter with your diary evidence",
       "Coaching script: exactly what to say if the Pflegekasse calls",
-      "Checklist of supporting documents to attach",
-      "30-day money-back guarantee"
+      "Checklist of supporting documents to attach"
     ],
     "widerspruch_cta": "Buy Package",
     "disclaimer": "Klara is not a substitute for official MDK assessment or legal advice. Estimates are based on public BRi 2024 guidelines."

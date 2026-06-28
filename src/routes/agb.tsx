@@ -10,9 +10,6 @@ function AgbPage() {
     <PublicShell>
       <div className="mx-auto max-w-2xl px-4 py-16">
         <h1 className="text-2xl font-bold text-foreground mb-2 md:text-3xl">Allgemeine Geschäftsbedingungen</h1>
-        <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-md px-4 py-3 mb-8">
-          Diese AGB sind ein Entwurf und müssen vor dem offiziellen Launch von einem Rechtsanwalt geprüft werden.
-        </p>
 
         <section className="mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-3">§1 Geltungsbereich</h2>
@@ -26,10 +23,13 @@ function AgbPage() {
           <p className="text-sm text-muted-foreground leading-relaxed mb-3">
             Klara bietet zwei digitale Produkte an:
           </p>
-          <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
+          <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside mb-4">
             <li><strong>Vorbereitungs-Report (€9,00 einmalig)</strong>: Digitaler Bericht zur Vorbereitung auf die MDK-Pflegegradbegutachtung, basierend auf Ihren Angaben im Pflegetagebuch und Assessment.</li>
-            <li><strong>Widerspruch-Paket (ab €19,00 einmalig)</strong>: KI-gestützter Entwurf eines Widerspruchsschreibens nebst Coaching-Skript und Dokumenten-Checkliste.</li>
+            <li><strong>Widerspruch-Paket (€19,00 einmalig)</strong>: KI-gestützter Entwurf eines Widerspruchsschreibens nebst Coaching-Skript und Dokumenten-Checkliste.</li>
           </ul>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            In der aktuellen Testphase können das Pflegetagebuch und das vollständige Assessment kostenlos und ohne Kauf genutzt werden. Es entsteht hierbei kein Vertrag im Sinne dieser AGB. Ein Vertrag kommt erst zustande, wenn Sie aktiv den Vorbereitungs-Report oder das Widerspruch-Paket kostenpflichtig bestellen (siehe §4).
+          </p>
         </section>
 
         <section className="mb-8">
@@ -54,14 +54,7 @@ function AgbPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-lg font-semibold text-foreground mb-3">§6 Geld-zurück-Garantie</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Klara bietet eine 30-Tage-Geld-zurück-Garantie, wenn der tatsächlich festgestellte Pflegegrad mehr als eine Stufe unter der Klara-Schätzung liegt und Sie dies durch den offiziellen MDK-Bescheid nachweisen. Anfragen an: kaaraboris@gmail.com.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-lg font-semibold text-foreground mb-3">§7 Anwendbares Recht</h2>
+          <h2 className="text-lg font-semibold text-foreground mb-3">§6 Anwendbares Recht</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
             Es gilt deutsches Recht. Gerichtsstand ist Passau, soweit gesetzlich zulässig.
           </p>

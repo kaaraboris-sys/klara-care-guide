@@ -19,9 +19,11 @@ function isConsentExpired(timestamp: number): boolean {
 }
 
 export function CookieBanner() {
+  const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const stored = getStoredConsent();
     if (!stored || isConsentExpired(stored.timestamp)) {
       setVisible(true);
@@ -36,7 +38,7 @@ export function CookieBanner() {
     setVisible(false);
   };
 
-  if (!visible) return null;
+  if (!mounted || !visible) return null;
 
   return (
     <div

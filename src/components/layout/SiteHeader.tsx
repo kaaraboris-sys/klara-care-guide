@@ -14,6 +14,8 @@ export function SiteHeader() {
 
   const nav = [
     { to: "/how-it-works", label: t("nav.how") },
+    { to: "/assessment", label: t("nav.assessment") },
+    { to: "/diary", label: t("nav.diary") },
     { to: "/pricing", label: t("nav.pricing") },
     { to: "/directory", label: t("nav.directory") },
   ] as const;
@@ -34,14 +36,14 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link to="/" className="flex items-center gap-2">
-          <span
-            aria-hidden
-            className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground font-semibold"
-          >
-            K
-          </span>
-          <span className="text-lg font-semibold tracking-tight text-foreground">
-            Klara
+          <span className="inline-flex items-center gap-1.5">
+            <span
+              aria-hidden
+              className="grid h-7 w-7 place-items-center rounded-md bg-primary text-primary-foreground text-sm font-bold"
+            >
+              K
+            </span>
+            <span className="text-lg font-semibold tracking-tight text-foreground">lara</span>
           </span>
         </Link>
 

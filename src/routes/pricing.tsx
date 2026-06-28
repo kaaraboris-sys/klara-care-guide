@@ -39,6 +39,21 @@ function PricingPage() {
           </p>
         </div>
 
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          Noch unsicher?{" "}
+          <a href="/survey" className="font-medium text-primary underline-offset-4 hover:underline">
+            Starten Sie zuerst den kostenlosen 5-Minuten-Check
+          </a>{" "}
+          — kein Login erforderlich.
+        </p>
+        <p className="mt-2 text-center text-sm text-muted-foreground">
+          Not sure yet?{" "}
+          <a href="/survey" className="font-medium text-primary underline-offset-4 hover:underline">
+            Try the free 5-minute check first
+          </a>{" "}
+          — no account needed.
+        </p>
+
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           <div className="flex flex-col rounded-2xl border border-border bg-card p-5 md:p-8 shadow-sm">
             <h2 className="text-xl font-semibold text-foreground">{t("pricing.report_title")}</h2>
@@ -56,7 +71,7 @@ function PricingPage() {
               ))}
             </ul>
             <a
-              href="/auth"
+              href="/assessment"
               className="mt-8 inline-flex items-center justify-center rounded-md border border-input bg-background px-5 py-3 text-base font-medium text-foreground transition-colors hover:bg-secondary"
             >
               {t("pricing.report_cta")}
@@ -85,7 +100,7 @@ function PricingPage() {
               ))}
             </ul>
             <a
-              href="/auth"
+              href="/assessment"
               className="mt-8 inline-flex items-center justify-center rounded-md bg-primary px-5 py-3 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
               {t("pricing.widerspruch_cta")}

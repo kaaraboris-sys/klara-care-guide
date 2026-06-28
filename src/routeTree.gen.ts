@@ -16,15 +16,15 @@ import { Route as ModulesRouteImport } from './routes/modules'
 import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as DirectoryRouteImport } from './routes/directory'
+import { Route as DiaryRouteImport } from './routes/diary'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AssessmentRouteImport } from './routes/assessment'
 import { Route as AgbRouteImport } from './routes/agb'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SurveyChildRouteImport } from './routes/survey.child'
 import { Route as AuthenticatedReportRouteImport } from './routes/_authenticated/report'
-import { Route as AuthenticatedDiaryRouteImport } from './routes/_authenticated/diary'
-import { Route as AuthenticatedAssessmentRouteImport } from './routes/_authenticated/assessment'
 
 const WiderrufRoute = WiderrufRouteImport.update({
   id: '/widerruf',
@@ -61,6 +61,11 @@ const DirectoryRoute = DirectoryRouteImport.update({
   path: '/directory',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DiaryRoute = DiaryRouteImport.update({
+  id: '/diary',
+  path: '/diary',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DatenschutzRoute = DatenschutzRouteImport.update({
   id: '/datenschutz',
   path: '/datenschutz',
@@ -69,6 +74,11 @@ const DatenschutzRoute = DatenschutzRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssessmentRoute = AssessmentRouteImport.update({
+  id: '/assessment',
+  path: '/assessment',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AgbRoute = AgbRouteImport.update({
@@ -95,22 +105,14 @@ const AuthenticatedReportRoute = AuthenticatedReportRouteImport.update({
   path: '/report',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedDiaryRoute = AuthenticatedDiaryRouteImport.update({
-  id: '/diary',
-  path: '/diary',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedAssessmentRoute = AuthenticatedAssessmentRouteImport.update({
-  id: '/assessment',
-  path: '/assessment',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agb': typeof AgbRoute
+  '/assessment': typeof AssessmentRoute
   '/auth': typeof AuthRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/diary': typeof DiaryRoute
   '/directory': typeof DirectoryRoute
   '/how-it-works': typeof HowItWorksRoute
   '/impressum': typeof ImpressumRoute
@@ -118,16 +120,16 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/survey': typeof SurveyRouteWithChildren
   '/widerruf': typeof WiderrufRoute
-  '/assessment': typeof AuthenticatedAssessmentRoute
-  '/diary': typeof AuthenticatedDiaryRoute
   '/report': typeof AuthenticatedReportRoute
   '/survey/child': typeof SurveyChildRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agb': typeof AgbRoute
+  '/assessment': typeof AssessmentRoute
   '/auth': typeof AuthRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/diary': typeof DiaryRoute
   '/directory': typeof DirectoryRoute
   '/how-it-works': typeof HowItWorksRoute
   '/impressum': typeof ImpressumRoute
@@ -135,8 +137,6 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/survey': typeof SurveyRouteWithChildren
   '/widerruf': typeof WiderrufRoute
-  '/assessment': typeof AuthenticatedAssessmentRoute
-  '/diary': typeof AuthenticatedDiaryRoute
   '/report': typeof AuthenticatedReportRoute
   '/survey/child': typeof SurveyChildRoute
 }
@@ -145,8 +145,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/agb': typeof AgbRoute
+  '/assessment': typeof AssessmentRoute
   '/auth': typeof AuthRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/diary': typeof DiaryRoute
   '/directory': typeof DirectoryRoute
   '/how-it-works': typeof HowItWorksRoute
   '/impressum': typeof ImpressumRoute
@@ -154,8 +156,6 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/survey': typeof SurveyRouteWithChildren
   '/widerruf': typeof WiderrufRoute
-  '/_authenticated/assessment': typeof AuthenticatedAssessmentRoute
-  '/_authenticated/diary': typeof AuthenticatedDiaryRoute
   '/_authenticated/report': typeof AuthenticatedReportRoute
   '/survey/child': typeof SurveyChildRoute
 }
@@ -164,8 +164,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/agb'
+    | '/assessment'
     | '/auth'
     | '/datenschutz'
+    | '/diary'
     | '/directory'
     | '/how-it-works'
     | '/impressum'
@@ -173,16 +175,16 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/survey'
     | '/widerruf'
-    | '/assessment'
-    | '/diary'
     | '/report'
     | '/survey/child'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/agb'
+    | '/assessment'
     | '/auth'
     | '/datenschutz'
+    | '/diary'
     | '/directory'
     | '/how-it-works'
     | '/impressum'
@@ -190,8 +192,6 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/survey'
     | '/widerruf'
-    | '/assessment'
-    | '/diary'
     | '/report'
     | '/survey/child'
   id:
@@ -199,8 +199,10 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/agb'
+    | '/assessment'
     | '/auth'
     | '/datenschutz'
+    | '/diary'
     | '/directory'
     | '/how-it-works'
     | '/impressum'
@@ -208,8 +210,6 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/survey'
     | '/widerruf'
-    | '/_authenticated/assessment'
-    | '/_authenticated/diary'
     | '/_authenticated/report'
     | '/survey/child'
   fileRoutesById: FileRoutesById
@@ -218,8 +218,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AgbRoute: typeof AgbRoute
+  AssessmentRoute: typeof AssessmentRoute
   AuthRoute: typeof AuthRoute
   DatenschutzRoute: typeof DatenschutzRoute
+  DiaryRoute: typeof DiaryRoute
   DirectoryRoute: typeof DirectoryRoute
   HowItWorksRoute: typeof HowItWorksRoute
   ImpressumRoute: typeof ImpressumRoute
@@ -280,6 +282,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DirectoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/diary': {
+      id: '/diary'
+      path: '/diary'
+      fullPath: '/diary'
+      preLoaderRoute: typeof DiaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/datenschutz': {
       id: '/datenschutz'
       path: '/datenschutz'
@@ -292,6 +301,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assessment': {
+      id: '/assessment'
+      path: '/assessment'
+      fullPath: '/assessment'
+      preLoaderRoute: typeof AssessmentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/agb': {
@@ -329,32 +345,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedReportRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/diary': {
-      id: '/_authenticated/diary'
-      path: '/diary'
-      fullPath: '/diary'
-      preLoaderRoute: typeof AuthenticatedDiaryRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/assessment': {
-      id: '/_authenticated/assessment'
-      path: '/assessment'
-      fullPath: '/assessment'
-      preLoaderRoute: typeof AuthenticatedAssessmentRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAssessmentRoute: typeof AuthenticatedAssessmentRoute
-  AuthenticatedDiaryRoute: typeof AuthenticatedDiaryRoute
   AuthenticatedReportRoute: typeof AuthenticatedReportRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAssessmentRoute: AuthenticatedAssessmentRoute,
-  AuthenticatedDiaryRoute: AuthenticatedDiaryRoute,
   AuthenticatedReportRoute: AuthenticatedReportRoute,
 }
 
@@ -376,8 +374,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AgbRoute: AgbRoute,
+  AssessmentRoute: AssessmentRoute,
   AuthRoute: AuthRoute,
   DatenschutzRoute: DatenschutzRoute,
+  DiaryRoute: DiaryRoute,
   DirectoryRoute: DirectoryRoute,
   HowItWorksRoute: HowItWorksRoute,
   ImpressumRoute: ImpressumRoute,
