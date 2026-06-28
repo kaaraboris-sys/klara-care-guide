@@ -6,6 +6,10 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 
+
+// Set to true to re-enable sign-in flow
+const SHOW_AUTH = false;
+
 export function SiteHeader() {
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
@@ -71,7 +75,7 @@ export function SiteHeader() {
             {langLabel}
           </button>
 
-          {isAuthenticated ? (
+          {SHOW_AUTH && isAuthenticated ? (
             <>
               <span className="hidden lg:inline max-w-[160px] truncate text-sm text-muted-foreground" title={user?.email ?? ""}>
                 {user?.email}
@@ -84,7 +88,7 @@ export function SiteHeader() {
                 {t("auth.signout")}
               </button>
             </>
-          ) : (
+          ) : SHOW_AUTH ? (
             <>
               <Link
                 to="/auth"
@@ -93,13 +97,13 @@ export function SiteHeader() {
                 {t("auth.signin")}
               </Link>
               <Link
-               to="/survey"
+                to="/survey"
                 className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 {t("home.cta_primary")}
               </Link>
             </>
-          )}
+          ) : null}
         </div>
 
         <button
@@ -137,7 +141,7 @@ export function SiteHeader() {
             <Globe className="h-4 w-4" />
             {i18n.language?.startsWith("de") ? "English" : "Deutsch"}
           </button>
-          {isAuthenticated ? (
+          {SHOW_AUTH && isAuthenticated ? (
             <button
               onClick={() => {
                 handleSignOut();
@@ -148,15 +152,7 @@ export function SiteHeader() {
               <LogOut className="h-4 w-4" />
               {t("auth.signout")}
             </button>
-          ) : (
-            <Link
-              to="/survey"
-              onClick={() => setOpen(false)}
-              className="mt-2 rounded-md bg-primary px-4 py-3 text-center text-base font-medium text-primary-foreground"
-            >
-              {t("home.cta_primary")}
-            </Link>
-          )}
+          ) : null}
         </div>
       </div>
     </header>
