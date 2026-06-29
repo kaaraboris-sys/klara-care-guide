@@ -26,7 +26,7 @@ type GenerateInput = {
 export const generateReport = createServerFn({ method: "POST" })
   .inputValidator((input: GenerateInput) => input)
   .handler(async ({ data }) => {
-    const apiKey = process.env.LOVABLE_API_KEY;
+    const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
       return { ok: false as const, error: "AI gateway is not configured." };
     }
@@ -71,18 +71,18 @@ Keep it under ~700 words. No disclaimers about being an AI.`;
       "\n```";
 
     try {
-      const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${apiKey}`,
+          "x-api-key": apiKey,
+          "anthropic-version": "2023-06-01",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "google/gemini-2.5-flash",
-          messages: [
-            { role: "system", content: system },
-            { role: "user", content: user },
-          ],
+          model: "claude-haiku-4-5-20251001",
+          max_tokens: 1500,
+          system: system,
+          messages: [{ role: "user", content: user }],
         }),
       });
 
@@ -99,9 +99,9 @@ Keep it under ~700 words. No disclaimers about being an AI.`;
       }
 
       const json = (await res.json()) as {
-        choices?: { message?: { content?: string } }[];
+        content?: { type: string; text: string }[];
       };
-      const markdown = json.choices?.[0]?.message?.content ?? "";
+      const markdown = json.content?.find(b => b.type === "text")?.text ?? "";
       if (!markdown) {
         return { ok: false as const, error: "Empty response from AI." };
       }
