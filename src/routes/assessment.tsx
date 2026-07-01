@@ -54,7 +54,7 @@ function loadAnswers(): Answers {
 }
 
 function AssessmentPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<Answers>({});
   const [activeModule, setActiveModule] = useState("1");
@@ -90,7 +90,7 @@ function AssessmentPage() {
       const weighted = bracketPoints(m.id, raw);
       return {
         id: m.id,
-        title: m.titleEn,
+        title: i18n.language === "de" ? m.titleDe : m.titleEn,
         weightPct: m.weightPct,
         raw,
         weighted,
@@ -175,15 +175,15 @@ function AssessmentPage() {
                     <CardHeader>
                       <div className="flex flex-wrap items-start justify-between gap-3">
                         <div>
-                          <CardTitle className="text-xl">{m.titleEn}</CardTitle>
-                          <p className="mt-1 text-sm text-muted-foreground">{m.titleDe}</p>
+                          <CardTitle className="text-xl">{i18n.language === "de" ? m.titleDe : m.titleEn}</CardTitle>
+                          <p className="mt-1 text-sm text-muted-foreground">{i18n.language === "de" ? m.titleEn : m.titleDe}</p>
                         </div>
                         <Badge variant="outline">
                           {t("assessment.weight_of_total", { p: m.weightPct })}
                           {m.id === 2 || m.id === 3 ? t("assessment.shared_m2_m3") : ""}
                         </Badge>
                       </div>
-                      <CardDescription className="pt-2">{m.description}</CardDescription>
+                      <CardDescription className="pt-2">{i18n.language === "de" ? (m.descriptionDe ?? m.description) : m.description}</CardDescription>
                       <div className="mt-3 flex items-center gap-3 text-xs text-muted-foreground">
                         <span>
                           {t("assessment.raw_weighted", { raw: r.raw })} <strong className="text-foreground">{r.weighted}</strong> {t("assessment.pts")}
@@ -313,10 +313,13 @@ function CriterionRow({
   answer: { value: number | null; notes: string } | undefined;
   onChange: (patch: Partial<{ value: number | null; notes: string }>) => void;
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isDE = i18n.language === "de";
   const scale = criterion.scale === "freq" ? SCALE_FREQ : SCALE_0_3;
   const current = answer?.value ?? null;
   const answered = current != null;
+  const paraphrase = isDE ? (criterion.paraphraseDe ?? criterion.paraphrase) : criterion.paraphrase;
+  const honest = isDE ? (criterion.honestDe ?? criterion.honest) : criterion.honest;
 
   return (
     <AccordionItem value={criterion.code}>
@@ -330,14 +333,14 @@ function CriterionRow({
           <div className="flex-1">
             <p className="text-sm font-medium text-foreground">
               <span className="text-muted-foreground">{criterion.code}</span>{" "}
-              {criterion.en}
+              {isDE ? criterion.de : criterion.en}
               {criterion.weight && criterion.weight > 1 ? (
                 <Badge variant="secondary" className="ml-2 text-[10px]">
                   ×{criterion.weight}
                 </Badge>
               ) : null}
             </p>
-            <p className="text-xs text-muted-foreground">{criterion.de}</p>
+            <p className="text-xs text-muted-foreground">{isDE ? criterion.en : criterion.de}</p>
           </div>
         </div>
       </AccordionTrigger>
@@ -346,17 +349,20 @@ function CriterionRow({
           <div className="rounded-md bg-muted/40 p-3">
             <p className="text-sm text-foreground">
               <span className="font-medium">{t("assessment.in_plain_words")} </span>
-              {criterion.paraphrase}
+              {paraphrase}
             </p>
             <p className="mt-2 flex items-start gap-2 text-xs text-muted-foreground">
               <Lightbulb className="mt-0.5 h-3.5 w-3.5 shrink-0 text-warning" />
-              <span>{criterion.honest}</span>
+              <span>{honest}</span>
             </p>
           </div>
 
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
             {scale.map((opt) => {
               const selected = current === opt.value;
+              const label = isDE ? opt.labelDe : opt.labelEn;
+              const sublabel = isDE ? opt.labelEn : opt.labelDe;
+              const hint = isDE ? (opt.hintDe ?? opt.hint) : opt.hint;
               return (
                 <button
                   key={opt.value}
@@ -368,9 +374,9 @@ function CriterionRow({
                       : "border-input bg-card hover:border-primary/40"
                   }`}
                 >
-                  <p className="font-medium text-foreground">{opt.labelEn}</p>
-                  <p className="text-xs text-muted-foreground">{opt.labelDe}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">{opt.hint}</p>
+                  <p className="font-medium text-foreground">{label}</p>
+                  <p className="text-xs text-muted-foreground">{sublabel}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{hint}</p>
                 </button>
               );
             })}

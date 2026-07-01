@@ -16,7 +16,7 @@ import {
   bracketPoints,
   pflegegradFromTotal,
 } from "@/lib/mdk-criteria";
-import { TEMPLATES, type DiaryEntry } from "@/lib/diary-templates";
+import { TEMPLATES_RAW, resolveTemplate, type DiaryEntry } from "@/lib/diary-templates";
 import { generateReport } from "@/lib/report.functions";
 
 export const Route = createFileRoute("/report")({
@@ -224,7 +224,7 @@ function ReportPage() {
                     }
                     className="font-medium text-primary hover:underline"
                   >
-                    {TEMPLATES[template].title} (switch)
+                    {resolveTemplate(TEMPLATES_RAW[template], t as (k: string) => string).title} (switch)
                   </button>
                 </p>
               </div>
