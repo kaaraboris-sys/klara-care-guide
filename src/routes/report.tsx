@@ -163,7 +163,7 @@ function ReportPage() {
       }
     } catch (e) {
       console.error(e);
-      setError("Something went wrong generating the report.");
+      setError(t("report.error_generic"));
     } finally {
       setLoading(false);
     }
@@ -174,14 +174,13 @@ function ReportPage() {
       <section className="bg-secondary/30 border-b border-border print:hidden">
         <div className="mx-auto max-w-4xl px-4 py-10">
           <Badge variant="secondary" className="mb-3">
-            Pro feature preview
+            {t("report.pro_badge")}
           </Badge>
           <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            MDK preparation report
+            {t("report.title")}
           </h1>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Klara reads your full assessment answers and your care diary, then drafts a
-            one-page report you can print and bring to the assessor.
+            {t("report.intro")}
           </p>
         </div>
       </section>
@@ -189,16 +188,15 @@ function ReportPage() {
       <section className="mx-auto max-w-4xl px-4 py-8 space-y-6">
         <Card className="print:hidden">
           <CardHeader>
-            <CardTitle>Inputs detected on this device</CardTitle>
+            <CardTitle>{t("report.inputs_title")}</CardTitle>
             <CardDescription>
-              Reports are generated from what you have already entered in the assessment and
-              diary. Nothing is uploaded until you sign in.
+              {t("report.inputs_desc")}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="rounded-md border p-3">
-                <p className="text-xs text-muted-foreground">Assessment criteria answered</p>
+                <p className="text-xs text-muted-foreground">{t("report.criteria_answered")}</p>
                 <p className="text-2xl font-semibold text-foreground">
                   {totalAnswered}
                   <span className="text-sm text-muted-foreground">
@@ -207,24 +205,24 @@ function ReportPage() {
                   </span>
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Live estimate: <strong>{assessmentPayload.pflegegrad.label}</strong> ·{" "}
-                  {assessmentPayload.totalPoints.toFixed(1)} pts
+                  {t("report.live_estimate")} <strong>{t(assessmentPayload.pflegegrad.label)}</strong> ·{" "}
+                  {assessmentPayload.totalPoints.toFixed(1)} {t("report.pts")}
                 </p>
               </div>
               <div className="rounded-md border p-3">
-                <p className="text-xs text-muted-foreground">Diary entries</p>
+                <p className="text-xs text-muted-foreground">{t("report.diary_entries")}</p>
                 <p className="text-2xl font-semibold text-foreground">
                   {diaryForTemplate.length}
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Template:{" "}
+                  {t("report.template")}{" "}
                   <button
                     onClick={() =>
                       setTemplate(template === "elderly" ? "autism" : "elderly")
                     }
                     className="font-medium text-primary hover:underline"
                   >
-                    {resolveTemplate(TEMPLATES_RAW[template], t as (k: string) => string).title} (switch)
+                    {resolveTemplate(TEMPLATES_RAW[template], t as (k: string) => string).title} {t("report.switch")}
                   </button>
                 </p>
               </div>
@@ -234,17 +232,17 @@ function ReportPage() {
               <Button onClick={onGenerate} disabled={!canGenerate || loading}>
                 {loading ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Generating…
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> {t("report.generating")}
                   </>
                 ) : (
                   <>
-                    <Sparkles className="mr-2 h-4 w-4" /> Generate report
+                    <Sparkles className="mr-2 h-4 w-4" /> {t("report.generate")}
                   </>
                 )}
               </Button>
               {markdown && unlocked ? (
                 <Button variant="outline" onClick={() => window.print()}>
-                  <Printer className="mr-2 h-4 w-4" /> Print / Save as PDF
+                  <Printer className="mr-2 h-4 w-4" /> {t("report.print")}
                 </Button>
               ) : null}
             </div>
@@ -253,17 +251,17 @@ function ReportPage() {
             {!canGenerate ? (
               <Alert>
                 <AlertCircle className="h-4 w-4" />
-                <AlertTitle>Nothing to summarise yet</AlertTitle>
+                <AlertTitle>{t("report.nothing_title")}</AlertTitle>
                 <AlertDescription>
-                  Fill in at least a few items in the{" "}
+                  {t("report.nothing_body_1")}
                   <Link to="/assessment" className="text-primary hover:underline">
-                    full assessment
-                  </Link>{" "}
-                  or the{" "}
+                    {t("report.nothing_body_2")}
+                  </Link>
+                  {t("report.nothing_body_3")}
                   <Link to="/diary" className="text-primary hover:underline">
-                    care diary
-                  </Link>{" "}
-                  first.
+                    {t("report.nothing_body_4")}
+                  </Link>
+                  {t("report.nothing_body_5")}
                 </AlertDescription>
               </Alert>
             ) : null}
@@ -271,7 +269,7 @@ function ReportPage() {
             {error ? (
               <Alert variant="destructive">
                 <AlertCircle className="h-4 w-4" />
-                <AlertTitle>Could not generate report</AlertTitle>
+                <AlertTitle>{t("report.error_title")}</AlertTitle>
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             ) : null}
@@ -284,18 +282,18 @@ function ReportPage() {
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <CardTitle className="flex items-center gap-2">
                   <FileText className="h-5 w-5 text-primary" />
-                  {unlocked ? "Your report" : "Sample preview"}
+                  {unlocked ? t("report.your_report") : t("report.sample_preview")}
                 </CardTitle>
                 {!unlocked ? (
                   <Badge variant="secondary" className="gap-1">
-                    <Lock className="h-3 w-3" /> Preview only
+                    <Lock className="h-3 w-3" /> {t("report.preview_only")}
                   </Badge>
                 ) : null}
               </div>
               <CardDescription>
                 {unlocked
-                  ? "Review and edit anything that doesn't match your day-to-day reality before printing."
-                  : `Estimated grade: ${assessmentPayload.pflegegrad.label}. Read through the wording below — when you're happy with it, unlock to download or print the full report.`}
+                  ? t("report.draft_desc")
+                  : t("report.estimated_grade", { grade: t(assessmentPayload.pflegegrad.label) })}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -318,15 +316,14 @@ function ReportPage() {
                     <Lock className="mt-0.5 h-5 w-5 text-primary" />
                     <div className="flex-1">
                       <h3 className="text-base font-semibold text-foreground">
-                        Unlock the full report — €9 once
+                        {t("report.unlock_title")}
                       </h3>
                       <p className="mt-1 text-sm text-muted-foreground">
-                        Download the complete MDK-ready PDF, print it, and bring it to the
-                        assessor. €9 once vs. up to €360 every month you go undergraded.
+                        {t("report.unlock_body")}
                       </p>
                       <div className="mt-3 flex flex-wrap gap-2">
                         <Button asChild>
-                          <Link to="/pricing">Unlock & download</Link>
+                          <Link to="/pricing">{t("report.unlock_cta")}</Link>
                         </Button>
                       </div>
                     </div>

@@ -232,7 +232,7 @@ function AssessmentPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-3xl font-bold text-foreground">{pg.label}</p>
+              <p className="text-3xl font-bold text-foreground">{t(pg.label)}</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 {t("assessment.based_on", { p: totalPoints.toFixed(2) })}
               </p>
@@ -279,7 +279,7 @@ function ScoreSummary({
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <CardTitle className="text-base text-muted-foreground">{t("assessment.live_estimate")}</CardTitle>
-            <p className="mt-1 text-3xl font-bold text-foreground">{pg.label}</p>
+            <p className="mt-1 text-3xl font-bold text-foreground">{t(pg.label)}</p>
           </div>
           <div className="text-right">
             <p className="text-2xl font-semibold text-foreground">{totalPoints.toFixed(1)}</p>

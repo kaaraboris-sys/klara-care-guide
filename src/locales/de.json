@@ -513,7 +513,22 @@
     "error_title": "Bericht konnte nicht erstellt werden",
     "error_generic": "Beim Erstellen des Berichts ist etwas schiefgelaufen.",
     "draft_title": "Berichtsentwurf",
-    "draft_desc": "Prüfen und korrigieren Sie alles, was nicht zu Ihrer Alltagsrealität passt, bevor Sie drucken."
+    "draft_desc": "Prüfen und korrigieren Sie alles, was nicht zu Ihrer Alltagsrealität passt, bevor Sie drucken.",
+    "your_report": "Ihr Bericht",
+    "sample_preview": "Beispielvorschau",
+    "preview_only": "Nur Vorschau",
+    "estimated_grade": "Geschätzter Pflegegrad: {{grade}}. Lesen Sie den Text unten durch — wenn er passt, schalten Sie den vollständigen Bericht zum Herunterladen oder Drucken frei.",
+    "unlock_title": "Vollständigen Bericht freischalten — einmalig 9 €",
+    "unlock_body": "Laden Sie das vollständige MDK-taugliche PDF herunter, drucken Sie es aus und bringen Sie es zur Begutachtung mit. Einmalig 9 € statt bis zu 360 € im Monat bei zu niedrig eingestuftem Pflegegrad.",
+    "unlock_cta": "Freischalten & herunterladen"
+  },
+  "pflegegrad": {
+    "grade_0": "Unter Pflegegrad 1",
+    "grade_1": "Pflegegrad 1",
+    "grade_2": "Pflegegrad 2",
+    "grade_3": "Pflegegrad 3",
+    "grade_4": "Pflegegrad 4",
+    "grade_5": "Pflegegrad 5"
   },
   "auth": {
     "title": "Willkommen bei Klara",

@@ -40,15 +40,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link to="/" className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5">
-            <span
-              aria-hidden
-              className="grid h-7 w-7 place-items-center rounded-md bg-primary text-primary-foreground text-sm font-bold"
-            >
-              K
-            </span>
-            <span className="text-lg font-semibold tracking-tight text-foreground">lara</span>
-          </span>
+          <img src="/klara-logo.png" alt="Klara" className="h-9 w-auto" />
         </Link>
 
         <nav aria-label="Hauptnavigation" className="hidden items-center gap-1 md:flex">

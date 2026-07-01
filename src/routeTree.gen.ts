@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WiderrufRouteImport } from './routes/widerruf'
 import { Route as SurveyRouteImport } from './routes/survey'
+import { Route as ReportRouteImport } from './routes/report'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ModulesRouteImport } from './routes/modules'
 import { Route as ImpressumRouteImport } from './routes/impressum'
@@ -21,10 +22,8 @@ import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AssessmentRouteImport } from './routes/assessment'
 import { Route as AgbRouteImport } from './routes/agb'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SurveyChildRouteImport } from './routes/survey.child'
-import { Route as AuthenticatedReportRouteImport } from './routes/_authenticated/report'
 
 const WiderrufRoute = WiderrufRouteImport.update({
   id: '/widerruf',
@@ -34,6 +33,11 @@ const WiderrufRoute = WiderrufRouteImport.update({
 const SurveyRoute = SurveyRouteImport.update({
   id: '/survey',
   path: '/survey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportRoute = ReportRouteImport.update({
+  id: '/report',
+  path: '/report',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -86,10 +90,6 @@ const AgbRoute = AgbRouteImport.update({
   path: '/agb',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -99,11 +99,6 @@ const SurveyChildRoute = SurveyChildRouteImport.update({
   id: '/child',
   path: '/child',
   getParentRoute: () => SurveyRoute,
-} as any)
-const AuthenticatedReportRoute = AuthenticatedReportRouteImport.update({
-  id: '/report',
-  path: '/report',
-  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -118,9 +113,9 @@ export interface FileRoutesByFullPath {
   '/impressum': typeof ImpressumRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
+  '/report': typeof ReportRoute
   '/survey': typeof SurveyRouteWithChildren
   '/widerruf': typeof WiderrufRoute
-  '/report': typeof AuthenticatedReportRoute
   '/survey/child': typeof SurveyChildRoute
 }
 export interface FileRoutesByTo {
@@ -135,15 +130,14 @@ export interface FileRoutesByTo {
   '/impressum': typeof ImpressumRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
+  '/report': typeof ReportRoute
   '/survey': typeof SurveyRouteWithChildren
   '/widerruf': typeof WiderrufRoute
-  '/report': typeof AuthenticatedReportRoute
   '/survey/child': typeof SurveyChildRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/agb': typeof AgbRoute
   '/assessment': typeof AssessmentRoute
   '/auth': typeof AuthRoute
@@ -154,9 +148,9 @@ export interface FileRoutesById {
   '/impressum': typeof ImpressumRoute
   '/modules': typeof ModulesRoute
   '/pricing': typeof PricingRoute
+  '/report': typeof ReportRoute
   '/survey': typeof SurveyRouteWithChildren
   '/widerruf': typeof WiderrufRoute
-  '/_authenticated/report': typeof AuthenticatedReportRoute
   '/survey/child': typeof SurveyChildRoute
 }
 export interface FileRouteTypes {
@@ -173,9 +167,9 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/modules'
     | '/pricing'
+    | '/report'
     | '/survey'
     | '/widerruf'
-    | '/report'
     | '/survey/child'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -190,14 +184,13 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/modules'
     | '/pricing'
+    | '/report'
     | '/survey'
     | '/widerruf'
-    | '/report'
     | '/survey/child'
   id:
     | '__root__'
     | '/'
-    | '/_authenticated'
     | '/agb'
     | '/assessment'
     | '/auth'
@@ -208,15 +201,14 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/modules'
     | '/pricing'
+    | '/report'
     | '/survey'
     | '/widerruf'
-    | '/_authenticated/report'
     | '/survey/child'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AgbRoute: typeof AgbRoute
   AssessmentRoute: typeof AssessmentRoute
   AuthRoute: typeof AuthRoute
@@ -227,6 +219,7 @@ export interface RootRouteChildren {
   ImpressumRoute: typeof ImpressumRoute
   ModulesRoute: typeof ModulesRoute
   PricingRoute: typeof PricingRoute
+  ReportRoute: typeof ReportRoute
   SurveyRoute: typeof SurveyRouteWithChildren
   WiderrufRoute: typeof WiderrufRoute
 }
@@ -245,6 +238,13 @@ declare module '@tanstack/react-router' {
       path: '/survey'
       fullPath: '/survey'
       preLoaderRoute: typeof SurveyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report': {
+      id: '/report'
+      path: '/report'
+      fullPath: '/report'
+      preLoaderRoute: typeof ReportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -317,13 +317,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgbRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -338,26 +331,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SurveyChildRouteImport
       parentRoute: typeof SurveyRoute
     }
-    '/_authenticated/report': {
-      id: '/_authenticated/report'
-      path: '/report'
-      fullPath: '/report'
-      preLoaderRoute: typeof AuthenticatedReportRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
   }
 }
-
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedReportRoute: typeof AuthenticatedReportRoute
-}
-
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedReportRoute: AuthenticatedReportRoute,
-}
-
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface SurveyRouteChildren {
   SurveyChildRoute: typeof SurveyChildRoute
@@ -372,7 +347,6 @@ const SurveyRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AgbRoute: AgbRoute,
   AssessmentRoute: AssessmentRoute,
   AuthRoute: AuthRoute,
@@ -383,6 +357,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImpressumRoute: ImpressumRoute,
   ModulesRoute: ModulesRoute,
   PricingRoute: PricingRoute,
+  ReportRoute: ReportRoute,
   SurveyRoute: SurveyRouteWithChildren,
   WiderrufRoute: WiderrufRoute,
 }

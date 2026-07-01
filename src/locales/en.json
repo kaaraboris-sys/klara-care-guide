@@ -514,7 +514,22 @@
     "error_title": "Could not generate report",
     "error_generic": "Something went wrong generating the report.",
     "draft_title": "Draft report",
-    "draft_desc": "Review and edit anything that doesn't match your day-to-day reality before printing."
+    "draft_desc": "Review and edit anything that doesn't match your day-to-day reality before printing.",
+    "your_report": "Your report",
+    "sample_preview": "Sample preview",
+    "preview_only": "Preview only",
+    "estimated_grade": "Estimated grade: {{grade}}. Read through the wording below — when you're happy with it, unlock to download or print the full report.",
+    "unlock_title": "Unlock the full report — €9 once",
+    "unlock_body": "Download the complete MDK-ready PDF, print it, and bring it to the assessor. €9 once vs. up to €360 every month you go undergraded.",
+    "unlock_cta": "Unlock & download"
+  },
+  "pflegegrad": {
+    "grade_0": "Below Pflegegrad 1",
+    "grade_1": "Pflegegrad 1",
+    "grade_2": "Pflegegrad 2",
+    "grade_3": "Pflegegrad 3",
+    "grade_4": "Pflegegrad 4",
+    "grade_5": "Pflegegrad 5"
   },
   "auth": {
     "title": "Welcome to Klara",

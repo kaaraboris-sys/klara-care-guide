@@ -713,10 +713,10 @@ export function bracketPoints(moduleId: number, raw: number): number {
 }
 
 export function pflegegradFromTotal(total: number): { grade: 0 | 1 | 2 | 3 | 4 | 5; label: string } {
-  if (total < 12.5) return { grade: 0, label: "Below Pflegegrad 1" };
-  if (total < 27) return { grade: 1, label: "Pflegegrad 1" };
-  if (total < 47.5) return { grade: 2, label: "Pflegegrad 2" };
-  if (total < 70) return { grade: 3, label: "Pflegegrad 3" };
-  if (total < 90) return { grade: 4, label: "Pflegegrad 4" };
-  return { grade: 5, label: "Pflegegrad 5" };
+  if (total < 12.5) return { grade: 0, label: "pflegegrad.grade_0" };
+  if (total < 27) return { grade: 1, label: "pflegegrad.grade_1" };
+  if (total < 47.5) return { grade: 2, label: "pflegegrad.grade_2" };
+  if (total < 70) return { grade: 3, label: "pflegegrad.grade_3" };
+  if (total < 90) return { grade: 4, label: "pflegegrad.grade_4" };
+  return { grade: 5, label: "pflegegrad.grade_5" };
 }
