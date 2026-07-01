@@ -27,7 +27,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { CalendarDays, CheckCircle2, FileText, Info, Trash2 } from "lucide-react";
-import { TEMPLATES, type DiaryEntry, type DiaryField, type DiaryTemplate } from "@/lib/diary-templates";
+import { TEMPLATES_RAW, resolveTemplate, type DiaryEntry, type DiaryField, type DiaryTemplate } from "@/lib/diary-templates";
 
 export const Route = createFileRoute("/diary")({
   head: () => ({
@@ -84,6 +84,10 @@ function DiaryPage() {
     setEntries(loadEntries());
   }, []);
 
+  const TEMPLATES = {
+    elderly: resolveTemplate(TEMPLATES_RAW.elderly, t as (k: string) => string),
+    autism: resolveTemplate(TEMPLATES_RAW.autism, t as (k: string) => string),
+  };
   const tpl = TEMPLATES[template];
 
   // Load existing entry for selected date+template
@@ -197,7 +201,7 @@ function DiaryPage() {
             <TabsTrigger value="autism">{t("diary.tab_autism")}</TabsTrigger>
           </TabsList>
 
-          {(Object.keys(TEMPLATES) as Array<"autism" | "elderly">).map((id) => (
+          {(Object.keys(TEMPLATES_RAW) as Array<"autism" | "elderly">).map((id) => (
             <TabsContent key={id} value={id} className="mt-6">
               <DiaryForm
                 template={TEMPLATES[id]}
