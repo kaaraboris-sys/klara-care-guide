@@ -32,12 +32,12 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold text-foreground">Rechtliches</h4>
+          <h4 className="text-sm font-semibold text-foreground">{t("footer.legal_heading")}</h4>
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li><Link to="/impressum" className="hover:text-foreground">Impressum</Link></li>
-            <li><Link to="/datenschutz" className="hover:text-foreground">Datenschutz</Link></li>
-            <li><Link to="/agb" className="hover:text-foreground">AGB</Link></li>
-            <li><Link to="/widerruf" className="hover:text-foreground">Widerruf</Link></li>
+            <li><Link to="/impressum" className="hover:text-foreground">{t("footer.impressum")}</Link></li>
+            <li><Link to="/datenschutz" className="hover:text-foreground">{t("footer.datenschutz")}</Link></li>
+            <li><Link to="/agb" className="hover:text-foreground">{t("footer.agb")}</Link></li>
+            <li><Link to="/widerruf" className="hover:text-foreground">{t("footer.widerruf")}</Link></li>
           </ul>
         </div>
 

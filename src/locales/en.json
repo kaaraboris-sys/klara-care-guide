@@ -64,7 +64,8 @@
     "elderly_title": "Caring for an elderly relative",
     "elderly_body": "Mobility, orientation, falls, night-time care, medication supervision — Klara's elderly diary mirrors exactly what Module 1–6 score.",
     "how_it_works": "How does it work?",
-    "hero_calc_month_label": "per month"
+    "hero_calc_month_label": "per month",
+    "basics_p2": "The grade is decided after an assessment by the <strong>Medizinischer Dienst (MD/MDK — Germany’s medical review service)</strong>, using the <strong>Neues Begutachtungsassessment (NBA — New Assessment Instrument)</strong>. The assessor scores how independent the person is across six life domains, weights the scores, and adds them up. The total — from 0 to 100 points — maps to one of five grades."
   },
   "modules": {
     "title": "The 6 NBA modules",
@@ -529,7 +530,12 @@
     "check_email": "Check your email to confirm your account."
   },
   "footer": {
-    "disclaimer": "Klara does not replace official MDK assessment or legal advice. NBA: SGB XI §15 · BRi 2024."
+    "disclaimer": "Klara does not replace official MDK assessment or legal advice. NBA: SGB XI §15 · BRi 2024.",
+    "legal_heading": "Legal",
+    "impressum": "Legal notice",
+    "datenschutz": "Privacy policy",
+    "agb": "Terms & conditions",
+    "widerruf": "Right of withdrawal"
   },
   "directory": {
     "title": "Find help",
@@ -543,5 +549,12 @@
     "tab_legal": "Legal help",
     "legal_coming_soon": "This section is under construction. Entries will be added after review by qualified Sozialrecht lawyers. Please check back later or contact the VdK or Verbraucherzentrale directly.",
     "distance": "ca. {{n}} km"
+  },
+  "cookie": {
+    "text": "We use cookies to operate this website. Analytics cookies are only set with your consent.",
+    "learn_more": "Learn more",
+    "necessary_only": "Necessary only",
+    "accept_all": "Accept all",
+    "aria_label": "Cookie settings"
   }
 }
